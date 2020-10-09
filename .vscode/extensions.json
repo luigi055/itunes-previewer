@@ -1,0 +1,24 @@
+{
+  "recommendations": [
+    "dzannotti.vscode-babel-coloring",
+    "CoenraadS.bracket-pair-colorizer",
+    "naumovs.color-highlight",
+    "mikestead.dotenv",
+    "EditorConfig.EditorConfig",
+    "dbaeumer.vscode-eslint",
+    "donjayamanne.githistory",
+    "eamodio.gitlens",
+    "vincaslt.highlight-matching-tag",
+    "wix.vscode-import-cost",
+    "bierner.lit-html",
+    "techer.open-in-browser",
+    "esbenp.prettier-vscode",
+    "cssho.vscode-svgviewer",
+    "shardulm94.trailing-spaces",
+    "jpoissonnier.vscode-styled-components",
+    "streetsidesoftware.code-spell-checker",
+    "alexkrechik.cucumberautocomplete",
+    "jpoissonnier.vscode-styled-components",
+    "danielhuth.styco"
+  ]
+}

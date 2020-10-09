@@ -1,0 +1,18 @@
+{
+  "files.eol": "\n",
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.renderControlCharacters": false,
+  "editor.renderWhitespace": "none",
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+  "breadcrumbs.enabled": true,
+  "workbench.colorCustomizations": {},
+  "editor.trimAutoWhitespace": true,
+  "files.trimTrailingWhitespace": false,
+  "cSpell.words": [],
+  "cSpell.ignoreWords": ["esnext"],
+}
