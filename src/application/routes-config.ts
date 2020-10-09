@@ -1,4 +1,4 @@
 export default {
-  HOME: "/",
+  ROOT: "/",
   SEARCH: "/search",
 };

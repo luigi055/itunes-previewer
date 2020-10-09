@@ -5,7 +5,7 @@ import routes from "./routes-config";
 
 const ClientRouter: FunctionComponent = () => (
   <Switch>
-    <Route exact path={routes.HOME}>
+    <Route exact path={routes.ROOT}>
       <Redirect to={routes.SEARCH} />
     </Route>
     <Route path={routes.SEARCH} exact>
