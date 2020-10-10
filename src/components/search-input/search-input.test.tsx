@@ -85,4 +85,85 @@ describe("Testing the SearchInput Component", () => {
       expect(spyHandler).toHaveBeenCalledWith(randomText);
     });
   });
+
+  describe("testing accessibility", () => {
+    it("should always focus the input first when the button is on the left", () => {
+      render(
+        <ComponentWithTheme>
+          <SearchInput handleSubmit={jest.fn()} />
+        </ComponentWithTheme>
+      );
+      const { getByTestId } = screen;
+      const searchInput = getByTestId(searchInputTestId);
+      const searchButton = getByTestId(searchButtonTestId);
+
+      expect(document.body).toHaveFocus();
+
+      userEvent.tab();
+
+      expect(searchInput).toHaveFocus();
+      expect(searchButton).not.toHaveFocus();
+    });
+
+    it("should always focus the input first when the button is on the right", () => {
+      render(
+        <ComponentWithTheme>
+          <SearchInput buttonToRight handleSubmit={jest.fn()} />
+        </ComponentWithTheme>
+      );
+      const { getByTestId } = screen;
+      const searchInput = getByTestId(searchInputTestId);
+      const searchButton = getByTestId(searchButtonTestId);
+
+      expect(document.body).toHaveFocus();
+
+      userEvent.tab();
+
+      expect(searchInput).toHaveFocus();
+      expect(searchButton).not.toHaveFocus();
+    });
+
+    it("should focus the button when tab after input had the focus", () => {
+      render(
+        <ComponentWithTheme>
+          <SearchInput handleSubmit={jest.fn()} />
+        </ComponentWithTheme>
+      );
+      const { getByTestId } = screen;
+      const searchInput = getByTestId(searchInputTestId);
+      const searchButton = getByTestId(searchButtonTestId);
+
+      expect(document.body).toHaveFocus();
+
+      userEvent.tab();
+
+      expect(searchInput).toHaveFocus();
+      expect(searchButton).not.toHaveFocus();
+
+      userEvent.tab();
+
+      expect(searchInput).not.toHaveFocus();
+      expect(searchButton).toHaveFocus();
+    });
+
+    it("should send submit the form when tab to the button and the user press enter", () => {
+      const spyHandler = jest.fn();
+      const randomText = Random.getString();
+      render(
+        <ComponentWithTheme>
+          <SearchInput handleSubmit={spyHandler} />
+        </ComponentWithTheme>
+      );
+      const { getByTestId } = screen;
+      const searchInput = getByTestId(searchInputTestId);
+      expect(document.body).toHaveFocus();
+
+      userEvent.tab();
+      userEvent.type(searchInput, randomText);
+      userEvent.tab();
+      document.activeElement.click();
+
+      expect(spyHandler).toHaveBeenCalledWith(randomText);
+    });
+  });
 });
