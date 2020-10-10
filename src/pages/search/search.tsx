@@ -16,6 +16,7 @@ const Search: FunctionComponent = () => {
       <SearchInput
         initialValue={decodeURIComponent(query.substring(1))}
         maxWidth="380px"
+        screenReaderTitle="search for your favorite music"
         handleSubmit={(value) => {
           history.replace(`?${value}`);
         }}

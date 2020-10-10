@@ -1,6 +1,5 @@
 import React, { FunctionComponent, HTMLAttributes } from "react";
 import { withTheme } from "styled-components";
-import { IconProps } from "./icons-types";
 
 const MagnifyingGlass: FunctionComponent<
   IconProps & HTMLAttributes<HTMLOrSVGElement>

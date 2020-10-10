@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SearchForm = styled.form<{ maxWidth?: string }>`
-  max-width: ${({ maxWidth }) => maxWidth || "100%"}
+  max-width: ${({ maxWidth }) => maxWidth || "100%"};
 `;
 
 export const SearchLabel = styled.label<{ buttonToRight: boolean }>`
@@ -9,7 +9,7 @@ export const SearchLabel = styled.label<{ buttonToRight: boolean }>`
   border-radius: 50px;
   display: flex;
   flex-direction: ${({ buttonToRight }) =>
-  buttonToRight ? "row" : "row-reverse"};
+    buttonToRight ? "row" : "row-reverse"};
   overflow: hidden;
   z-index: 9;
 `;

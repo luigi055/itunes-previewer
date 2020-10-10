@@ -6,6 +6,7 @@ import userEvent from "@testing-library/user-event";
 
 const searchInputTestId = "search-input-element";
 const searchButtonTestId = "search-button";
+const searchHiddenTitleTestId = "search-hidden-title";
 const magnifyingIconSelector = "[data-testid='magnifying-glass-icon']";
 
 describe("Testing the SearchInput Component", () => {
@@ -88,6 +89,31 @@ describe("Testing the SearchInput Component", () => {
   });
 
   describe("testing accessibility", () => {
+    it("should title be an empty string by default", () => {
+      render(
+        <ComponentWithTheme>
+          <SearchInput handleSubmit={jest.fn()} />
+        </ComponentWithTheme>
+      );
+      const { getByTestId } = screen;
+      const searchHiddenTitle = getByTestId(searchHiddenTitleTestId);
+
+      expect(searchHiddenTitle.textContent).toBe("");
+    });
+
+    it("should title the one specified by the screenReaderTitle property", () => {
+      const title = Random.getString();
+      render(
+        <ComponentWithTheme>
+          <SearchInput screenReaderTitle={title} handleSubmit={jest.fn()} />
+        </ComponentWithTheme>
+      );
+      const { getByTestId } = screen;
+      const searchHiddenTitle = getByTestId(searchHiddenTitleTestId);
+
+      expect(searchHiddenTitle.textContent).toBe(title);
+    });
+
     it("should always focus the input first when the button is on the left", () => {
       render(
         <ComponentWithTheme>

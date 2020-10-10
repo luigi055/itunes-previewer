@@ -1,4 +1,5 @@
-import MagnifyingGlass from "components/icons/magnifying-glass/magnifying-glass";
+import { MagnifyingGlass } from "components/icons";
+import { ScreenReaderOnly } from "components/screen-readers-helpers";
 import React, {
   FunctionComponent,
   useRef,
@@ -11,13 +12,7 @@ import {
   SearchLabel,
   SearchButton,
 } from "./search-input-styled";
-
-interface SearchInputProps {
-  handleSubmit: (value?: string) => void;
-  initialValue?: string;
-  buttonToRight?: boolean;
-  maxWidth?: string;
-}
+import { SearchInputProps } from "./search-input-types";
 
 const SearchInput: FunctionComponent<
   SearchInputProps & FormHTMLAttributes<HTMLFormElement>
@@ -25,6 +20,7 @@ const SearchInput: FunctionComponent<
   handleSubmit,
   initialValue = "",
   buttonToRight = false,
+  screenReaderTitle = "",
   ...props
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -44,6 +40,9 @@ const SearchInput: FunctionComponent<
         buttonToRight={buttonToRight}
         data-testid="search-label"
       >
+        <ScreenReaderOnly data-testid="search-hidden-title">
+          {screenReaderTitle}
+        </ScreenReaderOnly>
         <SearchFormInput
           data-testid="search-input-element"
           value={currentValue}
