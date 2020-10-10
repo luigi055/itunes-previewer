@@ -3,8 +3,6 @@ import { createMemoryHistory } from "history";
 import { cleanup, render } from "@testing-library/react";
 import ClientRouter from "./client-router";
 import routesConfig from "./routes-config";
-import { ThemeProvider } from "styled-components";
-import { defaultTheme } from "styles";
 import { ConnectedComponent } from "test-utils";
 
 describe("Testing ClientRouter component", () => {
@@ -20,7 +18,7 @@ describe("Testing ClientRouter component", () => {
     render(
       <ConnectedComponent history={history}>
         <ClientRouter />
-      </ConnectedComponent>,
+      </ConnectedComponent>
     );
 
     expect(history.location.pathname).toBe(routesConfig.SEARCH);
@@ -31,7 +29,7 @@ describe("Testing ClientRouter component", () => {
     render(
       <ConnectedComponent history={history}>
         <ClientRouter />
-      </ConnectedComponent>,
+      </ConnectedComponent>
     );
 
     expect(history.location.pathname).toBe(routesConfig.SEARCH);

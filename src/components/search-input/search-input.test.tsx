@@ -3,9 +3,7 @@ import React from "react";
 import { ComponentWithTheme, Random } from "test-utils";
 import SearchInput from "./search-input";
 import userEvent from "@testing-library/user-event";
-import { SearchLabel } from "./search-input-styled";
 
-const searchLabelTestId = "search-label";
 const searchInputTestId = "search-input-element";
 const searchButtonTestId = "search-button";
 const magnifyingIconSelector = "[data-testid='magnifying-glass-icon']";
