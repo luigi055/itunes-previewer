@@ -31,10 +31,6 @@ ${({ theme }) =>
       margin: 0;
     }
 
-    p {
-      font-size: ${theme.fontSize};
-    }
-
     #root {
       height: 100%;
       position: relative;
