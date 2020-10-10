@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { SearchInput } from "components";
+import { Header, SearchInput } from "components";
 import { useHistory, useLocation } from "react-router-dom";
 
 const Search: FunctionComponent = () => {
@@ -12,15 +12,17 @@ const Search: FunctionComponent = () => {
 
   return (
     <main>
-      Search Page
-      <SearchInput
-        initialValue={decodeURIComponent(query.substring(1))}
-        maxWidth="380px"
-        screenReaderTitle="search for your favorite music"
-        handleSubmit={(value) => {
-          history.replace(`?${value}`);
-        }}
-      />
+      <Header>
+        <h1> Search Page</h1>
+        <SearchInput
+          initialValue={decodeURIComponent(query.substring(1))}
+          maxWidth="380px"
+          screenReaderTitle="search for your favorite music"
+          handleSubmit={(value) => {
+            history.replace(`?${value}`);
+          }}
+        />
+      </Header>
     </main>
   );
 };
