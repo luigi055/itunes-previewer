@@ -1,14 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
 import { cleanup, render } from "@testing-library/react";
 import ClientRouter from "./client-router";
 import routesConfig from "./routes-config";
-
-const RouterWrapper: FunctionComponent<{ history: any }> = ({
-  history,
-  children,
-}) => <Router history={history}>{children}</Router>;
+import { ThemeProvider } from "styled-components";
+import { defaultTheme } from "styles";
+import { ConnectedComponent } from "test-utils";
 
 describe("Testing ClientRouter component", () => {
   let history: any;
@@ -21,9 +18,9 @@ describe("Testing ClientRouter component", () => {
   it(`should redirect to search url when the user access the app using root ${routesConfig.ROOT}`, () => {
     history.push(routesConfig.ROOT);
     render(
-      <RouterWrapper history={history}>
+      <ConnectedComponent history={history}>
         <ClientRouter />
-      </RouterWrapper>
+      </ConnectedComponent>,
     );
 
     expect(history.location.pathname).toBe(routesConfig.SEARCH);
@@ -32,9 +29,9 @@ describe("Testing ClientRouter component", () => {
   it(`should take the user to the search page when the user access to the ${routesConfig.SEARCH}`, () => {
     history.push(routesConfig.SEARCH);
     render(
-      <RouterWrapper history={history}>
+      <ConnectedComponent history={history}>
         <ClientRouter />
-      </RouterWrapper>
+      </ConnectedComponent>,
     );
 
     expect(history.location.pathname).toBe(routesConfig.SEARCH);

@@ -1,5 +1,6 @@
 interface Theme {
   primaryColor: string;
+  primaryVariantColor: string;
   onPrimaryColor: string;
   backgroundColor: string;
   onBackgroundVariantColor: string;

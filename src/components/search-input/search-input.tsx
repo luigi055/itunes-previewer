@@ -1,27 +1,50 @@
-import React, { FunctionComponent, useRef, useState } from "react";
+import MagnifyingGlass from "components/icons/magnifying-glass/magnifying-glass";
+import React, {
+  FunctionComponent,
+  useRef,
+  useState,
+  FormHTMLAttributes,
+} from "react";
+import {
+  SearchForm,
+  SearchFormInput,
+  SearchLabel,
+  SearchButton,
+} from "./search-input-styled";
 
 interface SearchInputProps {
-  initialValue: string;
-  handleSubmitCallback: (value?: string) => void;
+  handleSubmit: (value?: string) => void;
+  initialValue?: string;
+  buttonToRight?: boolean;
+  maxWidth?: string;
 }
 
-const SearchInput: FunctionComponent<SearchInputProps> = ({
-  handleSubmitCallback: readValueCallback,
-  initialValue,
+const SearchInput: FunctionComponent<
+  SearchInputProps & FormHTMLAttributes<HTMLFormElement>
+> = ({
+  handleSubmit,
+  initialValue = "",
+  buttonToRight = false,
+  ...props
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [currentValue, setCurrentValue] = useState(initialValue);
 
   return (
-    <form
+    <SearchForm
+      {...props}
       onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        readValueCallback(inputRef.current?.value);
+        handleSubmit(inputRef.current?.value);
       }}
     >
-      <label htmlFor="searchInput">
-        <input
+      <SearchLabel
+        htmlFor="searchInput"
+        buttonToRight={buttonToRight}
+        data-testid="search-label"
+      >
+        <SearchFormInput
           data-testid="search-input-element"
           value={currentValue}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,9 +54,11 @@ const SearchInput: FunctionComponent<SearchInputProps> = ({
           ref={inputRef}
           autoComplete="off"
         />
-        <button data-testid="search-button">Search</button>
-      </label>
-    </form>
+        <SearchButton data-testid="search-button">
+          <MagnifyingGlass />
+        </SearchButton>
+      </SearchLabel>
+    </SearchForm>
   );
 };
 

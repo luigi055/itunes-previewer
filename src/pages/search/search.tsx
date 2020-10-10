@@ -15,7 +15,8 @@ const Search: FunctionComponent = () => {
       Search Page
       <SearchInput
         initialValue={decodeURIComponent(query.substring(1))}
-        handleSubmitCallback={(value) => {
+        maxWidth="380px"
+        handleSubmit={(value) => {
           history.replace(`?${value}`);
         }}
       />
