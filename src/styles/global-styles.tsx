@@ -10,6 +10,16 @@ const GlobalStyles: GlobalStyleComponent<
 > = createGlobalStyle`
 ${({ theme }) =>
   css`
+    :root {
+      --type-scale: 1.5;
+      --base-size: 1rem;
+      --type-scale: 1.2;
+      --h3: calc(var(--base-size) * var(--type-scale));
+      --h2: calc(var(--h3) * var(--type-scale));
+      --h1: calc(var(--h2) * var(--type-scale));
+      --text-sm: calc(var(--base-size) / var(--type-scale));
+    }
+
     *,
     *::after,
     *::before {
