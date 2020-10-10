@@ -11,7 +11,6 @@ export const Header = styled.header`
   max-height: 70px;
   min-height: 70px;
   object-fit: contain;
-  padding: 15px;
 `;
 
 export default Header;
