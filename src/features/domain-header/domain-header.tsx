@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { Header, SearchInput } from "components";
 import { useHistory, useLocation } from "react-router-dom";
-import { DesignH1 } from "components/typography/heading";
+import { Header, SearchInput } from "components";
+import { DesignH1 } from "components/typography";
+import routesConfig from "application/routes-config";
 
 const DomainHeader: FunctionComponent = () => {
   const history = useHistory();
@@ -19,7 +20,7 @@ const DomainHeader: FunctionComponent = () => {
         maxWidth="380px"
         screenReaderTitle="search for your favorite music"
         handleSubmit={(value) => {
-          history.replace(`/search?${value}`);
+          history.replace(`${routesConfig.SEARCH}?${value}`);
         }}
       />
     </Header>
