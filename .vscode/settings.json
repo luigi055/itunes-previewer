@@ -13,6 +13,8 @@
   "workbench.colorCustomizations": {},
   "editor.trimAutoWhitespace": true,
   "files.trimTrailingWhitespace": false,
-  "cSpell.words": [],
+  "cSpell.words": [
+    "testid"
+  ],
   "cSpell.ignoreWords": ["esnext"],
 }

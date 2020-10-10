@@ -1,0 +1,41 @@
+pool:
+  name: AzureForgeV2Linux
+steps:
+  - task: NodeTool@0
+    displayName: "Use Node LTS"
+    inputs:
+      versionSpec: "12.19.0"
+      checkLatest: true
+
+  - task: Npm@1
+    displayName: "npm install"
+    inputs:
+      command: "install"
+
+  - task: Npm@1
+    displayName: "npm lint"
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: "run lint"
+
+  - task: Npm@1
+    displayName: "npm test:ci"
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: "run test:ci"
+
+  - task: Npm@1
+    displayName: "npm build"
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: "run build"
+
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact: build (Not For PullRequests)"
+    inputs:
+      PathtoPublish: package
+      ArtifactName: build
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
