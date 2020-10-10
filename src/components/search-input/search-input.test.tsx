@@ -13,11 +13,12 @@ describe("Testing the SearchInput Component", () => {
 
   describe("testing main behavior", () => {
     it("should show the magnifying glass icon in the button", () => {
-      const { getByTestId } = render(
+      render(
         <ComponentWithTheme>
           <SearchInput handleSubmit={() => {}} />
         </ComponentWithTheme>
       );
+      const { getByTestId } = screen;
       const searchButton = getByTestId(searchButtonTestId);
 
       expect(searchButton).toContainHTML("svg");
