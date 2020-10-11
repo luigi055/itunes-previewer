@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { Header, SearchInput } from "components";
 import { DesignH1 } from "components/typography";
 import routesConfig from "application/routes-config";
-import ITunesClient from "external/itunes-api/itunes-client";
+import ITunesClient from "services/externals/itunes-api";
 
 const DomainHeader: FunctionComponent = () => {
   const history = useHistory();
