@@ -1,6 +1,6 @@
 import { put, call, takeLatest, fork } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
-import { getSongsSuccess, GET_SONGS_START } from "./songs-actions";
+import { searchSongsSuccess, GET_SONGS_START } from "./search-songs-actions";
 import { SearchResult, ITunesClient } from "services/externals/itunes-api";
 import { startLoading, stopLoading } from "features/loading";
 
@@ -11,7 +11,7 @@ function* getSongs(props: any): SagaIterator {
   try {
     yield put(startLoading());
     const response: SearchResult = yield call(ITunesClient.search, payload);
-    yield put(getSongsSuccess(response));
+    yield put(searchSongsSuccess(response));
   } catch (error) {
     console.error("implement error case");
   } finally {

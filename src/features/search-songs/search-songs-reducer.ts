@@ -1,9 +1,9 @@
 // import {
 //   handleAction,
 // } from "services/application/redux";
-import initialState from "./songs-initial-state";
+import initialState from "./search-songs-initial-state";
 import { SearchResult } from "services/externals/itunes-api";
-import { GET_SONGS_SUCCESS } from "./songs-actions";
+import { GET_SONGS_SUCCESS } from "./search-songs-actions";
 
 const songsStateHandlers: Mapping<Function> = {
   [GET_SONGS_SUCCESS]: (

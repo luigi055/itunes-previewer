@@ -1,5 +1,5 @@
 import { reduceLoading } from "features/loading";
-import { reduceSongs } from "features/songs";
+import { reduceSongs } from "features/search-songs";
 import { combineReducers } from "redux";
 
 const rootReducers = combineReducers({
