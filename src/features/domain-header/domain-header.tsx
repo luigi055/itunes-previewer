@@ -3,13 +3,17 @@ import { useHistory, useLocation } from "react-router-dom";
 import { Header, SearchInput } from "components";
 import { DesignH1 } from "components/typography";
 import routesConfig from "application/routes-config";
+import ITunesClient from "external/itunes-api/itunes-client";
 
 const DomainHeader: FunctionComponent = () => {
   const history = useHistory();
   const query = useLocation().search;
 
   useEffect(() => {
-    console.warn("HERE WILL GO THE FETCH TO ITUNES", query);
+    (async () => {
+      const songs = await ITunesClient.search(query);
+      console.warn(songs);
+    })();
   }, [query]);
 
   return (
