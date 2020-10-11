@@ -1,8 +1,8 @@
-import {
-  handleAction,
-} from "services/application/redux";
+// import {
+//   handleAction,
+// } from "services/application/redux";
 import initialState from "./songs-initial-state";
-import SearchResult from "services/externals/itunes-api";
+import { SearchResult } from "services/externals/itunes-api";
 import { GET_SONGS_SUCCESS } from "./songs-actions";
 
 const songsStateHandlers: Mapping<Function> = {
@@ -12,11 +12,12 @@ const songsStateHandlers: Mapping<Function> = {
   ) => action.payload,
 };
 
-const songsReducer = (
+export const reduceSongs = (
   state: SearchResult = initialState,
   action: ActionStandard<SearchResult>,
 ) => {
-  return handleAction(state, action, songsStateHandlers);
-};
+  const handler = songsStateHandlers[action.type];
+  const hasHandler = !!handler;
 
-export default songsReducer;
+  return hasHandler ? handler(state, action) : state;
+};

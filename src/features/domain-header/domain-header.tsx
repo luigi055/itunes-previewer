@@ -3,18 +3,22 @@ import { useHistory, useLocation } from "react-router-dom";
 import { Header, SearchInput } from "components";
 import { DesignH1 } from "components/typography";
 import routesConfig from "application/routes-config";
-import ITunesClient from "services/externals/itunes-api";
+// import ITunesClient from "services/externals/itunes-api";
+import { useDispatch } from "react-redux";
+import { getSongsStart } from "features/songs";
 
 const DomainHeader: FunctionComponent = () => {
   const history = useHistory();
   const query = useLocation().search;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      const songs = await ITunesClient.search(query);
-      console.warn(songs);
-    })();
-  }, [query]);
+    dispatch(getSongsStart(query.slice(1)));
+    // (async () => {
+    // const songs = await ITunesClient.search(query);
+    // console.warn(songs);
+    // })();
+  }, [query, dispatch]);
 
   return (
     <Header>

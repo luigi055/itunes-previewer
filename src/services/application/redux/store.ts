@@ -1,15 +1,16 @@
+import { State } from "./state.d";
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { composeEnhancer } from "./collaborators";
-import registeredReducers from "./registered-reducers";
+import rootReducers from "./root-reducers";
 import rootSagas from "./root-sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const setStore = () => {
+const setStore = (initialState?: State) => {
   const store = createStore(
-    registeredReducers,
-    {},
+    rootReducers,
+    initialState,
     composeEnhancer(applyMiddleware(sagaMiddleware)),
   );
   sagaMiddleware.run(rootSagas);
