@@ -1,28 +1,8 @@
-import React, { FunctionComponent, useEffect } from "react";
-import { SearchInput } from "components";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { FunctionComponent } from "react";
+import { CenteredElementXY } from "components";
 
-const Search: FunctionComponent = () => {
-  const history = useHistory();
-  const query = useLocation().search;
-
-  useEffect(() => {
-    console.warn("HERE WILL GO THE FETCH TO ITUNES", query);
-  }, [query]);
-
-  return (
-    <main>
-      Search Page
-      <SearchInput
-        initialValue={decodeURIComponent(query.substring(1))}
-        maxWidth="380px"
-        screenReaderTitle="search for your favorite music"
-        handleSubmit={(value) => {
-          history.replace(`?${value}`);
-        }}
-      />
-    </main>
-  );
-};
+const Search: FunctionComponent = () => (
+  <CenteredElementXY><p>Use the search bar to find songs</p></CenteredElementXY>
+);
 
 export default Search;
