@@ -24,7 +24,7 @@ class ITunesClient {
     term: string,
   ): Promise<SearchResult> {
     return await (await fetch(
-      `https://itunes.apple.com/search?term=${term.replace(/\s/g, "+")}`,
+      `${process.env.REACT_APP_ITUNES_SEARCH_URI}${term.replace(/\s/g, "+")}`,
     )).json();
   }
 }
