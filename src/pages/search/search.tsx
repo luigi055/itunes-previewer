@@ -5,6 +5,7 @@ import { EmptyList } from "./search-collaborators";
 import {
   PlayList,
   PlayListElement,
+  PlayListHead,
   PlayListLink,
   PlayListRow,
 } from "./search-styled";
@@ -48,11 +49,11 @@ const Search: FunctionComponent = () => {
 
   return artistSongs.length ? (
     <PlayList>
-      <PlayListRow>
+      <PlayListHead>
         <span></span>
-        <PlayListElement>Song</PlayListElement>
-        <PlayListElement>Artist</PlayListElement>
-        <PlayListElement>Album</PlayListElement>
+        <PlayListElement as="strong">Song</PlayListElement>
+        <PlayListElement as="strong">Artist</PlayListElement>
+        <PlayListElement as="strong">Album</PlayListElement>
         <PlayListElement as="strong" highlight>
           Duration
         </PlayListElement>
@@ -62,7 +63,7 @@ const Search: FunctionComponent = () => {
         <PlayListElement as="strong" highlight>
           Price
         </PlayListElement>
-      </PlayListRow>
+      </PlayListHead>
       {renderSongs(artistSongs)}
     </PlayList>
   ) : (
