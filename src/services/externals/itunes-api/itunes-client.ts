@@ -14,7 +14,7 @@ interface ArtistSongs {
   artworkUrl100: string;
 }
 
-interface SearchResult {
+export interface SearchResult {
   resultCount: number;
   results: ArtistSongs[];
 }

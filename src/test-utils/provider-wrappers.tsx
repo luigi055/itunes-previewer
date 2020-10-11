@@ -3,6 +3,9 @@ import { createMemoryHistory } from "history";
 import { ThemeProvider } from "styled-components";
 import { Router } from "react-router-dom";
 import { defaultTheme } from "styles";
+import { setStore } from "services/application/redux";
+import { Provider } from "react-redux";
+import { Store } from "redux";
 
 export const ComponentWithTheme: FunctionComponent = ({ children }) => (
   <ThemeProvider theme={defaultTheme}>
@@ -10,10 +13,14 @@ export const ComponentWithTheme: FunctionComponent = ({ children }) => (
   </ThemeProvider>
 );
 
-export const ConnectedComponent: FunctionComponent<{ history?: any }> = (
-  { history = createMemoryHistory(), children },
+export const ConnectedComponent: FunctionComponent<
+  { store?: Store; history?: any }
+> = (
+  { store = setStore(), history = createMemoryHistory(), children },
 ) => (
-  <ComponentWithTheme>
-    <Router history={history}>{children}</Router>;
-  </ComponentWithTheme>
+  <Provider store={store}>
+    <ComponentWithTheme>
+      <Router history={history}>{children}</Router>;
+    </ComponentWithTheme>
+  </Provider>
 );
