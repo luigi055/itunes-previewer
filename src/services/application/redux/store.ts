@@ -5,10 +5,11 @@ import { composeEnhancer } from "./collaborators";
 import rootReducers from "./root-reducers";
 import rootSagas from "./root-sagas";
 import { actionWatcherMiddleware } from "test-utils/triggered-actions";
+import storeInitialState from "./store-initial-state";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const setStore = (initialState?: State) => {
+const setStore = (initialState: State = storeInitialState) => {
   const store = createStore(
     rootReducers,
     initialState,

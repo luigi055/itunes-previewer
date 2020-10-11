@@ -1,7 +1,8 @@
+import { Store } from "redux";
 import { START_LOADING } from "./../loading/loading-actions";
 import { Random } from "test-utils";
 import { GET_SONGS_SUCCESS, searchSongsStart } from "./search-songs-actions";
-import { setStore } from "services/application/redux";
+import { setStore, storeInitialState } from "services/application/redux";
 import searchSongsInitialState from "./search-songs-initial-state";
 import {
   dummySearchData,
@@ -11,23 +12,22 @@ import { triggeredActions } from "test-utils/triggered-actions";
 import { STOP_LOADING } from "features/loading";
 
 describe("Testing search songs feature", () => {
-  it("should not search for song when the query string is empty", () => {
-    const store = setStore(
-      { searchResult: searchSongsInitialState, isLoading: false },
-    );
+  let store: Store;
+  let randomTerm: string = "";
 
+  beforeEach(() => {
+    global.fetch = jest.fn().mockImplementation(fetchSearchAPIMocked);
+    randomTerm = Random.getString();
+    store = setStore(storeInitialState);
+  });
+
+  it("should not search for song when the query string is empty", () => {
     store.dispatch(searchSongsStart(""));
 
     expect(store.getState().searchResult).toEqual(searchSongsInitialState);
   });
 
   it("should search for a song based on the query term", async () => {
-    const randomTerm = Random.getString();
-    global.fetch = jest.fn().mockImplementation(fetchSearchAPIMocked);
-    const store = setStore(
-      { searchResult: searchSongsInitialState, isLoading: false },
-    );
-
     store.dispatch(searchSongsStart(randomTerm));
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
@@ -40,12 +40,6 @@ describe("Testing search songs feature", () => {
   });
 
   it("should start the loading action and stop it once the saga finish", async () => {
-    const randomTerm = Random.getString();
-    global.fetch = jest.fn().mockImplementation(fetchSearchAPIMocked);
-    const store = setStore(
-      { searchResult: searchSongsInitialState, isLoading: false },
-    );
-
     store.dispatch(searchSongsStart(randomTerm));
     await triggeredActions.waitForAction(STOP_LOADING);
 
