@@ -14,6 +14,11 @@ import {
 } from "services/externals/itunes-api/mock";
 import { triggeredActions } from "test-utils/triggered-actions";
 import { STOP_LOADING } from "features/loading";
+import {
+  selectResults,
+  selectResultCount,
+  selectSearchResult,
+} from "./search-songs-selectors";
 
 describe("Testing search songs feature", () => {
   let store: Store;
@@ -29,7 +34,9 @@ describe("Testing search songs feature", () => {
   it("should not search for song when the query string is empty", () => {
     store.dispatch(searchSongsStart(""));
 
-    expect(store.getState().searchResult).toEqual(searchSongsInitialState);
+    expect(selectSearchResult(store.getState())).toEqual(
+      searchSongsInitialState
+    );
   });
 
   it("should search for a song based on the query term", async () => {
@@ -39,12 +46,10 @@ describe("Testing search songs feature", () => {
     expect(triggeredActions.getAction(GET_SONGS_START).payload).toBe(
       randomTerm
     );
-    expect(store.getState().searchResult.resultCount).toEqual(
+    expect(selectResultCount(store.getState())).toEqual(
       dummySearchData.resultCount
     );
-    expect(store.getState().searchResult.results).toEqual(
-      dummySearchData.results
-    );
+    expect(selectResults(store.getState())).toEqual(dummySearchData.results);
   });
 
   it("should start the loading action and stop it once the saga finish", async () => {
