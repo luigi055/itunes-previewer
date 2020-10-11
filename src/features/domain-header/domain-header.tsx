@@ -14,8 +14,11 @@ const DomainHeader: FunctionComponent = () => {
 
   return (
     <Header>
-      <DesignH1 isFontWeightNormal>CornerJob Music Player</DesignH1>
+      <DesignH1 isFontWeightNormal data-testid="application-heading">
+        CornerJob Music Player
+      </DesignH1>
       <SearchInput
+        data-testid="search-input"
         initialValue={decodeURIComponent(query.substring(1))}
         maxWidth="380px"
         screenReaderTitle="search for your favorite music"
