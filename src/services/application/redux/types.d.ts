@@ -11,5 +11,3 @@ interface ActionStandard<T> extends ActionStandardBase {
 interface ActionPayloadRequired<T> extends ActionStandardBase {
   payload: T;
 }
-
-interface State {}
