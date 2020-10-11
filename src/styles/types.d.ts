@@ -7,4 +7,5 @@ interface Theme {
   onBackgroundColor: string;
   fontFamily: string;
   fontSize: string;
+  disabled: string;
 }

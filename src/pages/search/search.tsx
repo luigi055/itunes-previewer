@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react";
-import { CenteredElementXY } from "components";
+import { EmptyList } from "./search-collaborators";
 
 const Search: FunctionComponent = () => (
-  <CenteredElementXY><p>Use the search bar to find songs</p></CenteredElementXY>
+  <EmptyList />
 );
 
 export default Search;

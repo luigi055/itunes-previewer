@@ -10,7 +10,7 @@ export const ComponentWithTheme: FunctionComponent = ({ children }) => (
   </ThemeProvider>
 );
 
-export const ConnectedComponent: FunctionComponent<{ history: any }> = (
+export const ConnectedComponent: FunctionComponent<{ history?: any }> = (
   { history = createMemoryHistory(), children },
 ) => (
   <ComponentWithTheme>
