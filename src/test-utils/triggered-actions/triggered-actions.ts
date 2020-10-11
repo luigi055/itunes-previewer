@@ -15,7 +15,7 @@ export const triggeredActions = {
 
   getAction(searchedActionType: string) {
     return this.actions.find(
-      (action: ActionStandard<any>) => action.type === searchedActionType,
+      (action: ActionStandard<any>) => action.type === searchedActionType
     );
   },
 
@@ -23,12 +23,8 @@ export const triggeredActions = {
     return this.actions
       .reverse()
       .find(
-        (action: ActionStandard<any>) => action.type === searchedActionType,
+        (action: ActionStandard<any>) => action.type === searchedActionType
       );
-  },
-
-  getActions() {
-    return this.actions;
   },
 
   getActionsTypes() {
@@ -42,11 +38,11 @@ export const triggeredActions = {
           triggeredActions
             .getActionsTypes()
             .filter((actionType) => actionType === searchedActionType).length >
-            0;
+          0;
         const check = (): any =>
           originalTimeout(
             (): Promise<any> => (isAction() ? resolve() : check()),
-            1,
+            1
           );
         check();
       }),
@@ -54,24 +50,22 @@ export const triggeredActions = {
         originalTimeout(
           () =>
             reject(
-              new Error(`Timeout looking for Action ${searchedActionType}`),
+              new Error(`Timeout looking for Action ${searchedActionType}`)
             ),
-          1000,
+          1000
         )
       ),
     ]);
   },
 };
 
-export const actionWatcherMiddleware = () =>
-  (next: Function) =>
-    (
-      action: ActionStandard<any>,
-    ) => {
-      triggeredActions.actionTypes.push(action.type);
-      triggeredActions.actions.push(action);
+export const actionWatcherMiddleware = () => (next: Function) => (
+  action: ActionStandard<any>
+) => {
+  triggeredActions.actionTypes.push(action.type);
+  triggeredActions.actions.push(action);
 
-      return next(action);
-    };
+  return next(action);
+};
 
 export default triggeredActions;

@@ -1,7 +1,11 @@
 import { Store } from "redux";
 import { START_LOADING } from "./../loading/loading-actions";
 import { Random } from "test-utils";
-import { GET_SONGS_SUCCESS, searchSongsStart } from "./search-songs-actions";
+import {
+  GET_SONGS_START,
+  GET_SONGS_SUCCESS,
+  searchSongsStart,
+} from "./search-songs-actions";
 import { setStore, storeInitialState } from "services/application/redux";
 import searchSongsInitialState from "./search-songs-initial-state";
 import {
@@ -19,6 +23,7 @@ describe("Testing search songs feature", () => {
     global.fetch = jest.fn().mockImplementation(fetchSearchAPIMocked);
     randomTerm = Random.getString();
     store = setStore(storeInitialState);
+    triggeredActions.clear();
   });
 
   it("should not search for song when the query string is empty", () => {
@@ -31,11 +36,14 @@ describe("Testing search songs feature", () => {
     store.dispatch(searchSongsStart(randomTerm));
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
+    expect(triggeredActions.getAction(GET_SONGS_START).payload).toBe(
+      randomTerm
+    );
     expect(store.getState().searchResult.resultCount).toEqual(
-      dummySearchData.resultCount,
+      dummySearchData.resultCount
     );
     expect(store.getState().searchResult.results).toEqual(
-      dummySearchData.results,
+      dummySearchData.results
     );
   });
 
@@ -44,10 +52,10 @@ describe("Testing search songs feature", () => {
     await triggeredActions.waitForAction(STOP_LOADING);
 
     expect(triggeredActions.getLastActionCalled(START_LOADING).type).toEqual(
-      START_LOADING,
+      START_LOADING
     );
     expect(triggeredActions.getLastActionCalled(STOP_LOADING).type).toEqual(
-      STOP_LOADING,
+      STOP_LOADING
     );
   });
 });
