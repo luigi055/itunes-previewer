@@ -17,9 +17,10 @@ const renderSongs = (songs: ArtistSongs[]) =>
   songs
     .map((song, index) => (
       <PlayListLink
+        key={song.trackId}
         to={`/playList/michael%20jackson/${index + 1}/${song.trackName}`}
       >
-        <PlayListRow key={song.trackId}>
+        <PlayListRow data-testid="playlist-row">
           <img
             src={song.artworkUrl60}
             alt={`${song.collectionName} thumbnail`}
