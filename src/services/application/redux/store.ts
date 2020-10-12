@@ -1,4 +1,3 @@
-import { State } from "./state.d";
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { composeEnhancer } from "./collaborators";

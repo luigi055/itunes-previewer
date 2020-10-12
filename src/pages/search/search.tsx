@@ -1,75 +1,26 @@
 import React, { FunctionComponent } from "react";
-import { selectResults } from "features/search-songs/search-songs-selectors";
-import { useSelector } from "react-redux";
-import { EmptyList } from "./search-collaborators";
 import {
-  PlayList,
-  PlayListElement,
-  PlayListHead,
-  PlayListLink,
-  PlayListRow,
-} from "./search-styled";
-
-const formatToMinutes = (milliseconds: number): string =>
-  (milliseconds / 1000 / 60).toFixed(2).replace(/\./, ":");
-
-const formatPrice = (price: number, currency: string): string =>
-  price === -1 ? "Free" : `${price} ${currency}`;
-
-const renderSongs = (songs: ArtistSongs[]) =>
-  songs
-    .map((song, index) => (
-      <PlayListLink
-        to={`/playList/michael%20jackson/${index + 1}/${song.trackName}`}
-      >
-        <PlayListRow key={song.trackId}>
-          <img
-            src={song.artworkUrl60}
-            alt={`${song.collectionName} thumbnail`}
-          />
-
-          <PlayListElement highlight>{song.trackName}</PlayListElement>
-          <PlayListElement>{song.artistName}</PlayListElement>
-
-          <PlayListElement>{song.collectionName}</PlayListElement>
-          <PlayListElement>
-            {formatToMinutes(song.trackTimeMillis)}
-          </PlayListElement>
-          <PlayListElement>{song.primaryGenreName}</PlayListElement>
-          <PlayListElement>
-            {formatPrice(song.trackPrice, song.currency)}
-          </PlayListElement>
-        </PlayListRow>
-      </PlayListLink>
-    ));
+  selectResults,
+  selectSearchTerm,
+} from "features/search-songs/search-songs-selectors";
+import { useSelector } from "react-redux";
+import { EmptyList, PlayList } from "./search-collaborators";
+import { SearchTerm } from "./search-styled";
 
 const Search: FunctionComponent = () => {
   const artistSongs: ArtistSongs[] = useSelector(selectResults);
+  const searchTerm = useSelector(selectSearchTerm);
 
   return artistSongs.length
     ? (
-      <PlayList>
-        <PlayListHead>
-          <span></span>
-          <PlayListElement as="strong">Song</PlayListElement>
-          <PlayListElement as="strong">Artist</PlayListElement>
-          <PlayListElement as="strong">Album</PlayListElement>
-          <PlayListElement as="strong" highlight>
-            Duration
-          </PlayListElement>
-          <PlayListElement as="strong" highlight>
-            Genre
-          </PlayListElement>
-          <PlayListElement as="strong" highlight>
-            Price
-          </PlayListElement>
-        </PlayListHead>
-        {renderSongs(artistSongs)}
-      </PlayList>
+      <>
+        <SearchTerm isFontWeightNormal as="h2">
+          Searching: "{searchTerm}"
+        </SearchTerm>
+        <PlayList artistSongs={artistSongs} />
+      </>
     )
-    : (
-      <EmptyList />
-    );
+    : <EmptyList />;
 };
 
 export default Search;

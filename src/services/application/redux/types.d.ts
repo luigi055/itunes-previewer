@@ -1,3 +1,8 @@
+interface State {
+  searchResult: SearchSongsState;
+  isLoading: boolean;
+}
+
 interface ActionStandardBase {
   type: string;
   meta?: any;

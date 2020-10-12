@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
-const basePaddingX = css`
+export const basePaddingX = css`
   padding-left: 25px;
   padding-right: 25px;
 `;
 
-const basePaddingY = css`
+export const basePaddingY = css`
   padding-bottom: 50px;
   padding-top: 25px;
 `;

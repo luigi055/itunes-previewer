@@ -1,48 +1,9 @@
+import styled from "styled-components";
+import { basePaddingX } from "components";
 import { DesignH1 } from "components/typography";
-import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
 
-export const EmptyPlaylistHeading = styled(DesignH1)`
-  color: ${({ theme }) => theme.onBackgroundVariantColor};
-  font-weight: 200;
-  margin-top: 10px;
-`;
-
-export const EmptyTextWrapper = styled.div`
-  text-align: center;
-`;
-
-export const PlayList = styled.ul`
-  list-style: none;
-`;
-
-export const PlayListLink = styled(Link)`
-  text-decoration: none;
-`;
-
-const playListCSS = css`
-  display: grid;
-  grid-template-columns: 10% 25% 15% 15% 10% 10% 10%;
-  padding: 20px 0;
-`;
-
-export const PlayListRow = styled.li`
-  ${playListCSS}
-  color: ${({ theme }) => theme.onBackgroundColor};
-
-  :hover {
-    background: ${({ theme }) => theme.backgroundVariantColor};
-  }
-`;
-
-export const PlayListHead = styled.li`
-  ${playListCSS}
-  color: #747B81;
-`;
-
-export const PlayListElement = styled.span<{ highlight?: boolean }>`
-  display: flex;
-  align-items: center;
-  color: ${({ theme, highlight }) =>
-    highlight ? theme.primaryColor : "inherit"};
+export const SearchTerm = styled(DesignH1)`
+  ${basePaddingX}
+  padding-top: 40px;
+  padding-bottom: 30px;
 `;
