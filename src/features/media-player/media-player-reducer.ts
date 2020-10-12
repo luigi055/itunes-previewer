@@ -1,4 +1,5 @@
 import { GENERATE_CURRENT_TRACK_DATA } from "./media-player-actions";
+import mediaPlayerInitialState from "./media-player-initial-state";
 
 const mediaPlayerStateHandlers: Mapping<Function> = {
   [GENERATE_CURRENT_TRACK_DATA]: (
@@ -8,7 +9,7 @@ const mediaPlayerStateHandlers: Mapping<Function> = {
 };
 
 export const reduceMediaPlayer = (
-  state: MediaPlayerData | null = null,
+  state: MediaPlayerData = mediaPlayerInitialState,
   action: ActionStandard<MediaPlayerData>,
 ) => {
   const handler = mediaPlayerStateHandlers[action.type];

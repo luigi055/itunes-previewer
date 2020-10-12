@@ -1,9 +1,9 @@
 import { fetchTrackData } from "features/media-player";
 import {
-  selectResultCount,
-  selectResults,
-  selectSearchTerm,
-} from "features/search-songs";
+  selectCurrentTrack,
+  selectNextTrackPath,
+  selectPreviousTrackPath,
+} from "features/media-player/media-player-selectors";
 import React, { MouseEvent, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -14,31 +14,25 @@ interface PreviewParams {
 }
 
 const Preview = () => {
-  const songList = useSelector(selectResults);
-  const searchTerm = useSelector(selectSearchTerm);
-  const searchResultCount = useSelector(selectResultCount);
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
-  const { trackNumber, trackName } = useParams() as PreviewParams;
+  const { trackNumber } = useParams() as PreviewParams;
   const castedTrackNumber = trackNumber as string;
   const trackIndex = parseInt(
     castedTrackNumber.slice(castedTrackNumber.indexOf("-") + 1),
   );
 
   const dispatch = useDispatch();
+  const currentTrack = useSelector(selectCurrentTrack);
+  const nextTrackPath = useSelector(selectNextTrackPath);
+  const previousTrackPath = useSelector(selectPreviousTrackPath);
 
   useEffect(() => {
     dispatch(fetchTrackData(trackIndex));
   }, [dispatch, trackIndex]);
 
-  const subtractOneToTrackIndex = (trackNumber: number) =>
-    (trackNumber <= 1) ? 1 : trackNumber - 1;
-  const addOneToTrackIndex = (trackNumber: number, maxNumber: number) =>
-    (trackNumber >= maxNumber) ? maxNumber : trackNumber + 1;
   return <>
     <a
-      href={`/preview/track-${
-        subtractOneToTrackIndex(trackIndex)
-      }/${trackName}?${searchTerm}`}
+      href={previousTrackPath}
     >
       go back
     </a>
@@ -61,15 +55,13 @@ const Preview = () => {
       Pause
     </button>
     <a
-      href={`/preview/track-${
-        addOneToTrackIndex(trackIndex, searchResultCount)
-      }/${trackName}?${searchTerm}`}
+      href={nextTrackPath}
     >
       go next
     </a>
-    {songList[trackIndex] && (
+    {currentTrack.previewUrl && (
       <audio controls hidden ref={audioPlayerRef}>
-        <source src={songList[trackIndex]?.previewUrl} type="audio/x-m4a" />
+        <source src={currentTrack.previewUrl} type="audio/x-m4a" />
       </audio>
     )}
   </>;

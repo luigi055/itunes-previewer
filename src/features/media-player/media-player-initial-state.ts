@@ -1,5 +1,20 @@
 export default {
-  currentTrack: {},
+  currentTrack: {
+    trackId: 0,
+    trackName: "",
+    artistName: "",
+    collectionName: "",
+    trackTimeMillis: 0,
+    primaryGenreName: "",
+    trackPrice: 0,
+    currency: "",
+    collectionViewUrl: "",
+    kind: "",
+    previewUrl: "",
+    artworkUrl30: "",
+    artworkUrl60: "",
+    artworkUrl100: "",
+  },
   nextTrackPath: "",
   previousTrackPath: "",
 };
