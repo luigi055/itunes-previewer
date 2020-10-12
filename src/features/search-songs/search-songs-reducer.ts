@@ -1,16 +1,20 @@
 import initialState from "./search-songs-initial-state";
-import { GET_SONGS_SUCCESS } from "./search-songs-actions";
+import { GET_SONGS_START, GET_SONGS_SUCCESS } from "./search-songs-actions";
 
 const songsStateHandlers: Mapping<Function> = {
   [GET_SONGS_SUCCESS]: (
-    _state: SearchResult,
-    action: ActionPayloadRequired<SearchResult>
-  ) => action.payload,
+    state: SearchSongsState,
+    action: ActionPayloadRequired<SearchResult>,
+  ) => ({ ...state, ...action.payload }),
+  [GET_SONGS_START]: (
+    state: SearchSongsState,
+    action: ActionPayloadRequired<string>,
+  ) => ({ ...state, searchTerm: action.payload }),
 };
 
 export const reduceSongs = (
-  state: SearchResult = initialState,
-  action: ActionStandard<SearchResult>
+  state: SearchSongsState = initialState,
+  action: ActionStandard<SearchResult | string>,
 ) => {
   const handler = songsStateHandlers[action.type];
   const hasHandler = !!handler;

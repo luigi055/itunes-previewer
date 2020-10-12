@@ -11,6 +11,7 @@ function* getSongs(props: any): SagaIterator {
   try {
     yield put(startLoading());
     const response: SearchResult = yield call(ITunesClient.search, payload);
+
     yield put(searchSongsSuccess(response));
   } catch (error) {
     console.error("implement error case");

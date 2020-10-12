@@ -18,7 +18,6 @@ const formatPrice = (price: number, currency: string): string =>
 
 const renderSongs = (songs: ArtistSongs[]) =>
   songs
-    .filter((song) => song.kind === "song") // Todo move this to the reducer
     .map((song, index) => (
       <PlayListLink
         to={`/playList/michael%20jackson/${index + 1}/${song.trackName}`}
@@ -47,28 +46,30 @@ const renderSongs = (songs: ArtistSongs[]) =>
 const Search: FunctionComponent = () => {
   const artistSongs: ArtistSongs[] = useSelector(selectResults);
 
-  return artistSongs.length ? (
-    <PlayList>
-      <PlayListHead>
-        <span></span>
-        <PlayListElement as="strong">Song</PlayListElement>
-        <PlayListElement as="strong">Artist</PlayListElement>
-        <PlayListElement as="strong">Album</PlayListElement>
-        <PlayListElement as="strong" highlight>
-          Duration
-        </PlayListElement>
-        <PlayListElement as="strong" highlight>
-          Genre
-        </PlayListElement>
-        <PlayListElement as="strong" highlight>
-          Price
-        </PlayListElement>
-      </PlayListHead>
-      {renderSongs(artistSongs)}
-    </PlayList>
-  ) : (
-    <EmptyList />
-  );
+  return artistSongs.length
+    ? (
+      <PlayList>
+        <PlayListHead>
+          <span></span>
+          <PlayListElement as="strong">Song</PlayListElement>
+          <PlayListElement as="strong">Artist</PlayListElement>
+          <PlayListElement as="strong">Album</PlayListElement>
+          <PlayListElement as="strong" highlight>
+            Duration
+          </PlayListElement>
+          <PlayListElement as="strong" highlight>
+            Genre
+          </PlayListElement>
+          <PlayListElement as="strong" highlight>
+            Price
+          </PlayListElement>
+        </PlayListHead>
+        {renderSongs(artistSongs)}
+      </PlayList>
+    )
+    : (
+      <EmptyList />
+    );
 };
 
 export default Search;
