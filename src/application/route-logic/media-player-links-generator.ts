@@ -27,7 +27,7 @@ class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
   public generateNextTrackURI(currentTrack: number) {
     const { resultCount } = this._searchResult;
     const nextTrackIndex = (currentTrack < resultCount)
-      ? Math.max(currentTrack, 1) + 1
+      ? Math.max(currentTrack, 0) + 1
       : resultCount;
 
     return this._composeURI(nextTrackIndex, this._toZeroBased(nextTrackIndex));
@@ -35,9 +35,10 @@ class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
 
   public generatePreviousTrackURI(currentTrack: number) {
     const { resultCount } = this._searchResult;
+    const lastTrack = resultCount + 1;
     const previousTrackIndex = (currentTrack <= 1)
       ? 1
-      : Math.min(currentTrack, resultCount) - 1;
+      : Math.min(currentTrack, lastTrack) - 1;
 
     return this._composeURI(
       previousTrackIndex,

@@ -69,7 +69,8 @@ describe("Testing search songs feature", () => {
   });
 
   it("should always return the first track if the fetchTrackData receives a number smaller than 1 ", async () => {
-    store.dispatch(fetchTrackData(0));
+    const trackNumber = 0;
+    store.dispatch(fetchTrackData(trackNumber));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
@@ -83,15 +84,16 @@ describe("Testing search songs feature", () => {
     );
 
     expect(selectNextTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generateNextTrackURI(1),
+      mediaPlayerLinkGenerator.generateNextTrackURI(trackNumber),
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generatePreviousTrackURI(1),
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(trackNumber),
     );
   });
 
   it("should always return the last track if the fetchTrackData receives a number larger than ResultCount ", async () => {
-    store.dispatch(fetchTrackData(20));
+    const trackNumber = 20;
+    store.dispatch(fetchTrackData(trackNumber));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
@@ -105,10 +107,10 @@ describe("Testing search songs feature", () => {
     );
 
     expect(selectNextTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generateNextTrackURI(10),
+      mediaPlayerLinkGenerator.generateNextTrackURI(trackNumber),
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generatePreviousTrackURI(10),
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(trackNumber),
     );
   });
 });
