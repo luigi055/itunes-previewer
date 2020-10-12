@@ -1,5 +1,5 @@
 export default {
   ROOT: "/",
   SEARCH: "/search",
-  PLAYLIST: "/playlist/:artist/:trackNumber/:trackName",
+  PREVIEW: "/preview/:trackNumber/:trackName",
 };

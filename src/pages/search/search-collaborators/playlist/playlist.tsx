@@ -18,8 +18,8 @@ const renderSongs = (songs: ArtistSongs[], searchTerm: string) =>
     .map((song, index) => (
       <PlayListLink
         key={song.trackId}
-        to={`/playList/${searchTerm}/${index +
-          1}/${song.trackName}`}
+        to={`/preview/track-${index +
+          1}/${song.trackName}?${searchTerm}`}
       >
         <PlayListRow data-testid="playlist-row">
           <img

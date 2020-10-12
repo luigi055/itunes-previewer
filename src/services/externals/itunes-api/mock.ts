@@ -1,7 +1,7 @@
 import { Random } from "test-utils";
 
 export const dummySearchData = {
-  resultCount: Random.getNumber(),
+  resultCount: 10,
   results: [...Array(10)].map((e) => ({
     trackId: Random.getNumber(),
     trackName: Random.getString(),

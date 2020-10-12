@@ -2,12 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Search from "pages/search";
 import routes from "./routes-config";
-
-const PlayList = ({ match: { params } }: any) => (
-  <div>
-    {params.artist} {params.trackNumber} {params.trackName}
-  </div>
-);
+import Preview from "pages/search/preview";
 
 const ClientRouter: FunctionComponent = () => (
   <Switch>
@@ -17,7 +12,7 @@ const ClientRouter: FunctionComponent = () => (
     <Route path={routes.SEARCH} exact>
       <Search />
     </Route>
-    <Route path={routes.PLAYLIST} component={PlayList} exact></Route>
+    <Route path={routes.PREVIEW} component={Preview} exact></Route>
   </Switch>
 );
 
