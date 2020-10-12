@@ -13,12 +13,15 @@ const formatToMinutes = (milliseconds: number): string =>
 const formatPrice = (price: number, currency: string): string =>
   price === -1 ? "Free" : `${price} ${currency}`;
 
-const renderSongs = (songs: ArtistSongs[], searchTerm: string) =>
+const renderSongs = (
+  songs: ArtistSongs[],
+  searchTerm: string,
+) =>
   songs
     .map((song, index) => (
       <PlayListLink
         key={song.trackId}
-        to={`/preview/track-${index +
+        href={`/preview/track-${index +
           1}/${song.trackName}?${searchTerm}`}
       >
         <PlayListRow data-testid="playlist-row">

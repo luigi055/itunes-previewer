@@ -31,6 +31,14 @@ const Preview = () => {
   }, [dispatch, trackIndex]);
 
   return <>
+    <div>
+      <img
+        src={currentTrack.artworkUrl100}
+        alt={`${currentTrack.collectionName} cover`}
+      />
+      <h3>{currentTrack.trackName}</h3>
+      <p>{currentTrack.collectionName}</p>
+    </div>
     <a
       href={previousTrackPath}
     >
