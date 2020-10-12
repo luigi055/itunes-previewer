@@ -9,7 +9,7 @@ const songsStateHandlers: Mapping<Function> = {
   [GET_SONGS_START]: (
     state: SearchSongsState,
     action: ActionPayloadRequired<string>,
-  ) => ({ ...state, searchTerm: action.payload }),
+  ) => ({ ...state, searchTerm: decodeURIComponent(action.payload) }),
 };
 
 export const reduceSongs = (

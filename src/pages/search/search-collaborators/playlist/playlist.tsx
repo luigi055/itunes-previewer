@@ -13,12 +13,13 @@ const formatToMinutes = (milliseconds: number): string =>
 const formatPrice = (price: number, currency: string): string =>
   price === -1 ? "Free" : `${price} ${currency}`;
 
-const renderSongs = (songs: ArtistSongs[]) =>
+const renderSongs = (songs: ArtistSongs[], searchTerm: string) =>
   songs
     .map((song, index) => (
       <PlayListLink
         key={song.trackId}
-        to={`/playList/michael%20jackson/${index + 1}/${song.trackName}`}
+        to={`/playList/${searchTerm}/${index +
+          1}/${song.trackName}`}
       >
         <PlayListRow data-testid="playlist-row">
           <img
@@ -41,8 +42,10 @@ const renderSongs = (songs: ArtistSongs[]) =>
       </PlayListLink>
     ));
 
-const PlayList: FunctionComponent<{ artistSongs: ArtistSongs[] }> = (
-  { artistSongs },
+const PlayList: FunctionComponent<
+  { artistSongs: ArtistSongs[]; searchTerm: string }
+> = (
+  { artistSongs, searchTerm },
 ) => {
   return (
     <PlayListWrapper>
@@ -61,7 +64,7 @@ const PlayList: FunctionComponent<{ artistSongs: ArtistSongs[] }> = (
           Price
         </PlayListElement>
       </PlayListHead>
-      {renderSongs(artistSongs)}
+      {renderSongs(artistSongs, searchTerm)}
     </PlayListWrapper>
   );
 };

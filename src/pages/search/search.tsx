@@ -17,7 +17,7 @@ const Search: FunctionComponent = () => {
         <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
           Searching "{searchTerm}"
         </SearchTerm>
-        <PlayList artistSongs={artistSongs} />
+        <PlayList artistSongs={artistSongs} searchTerm={searchTerm} />
       </>
     )
     : <EmptyList />;
