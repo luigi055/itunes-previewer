@@ -1,17 +1,13 @@
 import { searchSongsSuccess } from "./../search-songs/search-songs-actions";
 import {
   selectCurrentTrack,
-  selectMediaPlayerData,
   selectNextTrackPath,
   selectPreviousTrackPath,
 } from "./media-player-selectors";
 import { fetchTrackData } from "./media-player-actions";
 import { Store } from "redux";
-import { START_LOADING } from "./../loading/loading-actions";
-import { Random } from "test-utils";
 import {
   GET_SONGS_SUCCESS,
-  searchSongsStart,
   selectSearchResult,
 } from "features/search-songs";
 import { setStore, storeInitialState } from "services/application/redux";
@@ -21,15 +17,12 @@ import {
 } from "services/externals/itunes-api/mock";
 import { triggeredActions } from "test-utils/triggered-actions";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
-import mediaPlayerInitialState from "./media-player-initial-state";
 
 describe("Testing search songs feature", () => {
   let store: Store;
-  let randomTerm: string = "";
 
   beforeEach(() => {
     global.fetch = jest.fn().mockImplementation(fetchSearchAPIMocked);
-    randomTerm = Random.getString();
     store = setStore(storeInitialState);
   });
 

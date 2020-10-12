@@ -8,6 +8,7 @@ import { put, takeLatest, fork, take, select } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
 // import { startLoading, stopLoading } from "features/loading";
 import { selectSearchResult } from "features/search-songs";
+import Track from "domain/track";
 
 function* processTrackData(
   currentTrack: ActionPayloadRequired<number>,
@@ -16,16 +17,19 @@ function* processTrackData(
 
   const searchResult = (yield select(selectSearchResult)) as SearchSongsState;
   const mediaPlayerLinksGenerator = new MediaPlayerLinksGenerator(searchResult);
+  const track = new Track(currentTrack.payload).defineMaxLimit(
+    searchResult.resultCount,
+  );
+  const index = track.toZeroBaseIndex();
+
   const trackData = {
     currentTrack: searchResult
-      .results[
-      currentTrack.payload <= 1 ? 0 : Math.min(currentTrack.payload, 10) - 1
-    ], // TODO: avoid primitive obsession
+      .results[index],
     nextTrackPath: mediaPlayerLinksGenerator.generateNextTrackURI(
-      currentTrack.payload, // TODO: avoid primitive obsession
+      track.getTrackNumber(),
     ),
     previousTrackPath: mediaPlayerLinksGenerator.generatePreviousTrackURI(
-      currentTrack.payload, // TODO: avoid primitive obsession
+      track.getTrackNumber(),
     ),
   };
 
