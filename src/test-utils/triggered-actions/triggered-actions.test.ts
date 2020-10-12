@@ -1,4 +1,3 @@
-import { all } from "redux-saga/effects";
 import { Store } from "redux";
 import { Random } from "../random";
 import actionWatcher from "./triggered-actions";
