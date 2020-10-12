@@ -1,4 +1,4 @@
-interface IMediaPlayerLinksGenerator {
+export interface IMediaPlayerLinksGenerator {
   generateNextTrackURI(currentTrack: number): string;
   generatePreviousTrackURI(currentTrack: number): string;
   generateURIFromZeroBasedPosition(trackNumber: number): string;

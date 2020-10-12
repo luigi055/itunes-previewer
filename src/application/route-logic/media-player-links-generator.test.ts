@@ -1,13 +1,21 @@
 import { Random } from "test-utils";
 import { dummySearchData } from "services/externals/itunes-api/mock";
-import MediaPlayerLinksGenerator from "./media-player-links-generator";
+import MediaPlayerLinksGenerator, {
+  IMediaPlayerLinksGenerator,
+} from "./media-player-links-generator";
 
 describe("testing MediaPlayerLinkGenerator class", () => {
-  it("should get track-1 when pass in 0 to the getURIFromZeroBasedIndex method trackIndex is 1-based", () => {
-    const randomSearch = Random.getString();
-    const mediaPlayerLinks = new MediaPlayerLinksGenerator(
+  let randomSearch: string;
+  let mediaPlayerLinks: IMediaPlayerLinksGenerator;
+
+  beforeEach(() => {
+    randomSearch = Random.getString();
+    mediaPlayerLinks = new MediaPlayerLinksGenerator(
       { ...dummySearchData, searchTerm: randomSearch },
     );
+  });
+
+  it("should get track-1 when pass in 0 to the getURIFromZeroBasedIndex method trackIndex is 1-based", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generateURIFromZeroBasedPosition(0)).toBe(
@@ -16,10 +24,6 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   });
 
   it("should get the next URI when invoke the getNextTrackURI method", () => {
-    const randomSearch = Random.getString();
-    const mediaPlayerLinks = new MediaPlayerLinksGenerator(
-      { ...dummySearchData, searchTerm: randomSearch },
-    );
     const dummyTrackName = dummySearchData.results[1].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(1)).toBe(
@@ -28,10 +32,6 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   });
 
   it("should get the same URI when invoke the getNextTrackURI method and is the last element", () => {
-    const randomSearch = Random.getString();
-    const mediaPlayerLinks = new MediaPlayerLinksGenerator(
-      { ...dummySearchData, searchTerm: randomSearch },
-    );
     const dummyTrackName = dummySearchData.results[9].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(9)).toBe(
@@ -40,10 +40,6 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   });
 
   it("should get the last URI when invoke the getNextTrackURI method and the number is larger than the last track", () => {
-    const randomSearch = Random.getString();
-    const mediaPlayerLinks = new MediaPlayerLinksGenerator(
-      { ...dummySearchData, searchTerm: randomSearch },
-    );
     const dummyTrackName = dummySearchData.results[9].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(20)).toBe(
@@ -52,10 +48,6 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   });
 
   it("should get the same URI when invoke the getPreviousTrackURI method and is the first track", () => {
-    const randomSearch = Random.getString();
-    const mediaPlayerLinks = new MediaPlayerLinksGenerator(
-      { ...dummySearchData, searchTerm: randomSearch },
-    );
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(1)).toBe(
@@ -64,10 +56,6 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   });
 
   it("should get the same URI when invoke the getPreviousTrackURI method and is smaller than the first track index", () => {
-    const randomSearch = Random.getString();
-    const mediaPlayerLinks = new MediaPlayerLinksGenerator(
-      { ...dummySearchData, searchTerm: randomSearch },
-    );
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(0)).toBe(
@@ -80,10 +68,6 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   });
 
   it("should get previous URI when using the getPreviousTrackURI method", () => {
-    const randomSearch = Random.getString();
-    const mediaPlayerLinks = new MediaPlayerLinksGenerator(
-      { ...dummySearchData, searchTerm: randomSearch },
-    );
     const dummyTrackName = dummySearchData.results[3].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(5)).toBe(

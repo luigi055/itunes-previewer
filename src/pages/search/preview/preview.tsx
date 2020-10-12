@@ -12,7 +12,6 @@ interface PreviewParams {
   trackName?: string;
 }
 
-
 const Preview = () => {
   const songList = useSelector(selectResults);
   const searchTerm = useSelector(selectSearchTerm);
