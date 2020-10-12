@@ -3,10 +3,12 @@ const defaultTheme: Theme = {
   primaryVariantColor: "#D94414",
   onPrimaryColor: "#FFF",
   backgroundColor: "#252729",
+  backgroundVariantColor: "#202224",
   onBackgroundColor: "#FFF",
-  onBackgroundVariantColor: "#747B81",
-  fontFamily: "sans-serif",
+  onBackgroundVariantColor: "#E5E5E6",
+  fontFamily: "Poppins",
   fontSize: "16px",
+  disabled: "#454749",
 };
 
 export default defaultTheme;

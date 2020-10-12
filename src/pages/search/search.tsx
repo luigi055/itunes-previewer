@@ -1,8 +1,26 @@
 import React, { FunctionComponent } from "react";
-import { CenteredElementXY } from "components";
+import {
+  selectResults,
+  selectSearchTerm,
+} from "features/search-songs/search-songs-selectors";
+import { useSelector } from "react-redux";
+import { EmptyList, PlayList } from "./search-collaborators";
+import { SearchTerm } from "./search-styled";
 
-const Search: FunctionComponent = () => (
-  <CenteredElementXY><p>Use the search bar to find songs</p></CenteredElementXY>
-);
+const Search: FunctionComponent = () => {
+  const artistSongs: ArtistSongs[] = useSelector(selectResults);
+  const searchTerm = useSelector(selectSearchTerm);
+
+  return artistSongs.length
+    ? (
+      <>
+        <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
+          Searching "{searchTerm}"
+        </SearchTerm>
+        <PlayList artistSongs={artistSongs} searchTerm={searchTerm} />
+      </>
+    )
+    : <EmptyList />;
+};
 
 export default Search;

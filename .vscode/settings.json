@@ -14,6 +14,7 @@
   "editor.trimAutoWhitespace": true,
   "files.trimTrailingWhitespace": false,
   "cSpell.words": [
+    "itunes",
     "testid"
   ],
   "cSpell.ignoreWords": ["esnext"],
