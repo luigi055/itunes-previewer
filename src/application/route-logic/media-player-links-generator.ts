@@ -2,7 +2,6 @@ export interface IMediaPlayerLinksGenerator {
   generateNextTrackURI(currentTrack: number): string;
   generatePreviousTrackURI(currentTrack: number): string;
   generateURIFromZeroBasedPosition(trackNumber: number): string;
-  trackToZeroBaseIndex(trackNumber: number): number;
 }
 
 class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
@@ -45,12 +44,6 @@ class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
       previousTrackIndex,
       this._toZeroBased(previousTrackIndex),
     );
-  }
-
-  trackToZeroBaseIndex(trackNumber: number) {
-    const { resultCount } = this._searchResult;
-
-    return trackNumber <= 1 ? 0 : Math.min(trackNumber, resultCount) - 1;
   }
 }
 
