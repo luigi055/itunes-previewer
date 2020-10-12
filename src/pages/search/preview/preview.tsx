@@ -1,10 +1,11 @@
+import { fetchTrackData } from "features/media-player";
 import {
   selectResultCount,
   selectResults,
   selectSearchTerm,
 } from "features/search-songs";
-import React, { MouseEvent, useRef } from "react";
-import { useSelector } from "react-redux";
+import React, { MouseEvent, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 interface PreviewParams {
@@ -22,6 +23,12 @@ const Preview = () => {
   const trackIndex = parseInt(
     castedTrackNumber.slice(castedTrackNumber.indexOf("-") + 1),
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTrackData(trackIndex));
+  }, [dispatch, trackIndex]);
 
   const subtractOneToTrackIndex = (trackNumber: number) =>
     (trackNumber <= 1) ? 1 : trackNumber - 1;
