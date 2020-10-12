@@ -27,14 +27,17 @@ class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
   public generateNextTrackURI(currentTrack: number) {
     const { resultCount } = this._searchResult;
     const nextTrackIndex = (currentTrack < resultCount)
-      ? currentTrack + 1
+      ? Math.max(currentTrack, 1) + 1
       : resultCount;
 
     return this._composeURI(nextTrackIndex, this._toZeroBased(nextTrackIndex));
   }
 
   public generatePreviousTrackURI(currentTrack: number) {
-    const previousTrackIndex = (currentTrack <= 1) ? 1 : currentTrack - 1;
+    const { resultCount } = this._searchResult;
+    const previousTrackIndex = (currentTrack <= 1)
+      ? 1
+      : Math.min(currentTrack, resultCount) - 1;
 
     return this._composeURI(
       previousTrackIndex,

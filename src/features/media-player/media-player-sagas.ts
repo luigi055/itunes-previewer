@@ -16,14 +16,16 @@ function* processTrackData(
 
   const searchResult = (yield select(selectSearchResult)) as SearchSongsState;
   const mediaPlayerLinksGenerator = new MediaPlayerLinksGenerator(searchResult);
-
   const trackData = {
-    currentTrack: searchResult.results[currentTrack.payload - 1],
+    currentTrack: searchResult
+      .results[
+      currentTrack.payload <= 1 ? 0 : Math.min(currentTrack.payload, 10) - 1
+    ], // TODO: avoid primitive obsession
     nextTrackPath: mediaPlayerLinksGenerator.generateNextTrackURI(
-      currentTrack.payload,
+      currentTrack.payload, // TODO: avoid primitive obsession
     ),
     previousTrackPath: mediaPlayerLinksGenerator.generatePreviousTrackURI(
-      currentTrack.payload,
+      currentTrack.payload, // TODO: avoid primitive obsession
     ),
   };
 
