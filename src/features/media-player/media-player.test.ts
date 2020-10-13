@@ -1,6 +1,8 @@
 import { searchSongsSuccess } from "./../search-songs/search-songs-actions";
 import {
   selectCurrentTrack,
+  selectIsNextButtonDisabled,
+  selectIsPreviousButtonDisabled,
   selectNextTrackPath,
   selectPreviousTrackPath,
 } from "./media-player-selectors";
@@ -76,6 +78,35 @@ describe("Testing search songs feature", () => {
     expect(selectPreviousTrackPath(store.getState())).toEqual(
       mediaPlayerLinkGenerator.generatePreviousTrackURI(trackNumber),
     );
+  });
+  it("should isPreviousButtonDisabled true when is the first element ", async () => {
+    const trackNumber = 1;
+    store.dispatch(fetchTrackData(trackNumber));
+    store.dispatch(searchSongsSuccess(dummySearchData));
+
+    await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
+
+    expect(selectCurrentTrack(store.getState())).toEqual(
+      dummySearchData.results[0],
+    );
+
+    expect(selectIsPreviousButtonDisabled(store.getState())).toBe(true);
+    expect(selectIsNextButtonDisabled(store.getState())).toBe(false);
+  });
+
+  it("should isNextButtonDisabled true when current track is the last track ", async () => {
+    const trackNumber = 10;
+    store.dispatch(fetchTrackData(trackNumber));
+    store.dispatch(searchSongsSuccess(dummySearchData));
+
+    await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
+
+    expect(selectCurrentTrack(store.getState())).toEqual(
+      dummySearchData.results[9],
+    );
+
+    expect(selectIsNextButtonDisabled(store.getState())).toBe(true);
+    expect(selectIsPreviousButtonDisabled(store.getState())).toBe(false);
   });
 
   it("should always return the last track if the fetchTrackData receives a number larger than ResultCount ", async () => {

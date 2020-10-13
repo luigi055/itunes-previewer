@@ -22,7 +22,13 @@ export const CoverInformation: FunctionComponent<CoverInformationProps> = (
 };
 
 export const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
-  { currentTrackURL, nextTrackPath, previousTrackPath },
+  {
+    currentTrackURL,
+    nextTrackPath,
+    previousTrackPath,
+    isNextButtonDisabled,
+    isPreviousButtonDisabled,
+  },
 ) => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -31,6 +37,7 @@ export const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
       <a
         href={previousTrackPath}
         data-testid="player-go-previous-button"
+        style={{ pointerEvents: isPreviousButtonDisabled ? "none" : "auto" }}
       >
         go Previous
       </a>
@@ -50,6 +57,7 @@ export const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
       <a
         href={nextTrackPath}
         data-testid="player-go-next-button"
+        style={{ pointerEvents: isNextButtonDisabled ? "none" : "auto" }}
       >
         go next
       </a>

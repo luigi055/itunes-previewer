@@ -17,4 +17,6 @@ export default {
   },
   nextTrackPath: "",
   previousTrackPath: "",
+  isNextButtonDisabled: false,
+  isPreviousButtonDisabled: false,
 };

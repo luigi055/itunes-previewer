@@ -20,20 +20,19 @@ function* processTrackData(
   const track = new Track(currentTrack.payload).defineMaxLimit(
     searchResult.resultCount,
   );
-  const index = track.toZeroBaseIndex();
 
-  const trackData = {
+  yield put(generateCurrentTrackData({
     currentTrack: searchResult
-      .results[index],
+      .results[track.toZeroBaseIndex()],
     nextTrackPath: mediaPlayerLinksGenerator.generateNextTrackURI(
       track.getTrackNumber(),
     ),
     previousTrackPath: mediaPlayerLinksGenerator.generatePreviousTrackURI(
       track.getTrackNumber(),
     ),
-  };
-
-  yield put(generateCurrentTrackData(trackData));
+    isNextButtonDisabled: track.isLastTrack(),
+    isPreviousButtonDisabled: track.isFirstTrack(),
+  }));
 }
 
 function* getTrackData() {

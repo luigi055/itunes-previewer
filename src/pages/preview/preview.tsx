@@ -2,6 +2,8 @@ import { AudioPlayer, CoverInformation } from "components";
 import { fetchTrackData } from "features/media-player";
 import {
   selectCurrentTrack,
+  selectIsNextButtonDisabled,
+  selectIsPreviousButtonDisabled,
   selectNextTrackPath,
   selectPreviousTrackPath,
 } from "features/media-player/media-player-selectors";
@@ -25,6 +27,8 @@ const Preview = () => {
   const currentTrack = useSelector(selectCurrentTrack);
   const nextTrackPath = useSelector(selectNextTrackPath);
   const previousTrackPath = useSelector(selectPreviousTrackPath);
+  const isNextButtonDisabled = useSelector(selectIsNextButtonDisabled);
+  const isPreviousButtonDisabled = useSelector(selectIsPreviousButtonDisabled);
 
   useEffect(() => {
     dispatch(fetchTrackData(trackIndex));
@@ -37,6 +41,8 @@ const Preview = () => {
         currentTrackURL={currentTrack.previewUrl}
         nextTrackPath={nextTrackPath}
         previousTrackPath={previousTrackPath}
+        isNextButtonDisabled={isNextButtonDisabled}
+        isPreviousButtonDisabled={isPreviousButtonDisabled}
       />
     </div>
   );

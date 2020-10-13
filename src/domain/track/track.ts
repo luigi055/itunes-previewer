@@ -18,6 +18,14 @@ class Track {
   public getTrackNumber(): number {
     return this._trackNumber;
   }
+
+  public isFirstTrack() {
+    return this._trackNumber <= 1;
+  }
+
+  public isLastTrack() {
+    return this._trackNumber >= this._maxLimit;
+  }
 }
 
 export default Track;
