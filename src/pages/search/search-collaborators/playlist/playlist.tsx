@@ -20,7 +20,7 @@ const renderSongs = (
   songs
     .map((song, index) => (
       <PlayListLink
-        key={song.trackId}
+        key={`${song.collectionName}${song.trackName}${song.trackId}`}
         href={`/preview/track-${index +
           1}/${song.trackName}?${searchTerm}`}
       >

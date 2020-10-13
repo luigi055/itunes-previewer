@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Search from "pages/search";
 import routes from "./routes-config";
-import Preview from "pages/search/preview";
+import Preview from "pages/preview";
 
 const ClientRouter: FunctionComponent = () => (
   <Switch>

@@ -26,12 +26,6 @@ describe("Testing search songs feature", () => {
     store = setStore(storeInitialState);
   });
 
-  // it("should state initialize as empty", () => {
-  //   expect(selectMediaPlayerData(store.getState())).toEqual(
-  //     mediaPlayerInitialState,
-  //   );
-  // });
-
   it("should update the currentTrack Object ", async () => {
     store.dispatch(fetchTrackData(2));
     store.dispatch(searchSongsSuccess(dummySearchData));
