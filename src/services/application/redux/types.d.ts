@@ -1,6 +1,7 @@
 interface State {
   searchResult: SearchSongsState;
   isLoading: boolean;
+  mediaPlayerData: MediaPlayerData;
 }
 
 interface ActionStandardBase {

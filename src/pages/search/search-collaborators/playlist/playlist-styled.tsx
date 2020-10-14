@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export const PlayListWrapper = styled.ul`
   list-style: none;
 `;
 
-export const PlayListLink = styled(Link)`
+export const PlayListLink = styled("a")`
   text-decoration: none;
 `;
 

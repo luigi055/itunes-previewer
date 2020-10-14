@@ -4,8 +4,8 @@ import { searchSongsSuccess, GET_SONGS_START } from "./search-songs-actions";
 import { ITunesClient } from "services/externals/itunes-api";
 import { startLoading, stopLoading } from "features/loading";
 
-function* getSongs(props: any): SagaIterator {
-  const { payload } = props;
+function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
+  const { payload } = searchTerm;
   if (payload === "") return;
 
   try {
@@ -24,6 +24,4 @@ function* getSongsSaga() {
   yield takeLatest(GET_SONGS_START, getSongs);
 }
 
-const songsSagas = [fork(getSongsSaga)];
-
-export default songsSagas;
+export const songsSagas = [fork(getSongsSaga)];

@@ -1,3 +1,4 @@
+import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import React, { FunctionComponent } from "react";
 import {
   PlayListWrapper,
@@ -13,19 +14,23 @@ const formatToMinutes = (milliseconds: number): string =>
 const formatPrice = (price: number, currency: string): string =>
   price === -1 ? "Free" : `${price} ${currency}`;
 
-const renderSongs = (songs: ArtistSongs[], searchTerm: string) =>
-  songs
-    .map((song, index) => (
-      <PlayListLink
-        key={song.trackId}
-        to={`/playList/${searchTerm}/${index +
-          1}/${song.trackName}`}
+const renderSongs = (
+  searchSongs: SearchSongsState,
+  searchTerm: string,
+) => {
+const mediaPlayerLinksGenerator = new MediaPlayerLinksGenerator(searchSongs);
+const getURLPath = (arrayIndex: number) => mediaPlayerLinksGenerator.generateURIFromZeroBasedPosition(arrayIndex);
+  return searchSongs.results
+  .map((song, index) => (
+    <PlayListLink
+    key={`${song.collectionName}${song.trackName}${song.trackId}`}
+    href={getURLPath(index)}
       >
         <PlayListRow data-testid="playlist-row">
           <img
             src={song.artworkUrl60}
             alt={`${song.collectionName} thumbnail`}
-          />
+            />
 
           <PlayListElement highlight>{song.trackName}</PlayListElement>
           <PlayListElement>{song.artistName}</PlayListElement>
@@ -41,11 +46,12 @@ const renderSongs = (songs: ArtistSongs[], searchTerm: string) =>
         </PlayListRow>
       </PlayListLink>
     ));
+  };
 
 const PlayList: FunctionComponent<
-  { artistSongs: ArtistSongs[]; searchTerm: string }
+  { searchSong: SearchSongsState; searchTerm: string }
 > = (
-  { artistSongs, searchTerm },
+  { searchSong, searchTerm },
 ) => {
   return (
     <PlayListWrapper>
@@ -64,7 +70,7 @@ const PlayList: FunctionComponent<
           Price
         </PlayListElement>
       </PlayListHead>
-      {renderSongs(artistSongs, searchTerm)}
+      {renderSongs(searchSong, searchTerm)}
     </PlayListWrapper>
   );
 };
