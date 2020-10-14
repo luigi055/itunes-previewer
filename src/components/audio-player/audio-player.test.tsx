@@ -14,6 +14,10 @@ describe("Testing AudioPlayer component", () => {
   const playerGoPreviousButtonTestId = "player-go-previous-button";
   const playerGoNextButtonTestId = "player-go-next-button";
   const playerAudioElementTestId = "player-audio-element";
+  const playerPreviousIconDisabledTestId = "player-previous-icon-disabled";
+  const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";
+  const playerNextIconEnabledTestId = "player-next-icon-enabled";
+  const playerNextIconDisabledTestId = "player-next-icon-disabled";
   const mediaPlayerLinks = new MediaPlayerLinksGenerator({
     ...dummySearchData,
     searchTerm: "",
@@ -176,6 +180,67 @@ describe("Testing AudioPlayer component", () => {
       const playerGoPreviousButton = getByTestId(playerGoPreviousButtonTestId);
 
       expect(playerGoPreviousButton.href).toContain(previousTrackPath);
+    });
+
+    it("should both buttons be enabled by default ", () => {
+      render(
+        <AudioPlayer
+          currentTrackURL={dummyPreviewURL}
+          nextTrackPath={nextTrackPath}
+          previousTrackPath={previousTrackPath}
+        />
+      );
+      const { getByTestId } = screen;
+
+      const playerGoPreviousIconEnabled = getByTestId(
+        playerPreviousIconEnabledTestId
+      );
+      const playerGoNextIconEnabled = getByTestId(playerNextIconEnabledTestId);
+
+      expect(playerGoPreviousIconEnabled).toBeInTheDocument();
+      expect(playerGoNextIconEnabled).toBeInTheDocument();
+    });
+
+    it("should disable the previous button when isPreviousButtonDisabled is true ", () => {
+      render(
+        <AudioPlayer
+          currentTrackURL={dummyPreviewURL}
+          nextTrackPath={nextTrackPath}
+          previousTrackPath={previousTrackPath}
+          isPreviousButtonDisabled={true}
+        />
+      );
+      const { getByTestId } = screen;
+
+      const playerGoPreviousIconDisabled = getByTestId(
+        playerPreviousIconDisabledTestId
+      );
+      const playerGoNextIconEnabled = getByTestId(playerNextIconEnabledTestId);
+
+      expect(playerGoPreviousIconDisabled).toBeInTheDocument();
+      expect(playerGoNextIconEnabled).toBeInTheDocument();
+    });
+
+    it("should disable the next button when isNextButtonDisabled is true ", () => {
+      render(
+        <AudioPlayer
+          currentTrackURL={dummyPreviewURL}
+          nextTrackPath={nextTrackPath}
+          previousTrackPath={previousTrackPath}
+          isNextButtonDisabled={true}
+        />
+      );
+      const { getByTestId } = screen;
+
+      const playerGoNextIconDisabled = getByTestId(
+        playerNextIconDisabledTestId
+      );
+      const playerGoPreviousIconEnabled = getByTestId(
+        playerPreviousIconEnabledTestId
+      );
+
+      expect(playerGoNextIconDisabled).toBeInTheDocument();
+      expect(playerGoPreviousIconEnabled).toBeInTheDocument();
     });
   });
 });
