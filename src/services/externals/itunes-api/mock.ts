@@ -1,8 +1,9 @@
 import { Random } from "test-utils";
+const arrayLength = 10;
 
 export const dummySearchData = {
-  resultCount: 10,
-  results: [...Array(10)].map((e) => ({
+  resultCount: arrayLength,
+  results: [...Array(arrayLength)].map((e) => ({
     trackId: Random.getNumber(),
     trackName: Random.getString(),
     artistName: Random.getString(),

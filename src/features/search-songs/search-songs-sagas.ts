@@ -24,6 +24,4 @@ function* getSongsSaga() {
   yield takeLatest(GET_SONGS_START, getSongs);
 }
 
-const songsSagas = [fork(getSongsSaga)];
-
-export default songsSagas;
+export const songsSagas = [fork(getSongsSaga)];

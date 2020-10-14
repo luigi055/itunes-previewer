@@ -6,7 +6,6 @@ import {
 } from "./media-player-actions";
 import { put, takeLatest, fork, take, select } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
-// import { startLoading, stopLoading } from "features/loading";
 import { selectSearchResult } from "features/search-songs";
 import Track from "domain/track";
 
