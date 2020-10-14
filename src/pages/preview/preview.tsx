@@ -1,4 +1,4 @@
-import { AudioPlayer, CoverInformation } from "components";
+import { AudioPlayer, Cover } from "components";
 import { fetchTrackData } from "features/media-player";
 import {
   selectCurrentTrack,
@@ -36,7 +36,7 @@ const Preview = () => {
 
   return (
     <div>
-      <CoverInformation currentTrack={currentTrack} />
+      <Cover currentTrack={currentTrack} />
       <AudioPlayer
         currentTrackURL={currentTrack.previewUrl}
         nextTrackPath={nextTrackPath}

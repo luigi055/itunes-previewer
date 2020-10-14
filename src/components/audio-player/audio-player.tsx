@@ -1,28 +1,7 @@
 import React, { FunctionComponent, MouseEvent, useRef, useState } from "react";
 import { NavigationButton } from "./audio-player-styled";
 
-interface CoverInformationProps {
-  currentTrack: ArtistSongs;
-}
-
-export const CoverInformation: FunctionComponent<CoverInformationProps> = (
-  { currentTrack },
-) => {
-  return (
-    <div>
-      <img
-        data-testid="cover-image"
-        src={currentTrack.artworkUrl100}
-        alt={`${currentTrack.collectionName} cover`}
-      />
-
-      <p data-testid="cover-track-name">{currentTrack.trackName}</p>
-      <h3 data-testid="cover-artist-name">{currentTrack.artistName}</h3>
-    </div>
-  );
-};
-
-export const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
+const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
   {
     currentTrackURL,
     nextTrackPath,
@@ -86,3 +65,6 @@ export const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
     </div>
   );
 };
+
+
+export default AudioPlayer;

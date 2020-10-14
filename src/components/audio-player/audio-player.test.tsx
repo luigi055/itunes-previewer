@@ -1,40 +1,10 @@
 import React from "react";
 import { createEvent, fireEvent, render, screen } from "@testing-library/react";
-import { AudioPlayer, CoverInformation } from "./audio-player";
+import { AudioPlayer } from "./audio-player";
 import { dummySearchData } from "services/externals/itunes-api/mock";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import userEvent from "@testing-library/user-event";
 import Track from "domain/track";
-
-describe("Testing the CoverInformation component", () => {
-  const coverImageTestId = "cover-image";
-  const coverTrackNameTestId = "cover-track-name";
-  const coverArtistNameTestId = "cover-artist-name";
-  const dummyCurrentTrack = dummySearchData.results[0];
-
-  beforeEach(() => {
-    render(<CoverInformation currentTrack={dummyCurrentTrack} />);
-  });
-
-  it("should show the correct thumbnail, the current track", () => {
-    const { getByTestId } = screen;
-
-    expect(getByTestId(coverImageTestId).src).toContain(
-      `/${dummyCurrentTrack.artworkUrl100}`,
-    );
-  });
-
-  it("should show the correct title and artist name of the current track", () => {
-    const { getByTestId } = screen;
-
-    expect(getByTestId(coverTrackNameTestId).textContent).toBe(
-      dummyCurrentTrack.trackName,
-    );
-    expect(getByTestId(coverArtistNameTestId).textContent).toBe(
-      dummyCurrentTrack.artistName,
-    );
-  });
-});
 
 describe("Testing AudioPlayer component", () => {
   const playerReproduceTestId = "player-reproduce-button";
