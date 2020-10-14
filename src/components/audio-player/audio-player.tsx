@@ -1,4 +1,5 @@
 import React, { FunctionComponent, MouseEvent, useRef, useState } from "react";
+import { NavigationButton } from "./audio-player-styled";
 
 interface CoverInformationProps {
   currentTrack: ArtistSongs;
@@ -34,13 +35,13 @@ export const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
   const [isPlaying, setIsPlaying] = useState(false);
   return (
     <div>
-      <a
+      <NavigationButton
         href={previousTrackPath}
         data-testid="player-go-previous-button"
-        style={{ pointerEvents: isPreviousButtonDisabled ? "none" : "auto" }}
+        isDisabled={isPreviousButtonDisabled}
       >
         go Previous
-      </a>
+      </NavigationButton>
       <button
         data-testid="player-reproduce-button"
         onClick={async (event: MouseEvent<HTMLButtonElement>) => {
@@ -54,13 +55,13 @@ export const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
           ? <i data-testid="player-pause-icon">Pause</i>
           : <i data-testid="player-play-icon">Play</i>}
       </button>
-      <a
+      <NavigationButton
         href={nextTrackPath}
         data-testid="player-go-next-button"
-        style={{ pointerEvents: isNextButtonDisabled ? "none" : "auto" }}
+        isDisabled={isNextButtonDisabled}
       >
         go next
-      </a>
+      </NavigationButton>
       <h1>is playing? {String(isPlaying)}</h1>
       {currentTrackURL && (
         <audio
