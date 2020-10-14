@@ -1,4 +1,4 @@
-class Track {
+class Track implements ITrack{
   private _maxLimit: number;
   constructor(private _trackNumber: number) {
     this._maxLimit = Infinity;
@@ -19,11 +19,11 @@ class Track {
     return this._trackNumber;
   }
 
-  public isFirstTrack() {
+  public isFirstTrack(): boolean {
     return this._trackNumber <= 1;
   }
 
-  public isLastTrack() {
+  public isLastTrack(): boolean {
     return this._trackNumber >= this._maxLimit;
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { createEvent, fireEvent, render, screen } from "@testing-library/react";
-import { AudioPlayer } from "./audio-player";
+import AudioPlayer from "./audio-player";
 import { dummySearchData } from "services/externals/itunes-api/mock";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import userEvent from "@testing-library/user-event";
