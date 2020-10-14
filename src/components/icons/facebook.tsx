@@ -8,7 +8,7 @@ const Facebook: FunctionComponent<SVGAttributes<SVGSVGElement>> = ({
     width="14"
     height="30"
     viewBox="0 0 14 30"
-    data-testid="whatsapp-icon"
+    data-testid="facebook-icon"
     {...props}
   >
     <image

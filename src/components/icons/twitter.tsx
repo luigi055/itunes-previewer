@@ -8,7 +8,7 @@ const Twitter: FunctionComponent<SVGAttributes<SVGSVGElement>> = ({
     width="30"
     height="24"
     viewBox="0 0 30 24"
-    data-testid="whatsapp-icon"
+    data-testid="twitter-icon"
     {...props}
   >
     <image
