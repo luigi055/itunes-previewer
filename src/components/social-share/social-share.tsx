@@ -1,6 +1,6 @@
 import { WhatsApp, Facebook, Twitter } from "components/icons";
 import { ScreenReaderOnly } from "components/screen-readers-helpers";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, HTMLAttributes } from "react";
 import styled from "styled-components";
 
 const SocialShareWrapper = styled.div`
@@ -13,17 +13,18 @@ const SocialShareWrapper = styled.div`
   }
 `;
 
-const SocialShare: FunctionComponent<{ shareURL?: string }> = ({
+const SocialShare: FunctionComponent<{ shareURL?: string } & HTMLAttributes<HTMLDivElement>> = ({
   shareURL = "",
+  ...props
 }) => (
-  <SocialShareWrapper>
+  <SocialShareWrapper {...props}>
     <a
-      href={`whatsapp://send?text=${shareURL}`}
+      href={`https://twitter.com/share?url=${shareURL}`}
       rel="noopener noreferrer"
       target="_blank"
     >
-      <WhatsApp />
-      <ScreenReaderOnly>Share song on whatsapp</ScreenReaderOnly>
+      <Twitter />
+      <ScreenReaderOnly>Share song on twitter</ScreenReaderOnly>
     </a>
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${shareURL}`}
@@ -34,12 +35,12 @@ const SocialShare: FunctionComponent<{ shareURL?: string }> = ({
       <ScreenReaderOnly>Share song on facebook</ScreenReaderOnly>
     </a>
     <a
-      href={`https://twitter.com/share?url=${shareURL}`}
+      href={`whatsapp://send?text=${shareURL}`}
       rel="noopener noreferrer"
       target="_blank"
     >
-      <Twitter />
-      <ScreenReaderOnly>Share song on twitter</ScreenReaderOnly>
+      <WhatsApp />
+      <ScreenReaderOnly>Share song on whatsapp</ScreenReaderOnly>
     </a>
   </SocialShareWrapper>
 );

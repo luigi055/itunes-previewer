@@ -11,6 +11,7 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Player } from "./preview.styled";
 
 interface PreviewURIParams {
   trackNumber?: string;
@@ -39,16 +40,17 @@ const Preview = () => {
   return (
     <>
       <Cover currentTrack={currentTrack} />
-      <div>
+      <Player>
         <AudioPlayer
+        className="audio-player"
           currentTrackURL={currentTrack.previewUrl}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
           isNextButtonDisabled={isNextButtonDisabled}
           isPreviousButtonDisabled={isPreviousButtonDisabled}
         />
-        <SocialShare shareURL="http://myawesomePage.com" />
-      </div>
+        <SocialShare className="social-share" shareURL="http://myawesomePage.com" />
+      </Player>
     </>
   );
 };

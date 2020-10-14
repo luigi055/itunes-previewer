@@ -10,4 +10,5 @@ interface Theme {
   fontFamily: string;
   fontSize: string;
   disabled: string;
+  largeBreakPoint: string;
 }
