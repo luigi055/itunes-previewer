@@ -17,3 +17,10 @@ export const declareCssForLargeView = (
     ${cssForLargeView}
   }
 `;
+
+export const declareCssForExtraSmallView = (cssForLargeView: ThemeInterpolation) => css`
+  @media screen and (max-width: ${({ theme }) =>
+      `${theme.extraSmallBreakPoint}${theme.breakPointUnit}`}) {
+    ${cssForLargeView}
+  }
+`;

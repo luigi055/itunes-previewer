@@ -27,7 +27,7 @@ export const SearchButton = styled.button`
 export const SearchFormInput = styled.input`
   background: transparent;
   color: ${({ theme }) => theme.onPrimaryColor};
-  font-size: 1.25rem;
+  font-size: var(--base-size);
   padding: 5px 2px;
   width: 100%;
 

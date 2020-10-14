@@ -3,7 +3,7 @@ import {
   GlobalStyleComponent,
   css,
 } from "styled-components";
-import { declareCssForLargeView } from "./responsive";
+import { declareCssForExtraSmallView, declareCssForLargeView } from "./responsive";
 
 const GlobalStyles: GlobalStyleComponent<
   { theme: Theme },
@@ -19,6 +19,13 @@ ${({ theme }) =>
       --h1: calc(var(--h2) * var(--type-scale));
       --text-sm: calc(var(--base-size) / var(--type-scale));
     }
+
+    ${declareCssForExtraSmallView(css`
+      :root {
+        --base-size: 0.95rem;
+        --type-scale: 1.15;
+      }
+    `)}
 
     ${declareCssForLargeView(css`
       :root {
@@ -43,7 +50,7 @@ ${({ theme }) =>
     html,
     body {
       background: ${theme.backgroundColor};
-      font-size: ${theme.fontSize};
+      font-size: var(--base-size);
       font-family: ${theme.fontFamily}, sans-serif;
       color: ${theme.onBackgroundColor};
       line-height: 1.15;
