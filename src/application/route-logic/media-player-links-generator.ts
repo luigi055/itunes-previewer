@@ -1,6 +1,6 @@
 export interface IMediaPlayerLinksGenerator {
-  generateNextTrackURI(currentTrack: number): string;
-  generatePreviousTrackURI(currentTrack: number): string;
+  generateNextTrackURI(currentTrack: ITrack): string;
+  generatePreviousTrackURI(currentTrack: ITrack): string;
   generateURIFromZeroBasedPosition(trackNumber: number): string;
 }
 
@@ -24,21 +24,23 @@ class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
     return this._composeURI(trackNumber + 1, trackNumber);
   }
 
-  public generateNextTrackURI(currentTrack: number) {
+  public generateNextTrackURI(currentTrack: ITrack) {
     const { resultCount } = this._searchResult;
-    const nextTrackIndex = (currentTrack < resultCount)
-      ? Math.max(currentTrack, 0) + 1
+    const trackNumber = currentTrack.getTrackNumber()
+    const nextTrackIndex = (trackNumber < resultCount)
+      ? Math.max(trackNumber, 0) + 1
       : resultCount;
 
     return this._composeURI(nextTrackIndex, this._toZeroBased(nextTrackIndex));
   }
 
-  public generatePreviousTrackURI(currentTrack: number) {
+  public generatePreviousTrackURI(currentTrack: ITrack) {
     const { resultCount } = this._searchResult;
+    const trackNumber = currentTrack.getTrackNumber()
     const lastTrack = resultCount + 1;
-    const previousTrackIndex = (currentTrack <= 1)
+    const previousTrackIndex = (trackNumber <= 1)
       ? 1
-      : Math.min(currentTrack, lastTrack) - 1;
+      : Math.min(trackNumber , lastTrack) - 1;
 
     return this._composeURI(
       previousTrackIndex,

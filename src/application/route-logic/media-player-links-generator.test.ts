@@ -3,6 +3,7 @@ import { dummySearchData } from "services/externals/itunes-api/mock";
 import MediaPlayerLinksGenerator, {
   IMediaPlayerLinksGenerator,
 } from "./media-player-links-generator";
+import Track from "domain/track";
 
 describe("testing MediaPlayerLinkGenerator class", () => {
   let randomSearch: string;
@@ -26,7 +27,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   it("should get the next URI when invoke the getNextTrackURI method", () => {
     const dummyTrackName = dummySearchData.results[1].trackName;
 
-    expect(mediaPlayerLinks.generateNextTrackURI(1)).toBe(
+    expect(mediaPlayerLinks.generateNextTrackURI(new Track(1))).toBe(
       `/preview/track-2/${dummyTrackName}?${randomSearch}`,
     );
   });
@@ -34,7 +35,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   it("should get the same URI when invoke the getNextTrackURI method and is the last element", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
-    expect(mediaPlayerLinks.generateNextTrackURI(9)).toBe(
+    expect(mediaPlayerLinks.generateNextTrackURI(new Track(9))).toBe(
       `/preview/track-10/${dummyTrackName}?${randomSearch}`,
     );
   });
@@ -42,7 +43,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   it("should get the first track when getNextTrackURI is invoked with a number smaller than 1", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
-    expect(mediaPlayerLinks.generateNextTrackURI(0)).toBe(
+    expect(mediaPlayerLinks.generateNextTrackURI(new Track(0))).toBe(
       `/preview/track-1/${dummyTrackName}?${randomSearch}`,
     );
   });
@@ -50,7 +51,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   it("should get the last URI when invoke the getNextTrackURI method and the number is larger than the last track", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
-    expect(mediaPlayerLinks.generateNextTrackURI(20)).toBe(
+    expect(mediaPlayerLinks.generateNextTrackURI(new Track(20))).toBe(
       `/preview/track-10/${dummyTrackName}?${randomSearch}`,
     );
   });
@@ -58,7 +59,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   it("should get previous URI when using the getPreviousTrackURI method", () => {
     const dummyTrackName = dummySearchData.results[3].trackName;
 
-    expect(mediaPlayerLinks.generatePreviousTrackURI(5)).toBe(
+    expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(5))).toBe(
       `/preview/track-4/${dummyTrackName}?${randomSearch}`,
     );
   });
@@ -66,15 +67,15 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   it("should get the same URI when invoke the getPreviousTrackURI method and is smaller than the first track index", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
-    expect(mediaPlayerLinks.generatePreviousTrackURI(-2)).toBe(
+    expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(-2))).toBe(
       `/preview/track-1/${dummyTrackName}?${randomSearch}`,
     );
 
-    expect(mediaPlayerLinks.generatePreviousTrackURI(0)).toBe(
+    expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(0))).toBe(
       `/preview/track-1/${dummyTrackName}?${randomSearch}`,
     );
 
-    expect(mediaPlayerLinks.generatePreviousTrackURI(1)).toBe(
+    expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(1))).toBe(
       `/preview/track-1/${dummyTrackName}?${randomSearch}`,
     );
   });
@@ -82,7 +83,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
   it("should always get the last track when invoke generatePreviousTrackURI is larger then the last track index", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
-    expect(mediaPlayerLinks.generatePreviousTrackURI(11)).toBe(
+    expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(11))).toBe(
       `/preview/track-10/${dummyTrackName}?${randomSearch}`,
     );
   });

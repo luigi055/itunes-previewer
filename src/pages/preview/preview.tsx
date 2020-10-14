@@ -1,4 +1,5 @@
 import { AudioPlayer, Cover } from "components";
+import Track from "domain/track";
 import { fetchTrackData } from "features/media-player";
 import {
   selectCurrentTrack,
@@ -22,6 +23,7 @@ const Preview = () => {
   const trackIndex = parseInt(
     castedTrackNumber.slice(castedTrackNumber.indexOf("-") + 1),
   );
+  const track = new Track(trackIndex);
 
   const dispatch = useDispatch();
   const currentTrack = useSelector(selectCurrentTrack);
@@ -31,8 +33,8 @@ const Preview = () => {
   const isPreviousButtonDisabled = useSelector(selectIsPreviousButtonDisabled);
 
   useEffect(() => {
-    dispatch(fetchTrackData(trackIndex));
-  }, [dispatch, trackIndex]);
+    dispatch(fetchTrackData(track.getTrackNumber()));
+  }, [dispatch, track]);
 
   return (
     <div>

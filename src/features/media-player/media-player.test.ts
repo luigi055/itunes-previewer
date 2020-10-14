@@ -19,6 +19,7 @@ import {
 } from "services/externals/itunes-api/mock";
 import { triggeredActions } from "test-utils/triggered-actions";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
+import Track from "domain/track";
 
 describe("Testing search songs feature", () => {
   let store: Store;
@@ -29,7 +30,8 @@ describe("Testing search songs feature", () => {
   });
 
   it("should update the currentTrack Object ", async () => {
-    store.dispatch(fetchTrackData(2));
+    const track = new Track(2)
+    store.dispatch(fetchTrackData(track.getTrackNumber()));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
@@ -40,7 +42,8 @@ describe("Testing search songs feature", () => {
   });
 
   it("should update next and previous paths ", async () => {
-    store.dispatch(fetchTrackData(2));
+    const track = new Track(2)
+    store.dispatch(fetchTrackData(track.getTrackNumber()));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
@@ -50,16 +53,16 @@ describe("Testing search songs feature", () => {
     );
 
     expect(selectNextTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generateNextTrackURI(2),
+      mediaPlayerLinkGenerator.generateNextTrackURI(track),
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generatePreviousTrackURI(2),
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(track),
     );
   });
 
   it("should always return the first track if the fetchTrackData receives a number smaller than 1 ", async () => {
-    const trackNumber = 0;
-    store.dispatch(fetchTrackData(trackNumber));
+    const track = new Track(0);
+    store.dispatch(fetchTrackData(track.getTrackNumber()));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
@@ -73,15 +76,15 @@ describe("Testing search songs feature", () => {
     );
 
     expect(selectNextTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generateNextTrackURI(trackNumber),
+      mediaPlayerLinkGenerator.generateNextTrackURI(track),
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generatePreviousTrackURI(trackNumber),
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(track),
     );
   });
   it("should isPreviousButtonDisabled true when is the first element ", async () => {
-    const trackNumber = 1;
-    store.dispatch(fetchTrackData(trackNumber));
+    const track = new Track(1);
+    store.dispatch(fetchTrackData(track.toZeroBaseIndex()));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
@@ -95,8 +98,8 @@ describe("Testing search songs feature", () => {
   });
 
   it("should isNextButtonDisabled true when current track is the last track ", async () => {
-    const trackNumber = 10;
-    store.dispatch(fetchTrackData(trackNumber));
+    const track = new Track(10);
+    store.dispatch(fetchTrackData(track.getTrackNumber()));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
@@ -110,8 +113,8 @@ describe("Testing search songs feature", () => {
   });
 
   it("should always return the last track if the fetchTrackData receives a number larger than ResultCount ", async () => {
-    const trackNumber = 20;
-    store.dispatch(fetchTrackData(trackNumber));
+    const track = new Track(20);
+    store.dispatch(fetchTrackData(track.toZeroBaseIndex()));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
@@ -125,10 +128,10 @@ describe("Testing search songs feature", () => {
     );
 
     expect(selectNextTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generateNextTrackURI(trackNumber),
+      mediaPlayerLinkGenerator.generateNextTrackURI(track),
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generatePreviousTrackURI(trackNumber),
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(track),
     );
   });
 });

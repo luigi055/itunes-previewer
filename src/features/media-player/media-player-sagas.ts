@@ -25,10 +25,10 @@ function* processTrackData(
     currentTrack: searchResult
       .results[track.toZeroBaseIndex()],
     nextTrackPath: mediaPlayerLinksGenerator.generateNextTrackURI(
-      track.getTrackNumber(),
+      track,
     ),
     previousTrackPath: mediaPlayerLinksGenerator.generatePreviousTrackURI(
-      track.getTrackNumber(),
+      track,
     ),
     isNextButtonDisabled: track.isLastTrack(),
     isPreviousButtonDisabled: track.isFirstTrack(),

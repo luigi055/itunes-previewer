@@ -31,12 +31,12 @@ describe("Testing AudioPlayer component", () => {
   let dummyPreviewURL: string;
   let nextTrackPath: string;
   let previousTrackPath: string;
-
   beforeEach(() => {
+    const track = new Track(1)
     dummyPreviewURL =
-      dummySearchData.results[new Track(1).toZeroBaseIndex()].previewUrl;
-    nextTrackPath = mediaPlayerLinks.generateNextTrackURI(1);
-    previousTrackPath = mediaPlayerLinks.generatePreviousTrackURI(1);
+      dummySearchData.results[track.toZeroBaseIndex()].previewUrl;
+    nextTrackPath = mediaPlayerLinks.generateNextTrackURI(track);
+    previousTrackPath = mediaPlayerLinks.generatePreviousTrackURI(track);
   });
 
   describe("testing play/pause button", () => {
