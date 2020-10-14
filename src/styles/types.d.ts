@@ -11,6 +11,6 @@ interface Theme {
   fontSize: string;
   disabled: string;
   largeBreakPoint: number;
-  extraSmallBreakPoint: number;
+  smallBreakPoint: number;
   breakPointUnit: string;
 }

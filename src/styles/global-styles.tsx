@@ -3,7 +3,7 @@ import {
   GlobalStyleComponent,
   css,
 } from "styled-components";
-import { declareCssForExtraSmallView } from "./responsive";
+import { declareCssForSmallView } from "./responsive";
 
 const GlobalStyles: GlobalStyleComponent<
   { theme: Theme },
@@ -12,18 +12,18 @@ const GlobalStyles: GlobalStyleComponent<
 ${({ theme }) =>
   css`
     :root {
-      --base-size: 1rem;
-      --type-scale: 1.2;
+      --base-size: 0.95rem;
+      --type-scale: 1.15;
       --h3: calc(var(--base-size) * var(--type-scale));
       --h2: calc(var(--h3) * var(--type-scale));
       --h1: calc(var(--h2) * var(--type-scale));
       --text-sm: calc(var(--base-size) / var(--type-scale));
     }
 
-    ${declareCssForExtraSmallView(css`
+    ${declareCssForSmallView(css`
       :root {
-        --base-size: 0.95rem;
-        --type-scale: 1.15;
+        --base-size: 1rem;
+        --type-scale: 1.2;
       }
     `)}
 

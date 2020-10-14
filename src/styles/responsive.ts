@@ -18,9 +18,9 @@ export const declareCssForLargeView = (
   }
 `;
 
-export const declareCssForExtraSmallView = (cssForLargeView: ThemeInterpolation) => css`
-  @media screen and (max-width: ${({ theme }) =>
-      `${theme.extraSmallBreakPoint}${theme.breakPointUnit}`}) {
+export const declareCssForSmallView = (cssForLargeView: ThemeInterpolation) => css`
+  @media screen and (min-width: ${({ theme }) =>
+      `${theme.smallBreakPoint}${theme.breakPointUnit}`}) {
     ${cssForLargeView}
   }
 `;
