@@ -1,4 +1,4 @@
-import { AudioPlayer, Cover } from "components";
+import { AudioPlayer, Cover, SocialShare } from "components";
 import Track from "domain/track";
 import { fetchTrackData } from "features/media-player";
 import {
@@ -46,6 +46,7 @@ const Preview = () => {
         isNextButtonDisabled={isNextButtonDisabled}
         isPreviousButtonDisabled={isPreviousButtonDisabled}
       />
+      <SocialShare />
     </div>
   );
 };
