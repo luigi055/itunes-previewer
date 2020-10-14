@@ -49,7 +49,11 @@ const Preview = () => {
           isNextButtonDisabled={isNextButtonDisabled}
           isPreviousButtonDisabled={isPreviousButtonDisabled}
         />
-        <SocialShare className="social-share" shareURL={href} />
+        <SocialShare
+          className="social-share"
+          data-testid="social-share-component"
+          shareURL={href}
+        />
       </Player>
     </>
   );

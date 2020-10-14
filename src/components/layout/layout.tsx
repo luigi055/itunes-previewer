@@ -24,7 +24,6 @@ export const MainLayout = styled.main`
   justify-content: start;
 `;
 
-
 export const CenteredMainElement = styled.div`
   display: flex;
   justify-content: center;

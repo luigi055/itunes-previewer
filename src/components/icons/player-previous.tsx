@@ -8,7 +8,11 @@ const PlayerPrevious: FunctionComponent<
     width="35"
     height="23"
     viewBox="0 0 35 23"
-    data-testid="player-previous-icon"
+    data-testid={
+      isDisabled
+        ? "player-previous-icon-disabled"
+        : "player-previous-icon-enabled"
+    }
     {...props}
   >
     <image

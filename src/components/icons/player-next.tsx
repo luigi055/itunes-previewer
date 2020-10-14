@@ -8,7 +8,9 @@ const PlayerNext: FunctionComponent<
     width="35"
     height="23"
     viewBox="0 0 35 23"
-    data-testid="player-next-icon"
+    data-testid={
+      isDisabled ? "player-next-icon-disabled" : "player-next-icon-enabled"
+    }
     {...props}
   >
     <image
