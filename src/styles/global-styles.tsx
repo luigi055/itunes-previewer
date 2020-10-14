@@ -44,7 +44,7 @@ ${({ theme }) =>
       background: ${theme.backgroundColor};
       font-size: ${theme.fontSize};
       font-family: ${theme.fontFamily}, sans-serif;
-      color: ${theme.onBackgroundVariantColor};
+      color: ${theme.onBackgroundColor};
       line-height: 1.15;
       text-size-adjust: 100%;
       height: 100%;

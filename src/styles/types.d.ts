@@ -3,7 +3,8 @@ interface Theme {
   primaryVariantColor: string;
   onPrimaryColor: string;
   backgroundColor: string;
-  backgroundVariantColor: string;
+  backgroundHoverColor: string;
+  backgroundVariantColor: string
   onBackgroundVariantColor: string;
   onBackgroundColor: string;
   fontFamily: string;
