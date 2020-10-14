@@ -13,10 +13,9 @@ const SocialShareWrapper = styled.div`
   }
 `;
 
-const SocialShare: FunctionComponent<{ shareURL?: string } & HTMLAttributes<HTMLDivElement>> = ({
-  shareURL = "",
-  ...props
-}) => (
+const SocialShare: FunctionComponent<
+  { shareURL?: string } & HTMLAttributes<HTMLDivElement>
+> = ({ shareURL = "", ...props }) => (
   <SocialShareWrapper {...props}>
     <a
       href={`https://twitter.com/share?url=${shareURL}`}

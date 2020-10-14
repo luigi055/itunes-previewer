@@ -4,11 +4,12 @@ interface Theme {
   onPrimaryColor: string;
   backgroundColor: string;
   backgroundHoverColor: string;
-  backgroundVariantColor: string
+  backgroundVariantColor: string;
   onBackgroundVariantColor: string;
   onBackgroundColor: string;
   fontFamily: string;
   fontSize: string;
   disabled: string;
-  largeBreakPoint: string;
+  largeBreakPoint: number;
+  breakPointUnit: string;
 }

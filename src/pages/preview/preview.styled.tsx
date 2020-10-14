@@ -1,8 +1,9 @@
 import { basePaddingX } from "components";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { declareCssForLargeView } from "styles/responsive";
 
 export const Player = styled.section`
-  background: ${({theme}) => theme.backgroundVariantColor};
+  background: ${({ theme }) => theme.backgroundVariantColor};
   display: flex;
   flex-direction: column;
   padding-bottom: 28px;
@@ -20,12 +21,10 @@ export const Player = styled.section`
     order: 1;
     padding-bottom: 8px;
     padding-top: 10px;
-
   }
-
-  @media screen and (min-width: ${({theme}) => theme.largeBreakPoint}) {
-  padding: 28px 0;
-  ${basePaddingX}
+  ${declareCssForLargeView(css`
+    padding: 28px 0;
+    ${basePaddingX}
 
     .social-share {
       align-self: flex-end;
@@ -34,5 +33,5 @@ export const Player = styled.section`
       padding-top: 0;
       position: absolute;
     }
-  }
+  `)}
 `;

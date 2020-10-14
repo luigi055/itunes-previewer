@@ -5,7 +5,13 @@ import {
   PlayerPrevious,
 } from "components/icons";
 import { ScreenReaderOnly } from "components/screen-readers-helpers";
-import React, { FunctionComponent, HTMLAttributes, MouseEvent, useRef, useState } from "react";
+import React, {
+  FunctionComponent,
+  HTMLAttributes,
+  MouseEvent,
+  useRef,
+  useState,
+} from "react";
 import { ControlButtons, PlayerButton } from "./audio-player-styled";
 
 const ToggleReproduceButton: FunctionComponent<{ isPlaying: boolean }> = ({
@@ -23,12 +29,14 @@ const ToggleReproduceButton: FunctionComponent<{ isPlaying: boolean }> = ({
     </>
   );
 
-const AudioPlayer: FunctionComponent<AudioPlayerProps & HTMLAttributes<HTMLDivElement>> = ({
+const AudioPlayer: FunctionComponent<
+  AudioPlayerProps & HTMLAttributes<HTMLDivElement>
+> = ({
   currentTrackURL,
   nextTrackPath,
   previousTrackPath,
-  isNextButtonDisabled,
-  isPreviousButtonDisabled,
+  isNextButtonDisabled = false,
+  isPreviousButtonDisabled = false,
   ...props
 }) => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
@@ -73,7 +81,6 @@ const AudioPlayer: FunctionComponent<AudioPlayerProps & HTMLAttributes<HTMLDivEl
           <PlayerNext isDisabled={isNextButtonDisabled} />
           <ScreenReaderOnly>go next</ScreenReaderOnly>
         </PlayerButton>
-
       </ControlButtons>
       {currentTrackURL && (
         <audio

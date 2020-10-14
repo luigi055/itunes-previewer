@@ -10,7 +10,8 @@ const defaultTheme: Theme = {
   fontFamily: "Poppins",
   fontSize: "16px",
   disabled: "#454749",
-  largeBreakPoint: "48rem" 
+  largeBreakPoint: 48,
+  breakPointUnit: "rem",
 };
 
 export default defaultTheme;

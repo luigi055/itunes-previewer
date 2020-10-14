@@ -3,6 +3,7 @@ import {
   GlobalStyleComponent,
   css,
 } from "styled-components";
+import { declareCssForLargeView } from "./responsive";
 
 const GlobalStyles: GlobalStyleComponent<
   { theme: Theme },
@@ -19,11 +20,11 @@ ${({ theme }) =>
       --text-sm: calc(var(--base-size) / var(--type-scale));
     }
 
-    @media screen and (min-width: 768px) {
+    ${declareCssForLargeView(css`
       :root {
         --type-scale: 1.25;
       }
-    }
+    `)}
 
     *,
     *::after,

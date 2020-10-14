@@ -20,6 +20,7 @@ interface PreviewURIParams {
 
 const Preview = () => {
   const { trackNumber } = useParams() as PreviewURIParams;
+  const { href } = window.location;
   const castedTrackNumber = trackNumber as string;
   const trackIndex = parseInt(
     castedTrackNumber.slice(castedTrackNumber.indexOf("-") + 1)
@@ -42,14 +43,14 @@ const Preview = () => {
       <Cover currentTrack={currentTrack} />
       <Player>
         <AudioPlayer
-        className="audio-player"
+          className="audio-player"
           currentTrackURL={currentTrack.previewUrl}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
           isNextButtonDisabled={isNextButtonDisabled}
           isPreviousButtonDisabled={isPreviousButtonDisabled}
         />
-        <SocialShare className="social-share" shareURL="http://myawesomePage.com" />
+        <SocialShare className="social-share" shareURL={href} />
       </Player>
     </>
   );
