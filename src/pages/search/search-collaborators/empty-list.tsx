@@ -20,11 +20,7 @@ const EmptyList: FunctionComponent = () => {
   return (
     <CenteredElementXY>
       <EmptyTextWrapper>
-        <MagnifyingGlass
-          width="50px"
-          height="50px"
-          color={theme.disabled}
-        />
+        <MagnifyingGlass width="50px" height="50px" color={theme.disabled} />
         <EmptyPlaylistHeading
           as="h2"
           isFontWeightNormal

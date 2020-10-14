@@ -26,7 +26,7 @@ describe("Testing DomainHeader Feature", () => {
     render(
       <ConnectedComponent history={history}>
         <DomainHeader />
-      </ConnectedComponent>,
+      </ConnectedComponent>
     );
     const { getByTestId } = screen;
     const applicationHeading = getByTestId(applicationHeadingTestid);
@@ -39,11 +39,12 @@ describe("Testing DomainHeader Feature", () => {
     render(
       <ConnectedComponent history={history}>
         <DomainHeader />
-      </ConnectedComponent>,
+      </ConnectedComponent>
     );
     const { getByTestId } = screen;
-    const searchInputElement =
-      getByTestId(searchInputTestId).getElementsByTagName("input")[0];
+    const searchInputElement = getByTestId(
+      searchInputTestId
+    ).getElementsByTagName("input")[0];
 
     expect(searchInputElement.value).toBe(`${randomSearch} ${randomSearch}`);
   });
@@ -53,11 +54,12 @@ describe("Testing DomainHeader Feature", () => {
     render(
       <ConnectedComponent history={history}>
         <DomainHeader />
-      </ConnectedComponent>,
+      </ConnectedComponent>
     );
     const { getByTestId } = screen;
-    const searchInputElement =
-      getByTestId(searchInputTestId).getElementsByTagName("input")[0];
+    const searchInputElement = getByTestId(
+      searchInputTestId
+    ).getElementsByTagName("input")[0];
 
     userEvent.tab();
     userEvent.type(searchInputElement, randomSearch);

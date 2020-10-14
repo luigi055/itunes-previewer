@@ -31,6 +31,6 @@ export const PlayListHead = styled.li`
 export const PlayListElement = styled.span<{ highlight?: boolean }>`
   align-items: center;
   color: ${({ theme, highlight }) =>
-  highlight ? theme.primaryColor : "inherit"};
+    highlight ? theme.primaryColor : "inherit"};
   display: flex;
 `;

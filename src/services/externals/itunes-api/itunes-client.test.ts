@@ -12,7 +12,7 @@ describe("Testing the itunes client class", () => {
     const result = await ITunesClient.search(term);
 
     expect(global.fetch).toHaveBeenCalledWith(
-      `${process.env.REACT_APP_ITUNES_SEARCH_URI}${term}`,
+      `${process.env.REACT_APP_ITUNES_SEARCH_URI}${term}`
     );
     expect(result).toEqual(dummySearchData);
   });

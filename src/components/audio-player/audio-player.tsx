@@ -1,15 +1,13 @@
 import React, { FunctionComponent, MouseEvent, useRef, useState } from "react";
 import { NavigationButton } from "./audio-player-styled";
 
-const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
-  {
-    currentTrackURL,
-    nextTrackPath,
-    previousTrackPath,
-    isNextButtonDisabled,
-    isPreviousButtonDisabled,
-  },
-) => {
+const AudioPlayer: FunctionComponent<AudioPlayerProps> = ({
+  currentTrackURL,
+  nextTrackPath,
+  previousTrackPath,
+  isNextButtonDisabled,
+  isPreviousButtonDisabled,
+}) => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   return (
@@ -25,14 +23,16 @@ const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
         data-testid="player-reproduce-button"
         onClick={async (event: MouseEvent<HTMLButtonElement>) => {
           event.preventDefault();
-          (isPlaying === true)
+          isPlaying === true
             ? await audioPlayerRef.current?.pause()
             : await audioPlayerRef.current?.play();
         }}
       >
-        {isPlaying
-          ? <i data-testid="player-pause-icon">Pause</i>
-          : <i data-testid="player-play-icon">Play</i>}
+        {isPlaying ? (
+          <i data-testid="player-pause-icon">Pause</i>
+        ) : (
+          <i data-testid="player-play-icon">Play</i>
+        )}
       </button>
       <NavigationButton
         href={nextTrackPath}
@@ -65,6 +65,5 @@ const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
     </div>
   );
 };
-
 
 export default AudioPlayer;

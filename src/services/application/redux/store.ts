@@ -12,7 +12,7 @@ const setStore = (initialState: State = storeInitialState) => {
   const store = createStore(
     rootReducers,
     initialState,
-    composeEnhancer(applyMiddleware(sagaMiddleware, actionWatcherMiddleware)),
+    composeEnhancer(applyMiddleware(sagaMiddleware, actionWatcherMiddleware))
   );
   sagaMiddleware.run(rootSagas);
 

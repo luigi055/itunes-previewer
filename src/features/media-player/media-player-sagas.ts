@@ -10,28 +10,27 @@ import { selectSearchResult } from "features/search-songs";
 import Track from "domain/track";
 
 function* processTrackData(
-  currentTrack: ActionPayloadRequired<number>,
+  currentTrack: ActionPayloadRequired<number>
 ): SagaIterator {
   yield take(GET_SONGS_SUCCESS);
 
   const searchResult = (yield select(selectSearchResult)) as SearchSongsState;
   const mediaPlayerLinksGenerator = new MediaPlayerLinksGenerator(searchResult);
   const track = new Track(currentTrack.payload).defineMaxLimit(
-    searchResult.resultCount,
+    searchResult.resultCount
   );
 
-  yield put(generateCurrentTrackData({
-    currentTrack: searchResult
-      .results[track.toZeroBaseIndex()],
-    nextTrackPath: mediaPlayerLinksGenerator.generateNextTrackURI(
-      track,
-    ),
-    previousTrackPath: mediaPlayerLinksGenerator.generatePreviousTrackURI(
-      track,
-    ),
-    isNextButtonDisabled: track.isLastTrack(),
-    isPreviousButtonDisabled: track.isFirstTrack(),
-  }));
+  yield put(
+    generateCurrentTrackData({
+      currentTrack: searchResult.results[track.toZeroBaseIndex()],
+      nextTrackPath: mediaPlayerLinksGenerator.generateNextTrackURI(track),
+      previousTrackPath: mediaPlayerLinksGenerator.generatePreviousTrackURI(
+        track
+      ),
+      isNextButtonDisabled: track.isLastTrack(),
+      isPreviousButtonDisabled: track.isFirstTrack(),
+    })
+  );
 }
 
 function* getTrackData() {

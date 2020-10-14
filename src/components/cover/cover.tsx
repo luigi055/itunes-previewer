@@ -4,9 +4,7 @@ interface CoverInformationProps {
   currentTrack: ArtistSongs;
 }
 
-const Cover: FunctionComponent<CoverInformationProps> = (
-  { currentTrack },
-) => {
+const Cover: FunctionComponent<CoverInformationProps> = ({ currentTrack }) => {
   return (
     <div>
       <img

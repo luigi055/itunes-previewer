@@ -1,4 +1,4 @@
-class Track implements ITrack{
+class Track implements ITrack {
   private _maxLimit: number;
   constructor(private _trackNumber: number) {
     this._maxLimit = Infinity;

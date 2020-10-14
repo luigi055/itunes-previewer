@@ -56,16 +56,27 @@ ${({ theme }) =>
       position: relative;
     }
 
-    h1 {font-size: var(--h1);}
+    h1 {
+      font-size: var(--h1);
+    }
 
-    h2 {font-size: var(--h2);}
+    h2 {
+      font-size: var(--h2);
+    }
 
-    h3 {font-size: var(--h3);}
+    h3 {
+      font-size: var(--h3);
+    }
 
-    p, h4 {font-size: var(--base-size);}
+    p,
+    h4 {
+      font-size: var(--base-size);
+    }
 
-    small, .text-small, h5 {
-        font-size: var(--text-sm);
+    small,
+    .text-small,
+    h5 {
+      font-size: var(--text-sm);
     }
 
     textarea {

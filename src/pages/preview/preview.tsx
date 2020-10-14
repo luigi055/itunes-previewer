@@ -21,7 +21,7 @@ const Preview = () => {
   const { trackNumber } = useParams() as PreviewURIParams;
   const castedTrackNumber = trackNumber as string;
   const trackIndex = parseInt(
-    castedTrackNumber.slice(castedTrackNumber.indexOf("-") + 1),
+    castedTrackNumber.slice(castedTrackNumber.indexOf("-") + 1)
   );
   const track = new Track(trackIndex);
 
