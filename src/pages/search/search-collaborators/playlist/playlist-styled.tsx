@@ -18,7 +18,7 @@ export const PlayListRow = styled.li`
   ${playListCSS}
   color: ${({ theme }) => theme.onBackgroundColor};
 
-  :hover {
+  :hover, :focus {
     background: ${({ theme }) => theme.backgroundHoverColor};
   }
 `;
