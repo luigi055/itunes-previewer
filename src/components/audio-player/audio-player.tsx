@@ -1,3 +1,10 @@
+import {
+  PlayerNext,
+  PlayerPause,
+  PlayerPlay,
+  PlayerPrevious,
+} from "components/icons";
+import { ScreenReaderOnly } from "components/screen-readers-helpers";
 import React, { FunctionComponent, MouseEvent, useRef, useState } from "react";
 import { NavigationButton } from "./audio-player-styled";
 
@@ -17,7 +24,8 @@ const AudioPlayer: FunctionComponent<AudioPlayerProps> = ({
         data-testid="player-go-previous-button"
         isDisabled={isPreviousButtonDisabled}
       >
-        go Previous
+        <PlayerPrevious isDisabled={isPreviousButtonDisabled} />
+        <ScreenReaderOnly>go Previous</ScreenReaderOnly>
       </NavigationButton>
       <button
         data-testid="player-reproduce-button"
@@ -29,9 +37,15 @@ const AudioPlayer: FunctionComponent<AudioPlayerProps> = ({
         }}
       >
         {isPlaying ? (
-          <i data-testid="player-pause-icon">Pause</i>
+          <>
+            <PlayerPause data-testid="player-pause-icon" />
+            <ScreenReaderOnly>Pause</ScreenReaderOnly>
+          </>
         ) : (
-          <i data-testid="player-play-icon">Play</i>
+          <>
+            <PlayerPlay data-testid="player-play-icon" />
+            <ScreenReaderOnly>Play</ScreenReaderOnly>
+          </>
         )}
       </button>
       <NavigationButton
@@ -39,9 +53,9 @@ const AudioPlayer: FunctionComponent<AudioPlayerProps> = ({
         data-testid="player-go-next-button"
         isDisabled={isNextButtonDisabled}
       >
-        go next
+        <PlayerNext isDisabled={isNextButtonDisabled} />
+        <ScreenReaderOnly>go next</ScreenReaderOnly>
       </NavigationButton>
-      <h1>is playing? {String(isPlaying)}</h1>
       {currentTrackURL && (
         <audio
           data-testid="player-audio-element"

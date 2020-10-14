@@ -46,7 +46,7 @@ const Preview = () => {
         isNextButtonDisabled={isNextButtonDisabled}
         isPreviousButtonDisabled={isPreviousButtonDisabled}
       />
-      <SocialShare shareURL="http://myawesomePage.com"/>
+      <SocialShare shareURL="http://myawesomePage.com" />
     </div>
   );
 };
