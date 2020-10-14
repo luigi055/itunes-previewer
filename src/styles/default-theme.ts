@@ -12,7 +12,7 @@ const defaultTheme: Theme = {
   disabled: "#454749",
   largeBreakPoint: 48,
   breakPointUnit: "rem",
-  smallBreakPoint: 25
+  smallBreakPoint: 25,
 };
 
 export default defaultTheme;

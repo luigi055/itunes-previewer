@@ -15,13 +15,15 @@ export const Player = styled.section`
   }
 
   > .social-share {
-    justify-content: space-between;
-    margin: 0 auto;
-    min-width: 180px;
+    align-self: center;
+    justify-content: space-around;
+    max-width: 180px;
     order: 1;
     padding-bottom: 8px;
     padding-top: 10px;
+    width: 100%;
   }
+
   ${declareCssForLargeView(css`
     padding: 28px 0;
     ${basePaddingX}

@@ -8,22 +8,18 @@ export const Header = styled.header`
   background: ${({ theme }) => theme.primaryColor};
   box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.16);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
   max-height: 115px;
   min-height: 115px;
   object-fit: contain;
-
-
-  justify-content: space-around;
-  padding-top: 10px;
   padding-bottom: 10px;
-
-  flex-direction: column;
+  padding-top: 10px;
 
   ${declareCssForLargeView(css`
-  max-height: 70px;
-  min-height: 70px;
-flex-direction: row;
+    flex-direction: row;
+    max-height: 70px;
+    min-height: 70px;
   `)}
 `;
 
