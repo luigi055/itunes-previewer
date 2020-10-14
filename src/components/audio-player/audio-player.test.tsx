@@ -32,7 +32,7 @@ describe("Testing AudioPlayer component", () => {
   let nextTrackPath: string;
   let previousTrackPath: string;
   beforeEach(() => {
-    const track = new Track(1)
+    const track = new Track(1);
     dummyPreviewURL =
       dummySearchData.results[track.toZeroBaseIndex()].previewUrl;
     nextTrackPath = mediaPlayerLinks.generateNextTrackURI(track);
