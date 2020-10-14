@@ -21,9 +21,8 @@ interface PreviewURIParams {
 const Preview = () => {
   const { trackNumber } = useParams() as PreviewURIParams;
   const { href } = window.location;
-  const castedTrackNumber = trackNumber as string;
   const trackIndex = parseInt(
-    castedTrackNumber.slice(castedTrackNumber.indexOf("-") + 1)
+    trackNumber!.slice(trackNumber!.indexOf("-") + 1)
   );
   const track = new Track(trackIndex);
 

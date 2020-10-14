@@ -17,18 +17,13 @@ export const fluidContainer = css`
   width: 100%;
 `;
 
-export const MainLayout = styled("div")`
+export const MainLayout = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: start;
 `;
 
-export const PageContainer = styled.main`
-  ${fluidContainer}
-  ${basePaddingY}
-  flex-grow: 100;
-`;
 
 export const CenteredMainElement = styled.div`
   display: flex;
