@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled, { useTheme } from "styled-components";
-import { CenteredElementXY } from "components";
+import { CenteredMainElement } from "components";
 import { MagnifyingGlass } from "components/icons";
 import { DesignH1 } from "components/typography";
 
@@ -18,7 +18,7 @@ const EmptyList: FunctionComponent = () => {
   const theme = useTheme() as Theme;
 
   return (
-    <CenteredElementXY>
+    <CenteredMainElement>
       <EmptyTextWrapper>
         <MagnifyingGlass width="50px" height="50px" color={theme.disabled} />
         <EmptyPlaylistHeading
@@ -29,7 +29,7 @@ const EmptyList: FunctionComponent = () => {
           Use the search bar to find songs
         </EmptyPlaylistHeading>
       </EmptyTextWrapper>
-    </CenteredElementXY>
+    </CenteredMainElement>
   );
 };
 

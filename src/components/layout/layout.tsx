@@ -17,15 +17,22 @@ export const fluidContainer = css`
   width: 100%;
 `;
 
+export const MainLayout = styled("div")`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: start;
+`;
+
 export const PageContainer = styled.main`
   ${fluidContainer}
   ${basePaddingY}
   flex-grow: 100;
 `;
 
-export const CenteredElementXY = styled(PageContainer)`
+export const CenteredMainElement = styled.div`
   display: flex;
-  height: calc(100% - 70px);
   justify-content: center;
   align-items: center;
+  flex-grow: 100;
 `;

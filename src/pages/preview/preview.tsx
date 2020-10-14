@@ -37,17 +37,19 @@ const Preview = () => {
   }, [dispatch, track]);
 
   return (
-    <div>
+    <>
       <Cover currentTrack={currentTrack} />
-      <AudioPlayer
-        currentTrackURL={currentTrack.previewUrl}
-        nextTrackPath={nextTrackPath}
-        previousTrackPath={previousTrackPath}
-        isNextButtonDisabled={isNextButtonDisabled}
-        isPreviousButtonDisabled={isPreviousButtonDisabled}
-      />
-      <SocialShare shareURL="http://myawesomePage.com" />
-    </div>
+      <div>
+        <AudioPlayer
+          currentTrackURL={currentTrack.previewUrl}
+          nextTrackPath={nextTrackPath}
+          previousTrackPath={previousTrackPath}
+          isNextButtonDisabled={isNextButtonDisabled}
+          isPreviousButtonDisabled={isPreviousButtonDisabled}
+        />
+        <SocialShare shareURL="http://myawesomePage.com" />
+      </div>
+    </>
   );
 };
 

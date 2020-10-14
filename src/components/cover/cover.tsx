@@ -1,4 +1,7 @@
+import { CenteredMainElement } from "components/layout";
+import { DesignH3 } from "components/typography";
 import React, { FunctionComponent } from "react";
+import { CoverElement } from "./cover.styled";
 
 interface CoverInformationProps {
   currentTrack: ArtistSongs;
@@ -6,16 +9,22 @@ interface CoverInformationProps {
 
 const Cover: FunctionComponent<CoverInformationProps> = ({ currentTrack }) => {
   return (
-    <div>
-      <img
-        data-testid="cover-image"
-        src={currentTrack.artworkUrl100}
-        alt={`${currentTrack.collectionName} cover`}
-      />
+    <CenteredMainElement>
+      <CoverElement>
+        <img
+          data-testid="cover-image"
+          src={currentTrack.artworkUrl100}
+          alt={`${currentTrack.collectionName} cover`}
+        />
 
-      <p data-testid="cover-track-name">{currentTrack.trackName}</p>
-      <h3 data-testid="cover-artist-name">{currentTrack.artistName}</h3>
-    </div>
+        <DesignH3 data-testid="cover-track-name">
+          {currentTrack.trackName}
+        </DesignH3>
+        <DesignH3 isFontWeightNormal data-testid="cover-artist-name">
+          {currentTrack.artistName}
+        </DesignH3>
+      </CoverElement>
+    </CenteredMainElement>
   );
 };
 
