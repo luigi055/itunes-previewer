@@ -5,8 +5,6 @@ import {
   Router,
   MemoryRouter,
   Route,
-  Redirect,
-  Switch,
 } from "react-router-dom";
 import { defaultTheme } from "styles";
 import { setStore } from "services/application/redux";
