@@ -1,5 +1,6 @@
 import { AudioPlayer, Cover, SocialShare } from "components";
 import Track from "domain/track";
+import DomainHeader from "features/domain-header";
 import { fetchTrackData } from "features/media-player";
 import {
   selectCurrentTrack,
@@ -39,6 +40,7 @@ const Preview = () => {
 
   return (
     <>
+    <DomainHeader />
       <Cover currentTrack={currentTrack} />
       <Player>
         <AudioPlayer

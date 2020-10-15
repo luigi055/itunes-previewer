@@ -7,6 +7,7 @@ import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
 import { triggeredActions } from "test-utils/triggered-actions";
 import { Store } from "redux";
+import userEvent from "@testing-library/user-event";
 
 const playlistRowTestId = "playlist-row";
 const magnifyingGlassIconTestId = "magnifying-glass-icon";
@@ -63,6 +64,8 @@ describe("Testing the search page", () => {
       const { getByTestId } = screen;
 
       const searchTermComponent = getByTestId("search-term");
+      userEvent.type(getByTestId("search-input-element"),randomSearch );
+      userEvent.click(getByTestId("search-button"));
 
       expect(searchTermComponent.textContent).toBe(
         `Searching "${randomSearch}"`

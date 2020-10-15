@@ -7,13 +7,16 @@ import {
 import { useSelector } from "react-redux";
 import { EmptyList, PlayList } from "./search-collaborators";
 import { SearchTerm } from "./search-styled";
+import DomainHeader from "features/domain-header";
 
 const Search: FunctionComponent = () => {
   const searchSong = useSelector(selectSearchResult);
   const artistSongs: ArtistSongs[] = useSelector(selectResults);
   const searchTerm = useSelector(selectSearchTerm);
 
-  return artistSongs.length ? (
+  return (<>
+  <DomainHeader />
+  {artistSongs.length ? (
     <>
       <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
         Searching "{searchTerm}"
@@ -22,7 +25,7 @@ const Search: FunctionComponent = () => {
     </>
   ) : (
     <EmptyList />
-  );
+  )}</>);
 };
 
 export default Search;
