@@ -3,7 +3,7 @@ import { createMemoryHistory } from "history";
 import { cleanup, render, screen } from "@testing-library/react";
 import { ConnectedComponent, Random } from "test-utils";
 import DomainHeader from "./domain-header";
-import routesConfig from "application/routes-config";
+import {basePaths} from "application/routes-config";
 import userEvent from "@testing-library/user-event";
 
 const searchInputTestId = "search-input";
@@ -35,7 +35,7 @@ describe("Testing DomainHeader Feature", () => {
   });
 
   it("should fill the search input using the URI query string", () => {
-    history.push(`${routesConfig.SEARCH}?${randomSearch}%20${randomSearch}`);
+    history.push(`${basePaths.SEARCH}?${randomSearch}%20${randomSearch}`);
     render(
       <ConnectedComponent history={history}>
         <DomainHeader />
@@ -50,7 +50,7 @@ describe("Testing DomainHeader Feature", () => {
   });
 
   it(`should update the query string url when the user submit the SearchInput component`, () => {
-    history.push(routesConfig.ROOT);
+    history.push(basePaths.ROOT);
     render(
       <ConnectedComponent history={history}>
         <DomainHeader />
@@ -66,7 +66,7 @@ describe("Testing DomainHeader Feature", () => {
     userEvent.tab();
     document.activeElement.click();
 
-    expect(history.location.pathname).toBe(routesConfig.SEARCH);
+    expect(history.location.pathname).toBe(basePaths.SEARCH);
     expect(history.location.search).toBe(`?${randomSearch}`);
   });
 });
