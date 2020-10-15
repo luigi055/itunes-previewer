@@ -3,6 +3,7 @@ import {
   GlobalStyleComponent,
   css,
 } from "styled-components";
+import { declareCssForSmallView } from "./responsive";
 
 const GlobalStyles: GlobalStyleComponent<
   { theme: Theme },
@@ -11,19 +12,20 @@ const GlobalStyles: GlobalStyleComponent<
 ${({ theme }) =>
   css`
     :root {
-      --base-size: 1rem;
-      --type-scale: 1.2;
+      --base-size: 0.95rem;
+      --type-scale: 1.15;
       --h3: calc(var(--base-size) * var(--type-scale));
       --h2: calc(var(--h3) * var(--type-scale));
       --h1: calc(var(--h2) * var(--type-scale));
       --text-sm: calc(var(--base-size) / var(--type-scale));
     }
 
-    @media screen and (min-width: 768px) {
+    ${declareCssForSmallView(css`
       :root {
-        --type-scale: 1.25;
+        --base-size: 1rem;
+        --type-scale: 1.2;
       }
-    }
+    `)}
 
     *,
     *::after,
@@ -42,9 +44,9 @@ ${({ theme }) =>
     html,
     body {
       background: ${theme.backgroundColor};
-      font-size: ${theme.fontSize};
+      font-size: var(--base-size);
       font-family: ${theme.fontFamily}, sans-serif;
-      color: ${theme.onBackgroundVariantColor};
+      color: ${theme.onBackgroundColor};
       line-height: 1.15;
       text-size-adjust: 100%;
       height: 100%;
@@ -56,16 +58,27 @@ ${({ theme }) =>
       position: relative;
     }
 
-    h1 {font-size: var(--h1);}
+    h1 {
+      font-size: var(--h1);
+    }
 
-    h2 {font-size: var(--h2);}
+    h2 {
+      font-size: var(--h2);
+    }
 
-    h3 {font-size: var(--h3);}
+    h3 {
+      font-size: var(--h3);
+    }
 
-    p, h4 {font-size: var(--base-size);}
+    p,
+    h4 {
+      font-size: var(--base-size);
+    }
 
-    small, .text-small, h5 {
-        font-size: var(--text-sm);
+    small,
+    .text-small,
+    h5 {
+      font-size: var(--text-sm);
     }
 
     textarea {

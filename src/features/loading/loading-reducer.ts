@@ -10,7 +10,7 @@ const initialState = false;
 
 export const reduceLoading = (
   state: boolean = initialState,
-  action: Action,
+  action: Action
 ) => {
   const handler = loadingStateHandlers[action.type];
   const hasHandler = !!handler;

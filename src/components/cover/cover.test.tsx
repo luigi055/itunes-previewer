@@ -17,7 +17,7 @@ describe("Testing the Cover component", () => {
     const { getByTestId } = screen;
 
     expect(getByTestId(coverImageTestId).src).toContain(
-      `/${dummyCurrentTrack.artworkUrl100}`,
+      `/${dummyCurrentTrack.artworkUrl100}`
     );
   });
 
@@ -25,10 +25,10 @@ describe("Testing the Cover component", () => {
     const { getByTestId } = screen;
 
     expect(getByTestId(coverTrackNameTestId).textContent).toBe(
-      dummyCurrentTrack.trackName,
+      dummyCurrentTrack.trackName
     );
     expect(getByTestId(coverArtistNameTestId).textContent).toBe(
-      dummyCurrentTrack.artistName,
+      dummyCurrentTrack.artistName
     );
   });
 });

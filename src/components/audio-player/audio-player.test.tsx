@@ -14,9 +14,14 @@ describe("Testing AudioPlayer component", () => {
   const playerGoPreviousButtonTestId = "player-go-previous-button";
   const playerGoNextButtonTestId = "player-go-next-button";
   const playerAudioElementTestId = "player-audio-element";
-  const mediaPlayerLinks = new MediaPlayerLinksGenerator(
-    { ...dummySearchData, searchTerm: "" },
-  );
+  const playerPreviousIconDisabledTestId = "player-previous-icon-disabled";
+  const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";
+  const playerNextIconEnabledTestId = "player-next-icon-enabled";
+  const playerNextIconDisabledTestId = "player-next-icon-disabled";
+  const mediaPlayerLinks = new MediaPlayerLinksGenerator({
+    ...dummySearchData,
+    searchTerm: "",
+  });
 
   beforeEach(() => {
     /**
@@ -46,12 +51,12 @@ describe("Testing AudioPlayer component", () => {
           currentTrackURL={dummyPreviewURL}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
-        />,
+        />
       );
       const { getByTestId } = screen;
 
       expect(getByTestId(playerSourceTestId).src).toContain(
-        `/${dummyPreviewURL}`,
+        `/${dummyPreviewURL}`
       );
     });
 
@@ -61,7 +66,7 @@ describe("Testing AudioPlayer component", () => {
           currentTrackURL={dummyPreviewURL}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
-        />,
+        />
       );
       const { getByTestId, queryByTestId } = screen;
 
@@ -75,13 +80,13 @@ describe("Testing AudioPlayer component", () => {
           currentTrackURL={dummyPreviewURL}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
-        />,
+        />
       );
       const { getByTestId, queryByTestId } = screen;
 
       fireEvent(
         getByTestId(playerAudioElementTestId),
-        createEvent.playing(getByTestId(playerAudioElementTestId), {}),
+        createEvent.playing(getByTestId(playerAudioElementTestId), {})
       );
 
       expect(queryByTestId(playerPlayIconTestId)).not.toBeInTheDocument();
@@ -94,13 +99,13 @@ describe("Testing AudioPlayer component", () => {
           currentTrackURL={dummyPreviewURL}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
-        />,
+        />
       );
       const { getByTestId, queryByTestId } = screen;
 
       fireEvent(
         getByTestId(playerAudioElementTestId),
-        createEvent.playing(getByTestId(playerAudioElementTestId), {}),
+        createEvent.playing(getByTestId(playerAudioElementTestId), {})
       );
 
       expect(queryByTestId(playerPlayIconTestId)).not.toBeInTheDocument();
@@ -108,7 +113,7 @@ describe("Testing AudioPlayer component", () => {
 
       fireEvent(
         getByTestId(playerAudioElementTestId),
-        createEvent.pause(getByTestId(playerAudioElementTestId), {}),
+        createEvent.pause(getByTestId(playerAudioElementTestId), {})
       );
 
       expect(queryByTestId(playerPlayIconTestId)).toBeInTheDocument();
@@ -121,25 +126,25 @@ describe("Testing AudioPlayer component", () => {
           currentTrackURL={dummyPreviewURL}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
-        />,
+        />
       );
       const { getByTestId } = screen;
 
       /**
-           * Click to play the audio player
-           * It is needed to click and also to update the component local state
-           * this is needed since neither Audio nor Video tags are full supported by JSDOM
-           */
+       * Click to play the audio player
+       * It is needed to click and also to update the component local state
+       * this is needed since neither Audio nor Video tags are full supported by JSDOM
+       */
       userEvent.click(getByTestId(playerReproduceTestId));
       fireEvent(
         getByTestId(playerAudioElementTestId),
-        createEvent.playing(getByTestId(playerAudioElementTestId), {}),
+        createEvent.playing(getByTestId(playerAudioElementTestId), {})
       );
 
       userEvent.click(getByTestId(playerReproduceTestId));
       fireEvent(
         getByTestId(playerAudioElementTestId),
-        createEvent.pause(getByTestId(playerAudioElementTestId), {}),
+        createEvent.pause(getByTestId(playerAudioElementTestId), {})
       );
 
       expect(window.HTMLMediaElement.prototype.play).toHaveBeenCalledTimes(1);
@@ -154,7 +159,7 @@ describe("Testing AudioPlayer component", () => {
           currentTrackURL={dummyPreviewURL}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
-        />,
+        />
       );
       const { getByTestId } = screen;
 
@@ -168,13 +173,74 @@ describe("Testing AudioPlayer component", () => {
           currentTrackURL={dummyPreviewURL}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
-        />,
+        />
       );
       const { getByTestId } = screen;
 
       const playerGoPreviousButton = getByTestId(playerGoPreviousButtonTestId);
 
       expect(playerGoPreviousButton.href).toContain(previousTrackPath);
+    });
+
+    it("should both buttons be enabled by default ", () => {
+      render(
+        <AudioPlayer
+          currentTrackURL={dummyPreviewURL}
+          nextTrackPath={nextTrackPath}
+          previousTrackPath={previousTrackPath}
+        />
+      );
+      const { getByTestId } = screen;
+
+      const playerGoPreviousIconEnabled = getByTestId(
+        playerPreviousIconEnabledTestId
+      );
+      const playerGoNextIconEnabled = getByTestId(playerNextIconEnabledTestId);
+
+      expect(playerGoPreviousIconEnabled).toBeInTheDocument();
+      expect(playerGoNextIconEnabled).toBeInTheDocument();
+    });
+
+    it("should disable the previous button when isPreviousButtonDisabled is true ", () => {
+      render(
+        <AudioPlayer
+          currentTrackURL={dummyPreviewURL}
+          nextTrackPath={nextTrackPath}
+          previousTrackPath={previousTrackPath}
+          isPreviousButtonDisabled={true}
+        />
+      );
+      const { getByTestId } = screen;
+
+      const playerGoPreviousIconDisabled = getByTestId(
+        playerPreviousIconDisabledTestId
+      );
+      const playerGoNextIconEnabled = getByTestId(playerNextIconEnabledTestId);
+
+      expect(playerGoPreviousIconDisabled).toBeInTheDocument();
+      expect(playerGoNextIconEnabled).toBeInTheDocument();
+    });
+
+    it("should disable the next button when isNextButtonDisabled is true ", () => {
+      render(
+        <AudioPlayer
+          currentTrackURL={dummyPreviewURL}
+          nextTrackPath={nextTrackPath}
+          previousTrackPath={previousTrackPath}
+          isNextButtonDisabled={true}
+        />
+      );
+      const { getByTestId } = screen;
+
+      const playerGoNextIconDisabled = getByTestId(
+        playerNextIconDisabledTestId
+      );
+      const playerGoPreviousIconEnabled = getByTestId(
+        playerPreviousIconEnabledTestId
+      );
+
+      expect(playerGoNextIconDisabled).toBeInTheDocument();
+      expect(playerGoPreviousIconEnabled).toBeInTheDocument();
     });
   });
 });

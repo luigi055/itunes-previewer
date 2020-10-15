@@ -4,17 +4,17 @@ import { GET_SONGS_START, GET_SONGS_SUCCESS } from "./search-songs-actions";
 const songsStateHandlers: Mapping<Function> = {
   [GET_SONGS_SUCCESS]: (
     state: SearchSongsState,
-    action: ActionPayloadRequired<SearchResult>,
+    action: ActionPayloadRequired<SearchResult>
   ) => ({ ...state, ...action.payload }),
   [GET_SONGS_START]: (
     state: SearchSongsState,
-    action: ActionPayloadRequired<string>,
+    action: ActionPayloadRequired<string>
   ) => ({ ...state, searchTerm: decodeURIComponent(action.payload) }),
 };
 
 export const reduceSongs = (
   state: SearchSongsState = initialState,
-  action: ActionStandard<SearchResult | string>,
+  action: ActionStandard<SearchResult | string>
 ) => {
   const handler = songsStateHandlers[action.type];
   const hasHandler = !!handler;

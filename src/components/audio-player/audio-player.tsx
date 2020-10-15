@@ -1,59 +1,95 @@
-import React, { FunctionComponent, MouseEvent, useRef, useState } from "react";
-import { NavigationButton } from "./audio-player-styled";
+import {
+  PlayerNext,
+  PlayerPause,
+  PlayerPlay,
+  PlayerPrevious,
+} from "components/icons";
+import { ScreenReaderOnly } from "components/screen-readers-helpers";
+import React, {
+  FunctionComponent,
+  HTMLAttributes,
+  MouseEvent,
+  useRef,
+  useState,
+} from "react";
+import { ControlButtons, PlayerButton } from "./audio-player-styled";
 
-const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
-  {
-    currentTrackURL,
-    nextTrackPath,
-    previousTrackPath,
-    isNextButtonDisabled,
-    isPreviousButtonDisabled,
-  },
-) => {
+const ToggleReproduceButton: FunctionComponent<{ isPlaying: boolean }> = ({
+  isPlaying,
+}) =>
+  isPlaying ? (
+    <>
+      <PlayerPause data-testid="player-pause-icon" />
+      <ScreenReaderOnly>Pause</ScreenReaderOnly>
+    </>
+  ) : (
+    <>
+      <PlayerPlay data-testid="player-play-icon" />
+      <ScreenReaderOnly>Play</ScreenReaderOnly>
+    </>
+  );
+
+const AudioPlayer: FunctionComponent<
+  AudioPlayerProps & HTMLAttributes<HTMLDivElement>
+> = ({
+  currentTrackURL,
+  nextTrackPath,
+  previousTrackPath,
+  isNextButtonDisabled = false,
+  isPreviousButtonDisabled = false,
+  ...props
+}) => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleClickReproduceButton = async (
+    event: MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+    isPlaying === true
+      ? await audioPlayerRef.current?.pause()
+      : await audioPlayerRef.current?.play();
+  };
+
+  const toggleIsPlaying = () => setIsPlaying(!isPlaying);
+
   return (
-    <div>
-      <NavigationButton
-        href={previousTrackPath}
-        data-testid="player-go-previous-button"
-        isDisabled={isPreviousButtonDisabled}
-      >
-        go Previous
-      </NavigationButton>
-      <button
-        data-testid="player-reproduce-button"
-        onClick={async (event: MouseEvent<HTMLButtonElement>) => {
-          event.preventDefault();
-          (isPlaying === true)
-            ? await audioPlayerRef.current?.pause()
-            : await audioPlayerRef.current?.play();
-        }}
-      >
-        {isPlaying
-          ? <i data-testid="player-pause-icon">Pause</i>
-          : <i data-testid="player-play-icon">Play</i>}
-      </button>
-      <NavigationButton
-        href={nextTrackPath}
-        data-testid="player-go-next-button"
-        isDisabled={isNextButtonDisabled}
-      >
-        go next
-      </NavigationButton>
-      <h1>is playing? {String(isPlaying)}</h1>
+    <>
+      <ControlButtons {...props}>
+        <PlayerButton
+          href={previousTrackPath}
+          data-testid="player-go-previous-button"
+          isDisabled={isPreviousButtonDisabled}
+        >
+          <PlayerPrevious isDisabled={isPreviousButtonDisabled} />
+          <ScreenReaderOnly>go Previous</ScreenReaderOnly>
+        </PlayerButton>
+
+        <PlayerButton
+          as="button"
+          data-testid="player-reproduce-button"
+          onClick={handleClickReproduceButton}
+        >
+          <ToggleReproduceButton isPlaying={isPlaying} />
+        </PlayerButton>
+
+        <PlayerButton
+          href={nextTrackPath}
+          data-testid="player-go-next-button"
+          isDisabled={isNextButtonDisabled}
+        >
+          <PlayerNext isDisabled={isNextButtonDisabled} />
+          <ScreenReaderOnly>go next</ScreenReaderOnly>
+        </PlayerButton>
+      </ControlButtons>
       {currentTrackURL && (
         <audio
           data-testid="player-audio-element"
           controls
           hidden
           ref={audioPlayerRef}
-          onPause={() => {
-            setIsPlaying(false);
-          }}
-          onPlaying={() => {
-            setIsPlaying(true);
-          }}
+          onPause={toggleIsPlaying}
+          onPlaying={toggleIsPlaying}
         >
           <source
             data-testid="player-source"
@@ -62,9 +98,8 @@ const AudioPlayer: FunctionComponent<AudioPlayerProps> = (
           />
         </audio>
       )}
-    </div>
+    </>
   );
 };
-
 
 export default AudioPlayer;

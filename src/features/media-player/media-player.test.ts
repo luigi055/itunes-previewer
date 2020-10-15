@@ -8,10 +8,7 @@ import {
 } from "./media-player-selectors";
 import { fetchTrackData } from "./media-player-actions";
 import { Store } from "redux";
-import {
-  GET_SONGS_SUCCESS,
-  selectSearchResult,
-} from "features/search-songs";
+import { GET_SONGS_SUCCESS, selectSearchResult } from "features/search-songs";
 import { setStore, storeInitialState } from "services/application/redux";
 import {
   dummySearchData,
@@ -30,33 +27,33 @@ describe("Testing search songs feature", () => {
   });
 
   it("should update the currentTrack Object ", async () => {
-    const track = new Track(2)
+    const track = new Track(2);
     store.dispatch(fetchTrackData(track.getTrackNumber()));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
     expect(selectCurrentTrack(store.getState())).toEqual(
-      dummySearchData.results[1],
+      dummySearchData.results[1]
     );
   });
 
   it("should update next and previous paths ", async () => {
-    const track = new Track(2)
+    const track = new Track(2);
     store.dispatch(fetchTrackData(track.getTrackNumber()));
     store.dispatch(searchSongsSuccess(dummySearchData));
 
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
     const mediaPlayerLinkGenerator = new MediaPlayerLinksGenerator(
-      selectSearchResult(store.getState()),
+      selectSearchResult(store.getState())
     );
 
     expect(selectNextTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generateNextTrackURI(track),
+      mediaPlayerLinkGenerator.generateNextTrackURI(track)
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generatePreviousTrackURI(track),
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(track)
     );
   });
 
@@ -68,18 +65,18 @@ describe("Testing search songs feature", () => {
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
     const mediaPlayerLinkGenerator = new MediaPlayerLinksGenerator(
-      selectSearchResult(store.getState()),
+      selectSearchResult(store.getState())
     );
 
     expect(selectCurrentTrack(store.getState())).toEqual(
-      dummySearchData.results[0],
+      dummySearchData.results[0]
     );
 
     expect(selectNextTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generateNextTrackURI(track),
+      mediaPlayerLinkGenerator.generateNextTrackURI(track)
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generatePreviousTrackURI(track),
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(track)
     );
   });
   it("should isPreviousButtonDisabled true when is the first element ", async () => {
@@ -90,7 +87,7 @@ describe("Testing search songs feature", () => {
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
     expect(selectCurrentTrack(store.getState())).toEqual(
-      dummySearchData.results[0],
+      dummySearchData.results[0]
     );
 
     expect(selectIsPreviousButtonDisabled(store.getState())).toBe(true);
@@ -105,7 +102,7 @@ describe("Testing search songs feature", () => {
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
     expect(selectCurrentTrack(store.getState())).toEqual(
-      dummySearchData.results[9],
+      dummySearchData.results[9]
     );
 
     expect(selectIsNextButtonDisabled(store.getState())).toBe(true);
@@ -120,18 +117,18 @@ describe("Testing search songs feature", () => {
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
     const mediaPlayerLinkGenerator = new MediaPlayerLinksGenerator(
-      selectSearchResult(store.getState()),
+      selectSearchResult(store.getState())
     );
 
     expect(selectCurrentTrack(store.getState())).toEqual(
-      dummySearchData.results[9],
+      dummySearchData.results[9]
     );
 
     expect(selectNextTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generateNextTrackURI(track),
+      mediaPlayerLinkGenerator.generateNextTrackURI(track)
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
-      mediaPlayerLinkGenerator.generatePreviousTrackURI(track),
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(track)
     );
   });
 });

@@ -6,6 +6,7 @@ import DomainHeader from "features/domain-header";
 import { GlobalStyles, defaultTheme } from "styles";
 import ClientRouter from "./client-router";
 import { setStore } from "services/application/redux";
+import { MainLayout } from "components";
 
 function App() {
   return (
@@ -13,8 +14,10 @@ function App() {
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />
         <Router>
-          <DomainHeader />
-          <ClientRouter />
+          <MainLayout>
+            <DomainHeader />
+            <ClientRouter />
+          </MainLayout>
         </Router>
       </ThemeProvider>
     </Provider>

@@ -4,9 +4,7 @@ import { render, screen } from "@testing-library/react";
 import Search from "./search";
 import { ConnectedComponent, Random } from "test-utils";
 import { setStore } from "services/application/redux";
-import {
-  dummySearchData,
-} from "services/externals/itunes-api/mock";
+import { dummySearchData } from "services/externals/itunes-api/mock";
 import { triggeredActions } from "test-utils/triggered-actions";
 import { Store } from "redux";
 
@@ -29,7 +27,7 @@ describe("Testing the search page", () => {
     render(
       <ConnectedComponent>
         <Search />
-      </ConnectedComponent>,
+      </ConnectedComponent>
     );
 
     const { getByTestId } = screen;
@@ -48,12 +46,10 @@ describe("Testing the search page", () => {
 
     beforeEach(() => {
       randomSearch = Random.getString();
-      store = setStore(
-        {
-          searchResult: { ...dummySearchData, searchTerm: randomSearch },
-          isLoading: false,
-        },
-      );
+      store = setStore({
+        searchResult: { ...dummySearchData, searchTerm: randomSearch },
+        isLoading: false,
+      });
       history = createMemoryHistory();
       triggeredActions.clear();
     });
@@ -62,14 +58,14 @@ describe("Testing the search page", () => {
       render(
         <ConnectedComponent store={store} history={history}>
           <Search />
-        </ConnectedComponent>,
+        </ConnectedComponent>
       );
       const { getByTestId } = screen;
 
       const searchTermComponent = getByTestId("search-term");
 
       expect(searchTermComponent.textContent).toBe(
-        `Searching "${randomSearch}"`,
+        `Searching "${randomSearch}"`
       );
     });
 
@@ -77,7 +73,7 @@ describe("Testing the search page", () => {
       render(
         <ConnectedComponent store={store} history={history}>
           <Search />
-        </ConnectedComponent>,
+        </ConnectedComponent>
       );
       const { getByText } = screen;
 
@@ -93,7 +89,7 @@ describe("Testing the search page", () => {
       render(
         <ConnectedComponent store={store} history={history}>
           <Search />
-        </ConnectedComponent>,
+        </ConnectedComponent>
       );
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
@@ -105,7 +101,7 @@ describe("Testing the search page", () => {
       render(
         <ConnectedComponent store={store} history={history}>
           <Search />
-        </ConnectedComponent>,
+        </ConnectedComponent>
       );
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;

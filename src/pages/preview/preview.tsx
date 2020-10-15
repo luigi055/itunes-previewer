@@ -1,4 +1,4 @@
-import { AudioPlayer, Cover } from "components";
+import { AudioPlayer, Cover, SocialShare } from "components";
 import Track from "domain/track";
 import { fetchTrackData } from "features/media-player";
 import {
@@ -11,6 +11,7 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Player } from "./preview.styled";
 
 interface PreviewURIParams {
   trackNumber?: string;
@@ -19,9 +20,9 @@ interface PreviewURIParams {
 
 const Preview = () => {
   const { trackNumber } = useParams() as PreviewURIParams;
-  const castedTrackNumber = trackNumber as string;
+  const { href } = window.location;
   const trackIndex = parseInt(
-    castedTrackNumber.slice(castedTrackNumber.indexOf("-") + 1),
+    trackNumber!.slice(trackNumber!.indexOf("-") + 1)
   );
   const track = new Track(trackIndex);
 
@@ -37,16 +38,24 @@ const Preview = () => {
   }, [dispatch, track]);
 
   return (
-    <div>
+    <>
       <Cover currentTrack={currentTrack} />
-      <AudioPlayer
-        currentTrackURL={currentTrack.previewUrl}
-        nextTrackPath={nextTrackPath}
-        previousTrackPath={previousTrackPath}
-        isNextButtonDisabled={isNextButtonDisabled}
-        isPreviousButtonDisabled={isPreviousButtonDisabled}
-      />
-    </div>
+      <Player>
+        <AudioPlayer
+          className="audio-player"
+          currentTrackURL={currentTrack.previewUrl}
+          nextTrackPath={nextTrackPath}
+          previousTrackPath={previousTrackPath}
+          isNextButtonDisabled={isNextButtonDisabled}
+          isPreviousButtonDisabled={isPreviousButtonDisabled}
+        />
+        <SocialShare
+          className="social-share"
+          data-testid="social-share-component"
+          shareURL={href}
+        />
+      </Player>
+    </>
   );
 };
 

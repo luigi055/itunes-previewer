@@ -13,16 +13,16 @@ const Search: FunctionComponent = () => {
   const artistSongs: ArtistSongs[] = useSelector(selectResults);
   const searchTerm = useSelector(selectSearchTerm);
 
-  return artistSongs.length
-    ? (
-      <>
-        <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
-          Searching "{searchTerm}"
-        </SearchTerm>
-        <PlayList searchSong={searchSong} searchTerm={searchTerm} />
-      </>
-    )
-    : <EmptyList />;
+  return artistSongs.length ? (
+    <>
+      <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
+        Searching "{searchTerm}"
+      </SearchTerm>
+      <PlayList searchSong={searchSong} searchTerm={searchTerm} />
+    </>
+  ) : (
+    <EmptyList />
+  );
 };
 
 export default Search;
