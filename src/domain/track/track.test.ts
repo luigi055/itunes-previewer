@@ -39,6 +39,13 @@ describe("Testing the Track class (track numbers are 1-based index)", () => {
       expect(new Track(500).isLastTrack()).toBe(false)
     })
 
+    it("should be the same as not having a maxLimit when set the maxLimit empty", ()=> {
+      expect(new Track(3).defineMaxLimit().getTrackNumber()).toBe(3)
+      expect(new Track(55).defineMaxLimit().getTrackNumber()).toBe(55)
+      expect(new Track(120).defineMaxLimit().getTrackNumber()).toBe(120)
+    })
+
+
     it("should return me the zero base index with the maxLimit set", ()=> {
       expect(new Track(3).defineMaxLimit(150).toZeroBaseIndex()).toBe(2)
       expect(new Track(55).defineMaxLimit(150).toZeroBaseIndex()).toBe(54)
