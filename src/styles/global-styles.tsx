@@ -3,7 +3,7 @@ import {
   GlobalStyleComponent,
   css,
 } from "styled-components";
-import { declareCssForSmallView } from "./responsive";
+import { declareCssForLargeView, declareCssForSmallView } from "./responsive";
 
 const GlobalStyles: GlobalStyleComponent<
   { theme: Theme },
@@ -23,6 +23,13 @@ ${({ theme }) =>
     ${declareCssForSmallView(css`
       :root {
         --base-size: 1rem;
+        --type-scale: 1.2;
+      }
+    `)}
+
+    ${declareCssForLargeView(css`
+      :root {
+        --base-size: 1.05rem;
         --type-scale: 1.2;
       }
     `)}

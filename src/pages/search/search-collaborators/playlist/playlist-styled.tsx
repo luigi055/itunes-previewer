@@ -1,23 +1,23 @@
 import { basePaddingX } from "components";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { declareCssForMediumView, declareCssForLargeView } from "styles/responsive";
 
 export const PlayListWrapper = styled.ul`
   list-style: none;
-  ${basePaddingX}
+
 `;
 
 const playListCSS = css`
-  /* display: grid;
-  grid-template-columns: 10% 25% 15% 15% 10% 10% 10%; */
   display: flex;
   padding: 20px 0;
+  ${basePaddingX}
 `;
 
 export const TextWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  flex-basis: 100%;
 `;
 
 export const TextRight = styled.div`
@@ -26,22 +26,71 @@ export const TextRight = styled.div`
   flex-direction: column;
   justify-content: space-between;
   min-width: 100px;
+
+  ${declareCssForMediumView(css`
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-basis: 35%;
+    padding-left: 25px;
+    
+    > span {
+      flex-basis: 100%;
+      }
+  `)}
 `;
 
 export const TextLeft = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
+  ${declareCssForMediumView(css`
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-basis: 65%;
+
+    > *:not(:first-child) {
+      padding-left: 20px;
+    }
+
+    > :first-child {
+      flex-basis:35%;
+    }
+    > :nth-child(2) {
+      flex-basis: 35%;
+    }
+    > :last-child{
+      flex-basis: 30%;
+    }
+  `)}
+
+  ${declareCssForLargeView(css`
+    > :first-child {
+      flex-basis:30%;
+    }
+    > :nth-child(2) {
+      flex-basis: 30%;
+    }
+    > :last-child{
+      flex-basis: 40%;
+    }
+  `)}
 `;
 
 export const PlayListRow = styled.li`
   ${playListCSS}
+
   color: ${({ theme }) => theme.onBackgroundColor};
 `;
 
 export const PlayListThumbNail = styled.img`
   align-self: center;
   margin-right: 10px;
+
+  ${declareCssForMediumView(css`
+    margin-right: 20px;
+  `)}
 `;
 
 export const PlayListLink = styled(Link)`
@@ -66,7 +115,6 @@ const listElement = css<{ highlight?: boolean }>`
     highlight ? theme.primaryColor : "inherit"};
   display: flex;
   font-family: ${({ theme }) => theme.fontFamily};
-  font-size: 1rem;
 `;
 
 export const PlayListElement = styled.span<{ highlight?: boolean }>`
