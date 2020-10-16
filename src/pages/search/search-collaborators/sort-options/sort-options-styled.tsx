@@ -1,9 +1,14 @@
 import { basePaddingX } from "components";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import {declareCssForLargeView} from "styles/responsive";
 
 export const SortOptionLabel = styled.label`
   ${basePaddingX}
   position: relative;
+
+  ${declareCssForLargeView(css`
+    display: none;
+  `)}
 
   :after {
     -moz-transform: rotate(90deg);

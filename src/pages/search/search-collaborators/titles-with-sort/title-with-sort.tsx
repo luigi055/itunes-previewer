@@ -4,8 +4,8 @@ import React, { FunctionComponent } from "react";
 import {
   PlayListHeadElement,
   PlayListHead,
-  PlayListWrapper,
 } from "../playlist/playlist-styled";
+import { TitleWithSortWrapper } from "./title-with-sort-styled";
 
 const TitleWithSort: FunctionComponent<{ onOptionChange: Function }> = ({
   onOptionChange,
@@ -16,7 +16,7 @@ const TitleWithSort: FunctionComponent<{ onOptionChange: Function }> = ({
   const { sortByDuration, sortByGenre, sortByPrice } = queryStringSortOptions;
 
   return (
-    <PlayListWrapper>
+    <TitleWithSortWrapper>
       <PlayListHead>
         <span></span>
         <PlayListHeadElement as="strong">Song</PlayListHeadElement>
@@ -47,7 +47,7 @@ const TitleWithSort: FunctionComponent<{ onOptionChange: Function }> = ({
           <ScreenReaderOnly>sort by</ScreenReaderOnly> Price
         </PlayListHeadElement>
       </PlayListHead>
-    </PlayListWrapper>
+    </TitleWithSortWrapper>
   );
 };
 
