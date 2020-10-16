@@ -11,25 +11,6 @@ import DomainHeader from "features/domain-header";
 import { basePaths, sortQueryStringOptions } from "application/routes-config";
 import { useHistory, useLocation } from "react-router-dom";
 import { updateSortedBy } from "features/search-songs";
-import { sortObjectsByPropertyAscending } from "utils/sort-utils";
-
-export const getSortRules = (
-  artistSongs: ArtistSongs[]
-): Mapping<ArtistSongs[]> => ({
-  [sortQueryStringOptions.unsorted]: artistSongs,
-  [sortQueryStringOptions.sortByGenre]: sortObjectsByPropertyAscending(
-    artistSongs,
-    "primaryGenreName"
-  ),
-  [sortQueryStringOptions.sortByPrice]: sortObjectsByPropertyAscending(
-    artistSongs,
-    "trackPrice"
-  ),
-  [sortQueryStringOptions.sortByDuration]: sortObjectsByPropertyAscending(
-    artistSongs,
-    "trackTimeMillis"
-  ),
-});
 
 const Search: FunctionComponent = () => {
   const searchSong = useSelector(selectSearchResult);
@@ -44,6 +25,9 @@ const Search: FunctionComponent = () => {
       <DomainHeader />
       {artistSongs.length ? (
         <>
+          <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
+            Searching "{searchTerm}"
+          </SearchTerm>
           <label htmlFor="sort-options">
             <select
               defaultValue={query.slice(1) || sortQueryStringOptions.unsorted}
@@ -61,9 +45,7 @@ const Search: FunctionComponent = () => {
               <option value={sortQueryStringOptions.sortByDuration}>Sort by Duration</option>
             </select>
           </label>
-          <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
-            Searching "{searchTerm}"
-          </SearchTerm>
+   
           <PlayList searchSong={searchSong} />
         </>
       ) : (

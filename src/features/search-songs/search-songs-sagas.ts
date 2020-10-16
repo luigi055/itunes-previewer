@@ -9,7 +9,7 @@ import {
 import { ITunesClient } from "services/externals/itunes-api";
 import { startLoading, stopLoading } from "features/loading";
 import { selectResults, selectSortedBy } from "./search-songs-selectors";
-import { getSortRules } from "pages/search/search";
+import { getSortRules } from "./search-songs-collaborators";
 
 function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
   const { payload } = searchTerm;
