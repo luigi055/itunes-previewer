@@ -6,13 +6,15 @@ import { startLoading, stopLoading } from "features/loading";
 
 function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
   const { payload } = searchTerm;
-  if (payload === "") return;
 
   try {
     yield put(startLoading());
-    const response: SearchResult = yield call(ITunesClient.search, payload);
-
-    yield put(searchSongsSuccess(response));
+    if (payload === "") {
+      yield put(searchSongsSuccess({ resultCount: 0, results: [] }));
+    } else {
+      const response: SearchResult = yield call(ITunesClient.search, payload);
+      yield put(searchSongsSuccess(response));
+    }
   } catch (error) {
     console.error("implement error case");
   } finally {

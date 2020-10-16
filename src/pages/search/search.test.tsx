@@ -2,11 +2,12 @@ import React from "react";
 import { createMemoryHistory } from "history";
 import { render, screen } from "@testing-library/react";
 import Search from "./search";
-import { ConnectedComponent, Random } from "test-utils";
+import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
 import { Store } from "redux";
 import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
+import routesConfig, { basePaths } from "application/routes-config";
 
 const playlistRowTestId = "playlist-row";
 const magnifyingGlassIconTestId = "magnifying-glass-icon";
@@ -54,12 +55,19 @@ describe("Testing the search page", () => {
       history = createMemoryHistory();
     });
 
-    it("should show all the head labels in the document", () => {
+    beforeEach(() => {
       render(
-        <ConnectedComponent store={store} history={history}>
+        <ConnectedMemoryRouter
+          store={store}
+          initialURLPath={routesConfig.SEARCH}
+          route={`${basePaths.SEARCH}/${Random.getString()}`}
+        >
           <Search />
-        </ConnectedComponent>
+        </ConnectedMemoryRouter>
       );
+    });
+
+    it("should show all the head labels in the document", () => {
       const { getByText } = screen;
 
       expect(getByText(playListHeadings.SONG)).toBeInTheDocument();
@@ -71,11 +79,6 @@ describe("Testing the search page", () => {
     });
 
     it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
-      render(
-        <ConnectedComponent store={store} history={history}>
-          <Search />
-        </ConnectedComponent>
-      );
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 
@@ -83,11 +86,6 @@ describe("Testing the search page", () => {
     });
 
     it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
-      render(
-        <ConnectedComponent store={store} history={history}>
-          <Search />
-        </ConnectedComponent>
-      );
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 

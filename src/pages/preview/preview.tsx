@@ -14,13 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Player } from "./preview.styled";
 
-interface PreviewURIParams {
-  trackNumber?: string;
-  trackName?: string;
-}
-
 const Preview = () => {
-  const { trackNumber } = useParams() as PreviewURIParams;
+  const { trackNumber } = useParams() as DomainURIParams;
   const { href } = window.location;
   const trackIndex = parseInt(
     trackNumber!.slice(trackNumber!.indexOf("-") + 1)
