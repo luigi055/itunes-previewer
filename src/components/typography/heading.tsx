@@ -12,7 +12,7 @@ interface HeadingProps {
 
 export const Heading = styled("h1")<HeadingProps>`
   font-weight: ${({ isFontWeightNormal }) =>
-    isFontWeightNormal ? "normal" : "bold"};
+    isFontWeightNormal ? "200" : "400"};
   ${textStyles}
   line-height: 1.13;
   color: ${({ theme }) => theme.onPrimaryColor};

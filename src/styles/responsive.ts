@@ -9,14 +9,14 @@ type ThemeInterpolation =
   | FlattenSimpleInterpolation
   | Interpolation<ThemeProps<Theme>>;
 
-  export const declareCssForSmallView = (
-    cssForLargeView: ThemeInterpolation
-  ) => css`
-    @media screen and (min-width: ${({ theme }) =>
-        `${theme.smallBreakPoint}${theme.breakPointUnit}`}) {
-      ${cssForLargeView}
-    }
-  `;
+export const declareCssForSmallView = (
+  cssForLargeView: ThemeInterpolation
+) => css`
+  @media screen and (min-width: ${({ theme }) =>
+      `${theme.smallBreakPoint}${theme.breakPointUnit}`}) {
+    ${cssForLargeView}
+  }
+`;
 
 export const declareCssForMediumView = (
   cssForLargeView: ThemeInterpolation

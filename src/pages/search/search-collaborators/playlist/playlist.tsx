@@ -36,7 +36,7 @@ const renderSongs = (searchSongs: SearchSongsState) => {
 
         <TextWrapper>
           <TextLeft>
-            <PlayListElement highlight title={song.trackName} >
+            <PlayListElement highlight title={song.trackName}>
               <Truncate>
                 <ScreenReaderOnly>song name:</ScreenReaderOnly>
                 {song.trackName}

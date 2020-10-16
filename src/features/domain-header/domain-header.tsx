@@ -21,7 +21,7 @@ const DomainHeader: FunctionComponent = () => {
 
   return (
     <Header>
-      <DesignH1 isFontWeightNormal data-testid="application-heading">
+      <DesignH1 data-testid="application-heading">
         CornerJob Music Player
       </DesignH1>
       <SearchInput
