@@ -8,7 +8,7 @@ import { Store } from "redux";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import Track from "domain/track";
 import routesConfig, { basePaths } from "application/routes-config";
-import { SortEnum } from "pages/search/search";
+import { sortEnum } from "pages/search/search";
 
 const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";
 const playerPreviousIconDisabledTestId = "player-previous-icon-disabled";
@@ -26,7 +26,7 @@ describe("Testing the Preview Page", () => {
     ...dummySearchData,
     searchTerm: "",
     sortedTracks: dummySearchData.results,
-    sortedBy: SortEnum.unsorted,
+    sortedBy: sortEnum.unsorted,
   });
 
   const generateDummyURLBasedOnTracks = (track: ITrack) =>

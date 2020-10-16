@@ -21,7 +21,7 @@ const renderSongs = (searchSongs: SearchSongsState) => {
     mediaPlayerLinksGenerator.generateURIFromZeroBasedPosition(arrayIndex);
   return searchSongs.sortedTracks.map((song, index) => (
     <PlayListLink
-    as={Link}
+      as={Link}
       key={`${song.collectionName}${song.trackName}${song.trackId}`}
       to={getURLPath(index)}
     >

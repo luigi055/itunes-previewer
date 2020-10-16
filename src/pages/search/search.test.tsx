@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Search, { SortEnum } from "./search";
+import Search, { sortEnum } from "./search";
 import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
@@ -49,7 +49,7 @@ describe("Testing the search page", () => {
         searchResult: {
           ...dummySearchData,
           searchTerm: randomSearch,
-          sortedBy: SortEnum.unsorted,
+          sortedBy: sortEnum.unsorted,
           sortedTracks: dummySearchData.results,
         },
         isLoading: false,

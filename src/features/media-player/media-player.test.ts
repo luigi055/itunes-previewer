@@ -16,14 +16,14 @@ import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import Track from "domain/track";
-import { SortEnum } from "pages/search/search";
+import { sortEnum } from "pages/search/search";
 
 describe("Testing search songs feature", () => {
   let store: Store;
 
   beforeEach(() => {
     store = setStore();
-    store.dispatch(updateSortedBy(SortEnum.unsorted));
+    store.dispatch(updateSortedBy(sortEnum.unsorted));
     store.dispatch(searchSongsSuccess(dummySearchData));
   });
 

@@ -11,11 +11,9 @@ import DomainHeader from "features/domain-header";
 import { basePaths } from "application/routes-config";
 import { useHistory, useLocation } from "react-router-dom";
 import { updateSortedBy } from "features/search-songs";
+import { sortObjectsByPropertyAscending } from "utils/sort-utils";
 
-const sortByObjectProperty = (array: any[], property: string) =>
-  array.slice().sort((a, b) => (a[property] > b[property] ? 1 : -1));
-
-export const SortEnum = {
+export const sortEnum = {
   unsorted: "sort-by=unsorted",
   sortByGenre: "sort-by=genre",
   sortByPrice: "sort-by=price",
@@ -25,10 +23,16 @@ export const SortEnum = {
 export const getSortRules = (
   artistSongs: ArtistSongs[]
 ): Mapping<ArtistSongs[]> => ({
-  [SortEnum.unsorted]: artistSongs,
-  [SortEnum.sortByGenre]: sortByObjectProperty(artistSongs, "primaryGenreName"),
-  [SortEnum.sortByPrice]: sortByObjectProperty(artistSongs, "trackPrice"),
-  [SortEnum.sortByDuration]: sortByObjectProperty(
+  [sortEnum.unsorted]: artistSongs,
+  [sortEnum.sortByGenre]: sortObjectsByPropertyAscending(
+    artistSongs,
+    "primaryGenreName"
+  ),
+  [sortEnum.sortByPrice]: sortObjectsByPropertyAscending(
+    artistSongs,
+    "trackPrice"
+  ),
+  [sortEnum.sortByDuration]: sortObjectsByPropertyAscending(
     artistSongs,
     "trackTimeMillis"
   ),
@@ -49,7 +53,7 @@ const Search: FunctionComponent = () => {
         <>
           <label htmlFor="sort-options">
             <select
-              defaultValue={query.slice(1) || SortEnum.unsorted}
+              defaultValue={query.slice(1) || sortEnum.unsorted}
               id="sort-options"
               onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                 history.replace(
@@ -58,10 +62,10 @@ const Search: FunctionComponent = () => {
                 dispatch(updateSortedBy(event.currentTarget.value));
               }}
             >
-              <option value={SortEnum.unsorted}>unsorted</option>
-              <option value={SortEnum.sortByGenre}>Sort by Genre</option>
-              <option value={SortEnum.sortByPrice}>Sort by price</option>
-              <option value={SortEnum.sortByDuration}>Sort by Duration</option>
+              <option value={sortEnum.unsorted}>unsorted</option>
+              <option value={sortEnum.sortByGenre}>Sort by Genre</option>
+              <option value={sortEnum.sortByPrice}>Sort by price</option>
+              <option value={sortEnum.sortByDuration}>Sort by Duration</option>
             </select>
           </label>
           <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
