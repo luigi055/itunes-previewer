@@ -13,7 +13,7 @@ const Search: FunctionComponent = () => {
   const searchSong = useSelector(selectSearchResult);
   const artistSongs: ArtistSongs[] = useSelector(selectResults);
   const searchTerm = useSelector(selectSearchTerm);
-
+  
   return (<>
   <DomainHeader />
   {artistSongs.length ? (

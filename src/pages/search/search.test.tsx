@@ -8,6 +8,8 @@ import { dummySearchData } from "services/externals/itunes-api/mock";
 import { triggeredActions } from "test-utils/triggered-actions";
 import { Store } from "redux";
 import userEvent from "@testing-library/user-event";
+import { GET_SONGS_SUCCESS, searchSongsStart } from "features/search-songs";
+import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
 
 const playlistRowTestId = "playlist-row";
 const magnifyingGlassIconTestId = "magnifying-glass-icon";
@@ -50,26 +52,9 @@ describe("Testing the search page", () => {
       store = setStore({
         searchResult: { ...dummySearchData, searchTerm: randomSearch },
         isLoading: false,
+        mediaPlayerData: mediaPlayerInitialState
       });
       history = createMemoryHistory();
-      triggeredActions.clear();
-    });
-
-    it("should show the search term correctly", () => {
-      render(
-        <ConnectedComponent store={store} history={history}>
-          <Search />
-        </ConnectedComponent>
-      );
-      const { getByTestId } = screen;
-
-      const searchTermComponent = getByTestId("search-term");
-      userEvent.type(getByTestId("search-input-element"),randomSearch );
-      userEvent.click(getByTestId("search-button"));
-
-      expect(searchTermComponent.textContent).toBe(
-        `Searching "${randomSearch}"`
-      );
     });
 
     it("should show all the head labels in the document", () => {
