@@ -5,7 +5,7 @@ export const selectResultCount = (state: State) =>
   selectSearchResult(state).resultCount;
 export const selectSearchTerm = (state: State) =>
   selectSearchResult(state).searchTerm;
-  export const selectSortedTracks = (state: State) =>
+export const selectSortedTracks = (state: State) =>
   selectSearchResult(state).sortedTracks;
 export const selectSortedBy = (state: State) =>
   selectSearchResult(state).sortedBy;

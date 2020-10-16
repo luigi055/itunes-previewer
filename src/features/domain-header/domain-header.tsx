@@ -17,7 +17,7 @@ const DomainHeader: FunctionComponent = () => {
   useEffect(() => {
     dispatch(updateSortedBy(query.slice(1)));
     dispatch(searchSongsStart(searchInfo));
-  }, [searchInfo, query,dispatch]);
+  }, [searchInfo, query, dispatch]);
 
   return (
     <Header>

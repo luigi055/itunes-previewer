@@ -11,10 +11,11 @@ class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
   constructor(private _searchResult: SearchSongsState) {}
 
   private _composeURI(trackNumber: number, arrayIndex: number = 0): string {
-    const { results, searchTerm } = this._searchResult;
-    const trackName = results[arrayIndex].trackName;
+    const { sortedTracks, searchTerm, sortedBy } = this._searchResult;
+    const trackName = sortedTracks[arrayIndex].trackName;
+    const prettifiedSortedBy = sortedBy ? `?${sortedBy}` : "";
 
-    return `${basePaths.PREVIEW}/${searchTerm}/track-${trackNumber}/${trackName}`;
+    return `${basePaths.PREVIEW}/${searchTerm}/track-${trackNumber}/${trackName}${prettifiedSortedBy}`;
   }
 
   private _toZeroBased(oneBased: number) {

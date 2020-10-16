@@ -1,5 +1,10 @@
 import initialState from "./search-songs-initial-state";
-import { GET_SONGS_START, GET_SONGS_SUCCESS, UPDATE_SORTED_BY, UPDATE_SORTED_TRACKS } from "./search-songs-actions";
+import {
+  GET_SONGS_START,
+  GET_SONGS_SUCCESS,
+  UPDATE_SORTED_BY,
+  UPDATE_SORTED_TRACKS,
+} from "./search-songs-actions";
 
 const songsStateHandlers: Mapping<Function> = {
   [GET_SONGS_SUCCESS]: (

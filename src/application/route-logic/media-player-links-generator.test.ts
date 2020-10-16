@@ -4,6 +4,7 @@ import MediaPlayerLinksGenerator, {
   IMediaPlayerLinksGenerator,
 } from "./media-player-links-generator";
 import Track from "domain/track";
+import { SortEnum } from "pages/search/search";
 
 describe("testing MediaPlayerLinkGenerator class", () => {
   let randomSearch: string;
@@ -14,6 +15,8 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     mediaPlayerLinks = new MediaPlayerLinksGenerator({
       ...dummySearchData,
       searchTerm: randomSearch,
+      sortedTracks: dummySearchData.results,
+      sortedBy: SortEnum.unsorted,
     });
   });
 
@@ -21,7 +24,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generateURIFromZeroBasedPosition(0)).toBe(
-      `/preview/${randomSearch}/track-1/${dummyTrackName}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
 
@@ -29,7 +32,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[1].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(new Track(1))).toBe(
-      `/preview/${randomSearch}/track-2/${dummyTrackName}`
+      `/preview/${randomSearch}/track-2/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
 
@@ -37,7 +40,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(new Track(9))).toBe(
-      `/preview/${randomSearch}/track-10/${dummyTrackName}`
+      `/preview/${randomSearch}/track-10/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
 
@@ -45,7 +48,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(new Track(0))).toBe(
-      `/preview/${randomSearch}/track-1/${dummyTrackName}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
 
@@ -53,7 +56,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(new Track(20))).toBe(
-      `/preview/${randomSearch}/track-10/${dummyTrackName}`
+      `/preview/${randomSearch}/track-10/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
 
@@ -61,7 +64,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[3].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(5))).toBe(
-      `/preview/${randomSearch}/track-4/${dummyTrackName}`
+      `/preview/${randomSearch}/track-4/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
 
@@ -69,15 +72,15 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(-2))).toBe(
-      `/preview/${randomSearch}/track-1/${dummyTrackName}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}?${SortEnum.unsorted}`
     );
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(0))).toBe(
-      `/preview/${randomSearch}/track-1/${dummyTrackName}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}?${SortEnum.unsorted}`
     );
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(1))).toBe(
-      `/preview/${randomSearch}/track-1/${dummyTrackName}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
 
@@ -85,7 +88,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(11))).toBe(
-      `/preview/${randomSearch}/track-10/${dummyTrackName}`
+      `/preview/${randomSearch}/track-10/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
 });

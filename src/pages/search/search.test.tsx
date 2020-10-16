@@ -1,7 +1,6 @@
 import React from "react";
-import { createMemoryHistory } from "history";
 import { render, screen } from "@testing-library/react";
-import Search, {SortEnum} from "./search";
+import Search, { SortEnum } from "./search";
 import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
@@ -41,18 +40,21 @@ describe("Testing the search page", () => {
   });
 
   describe("Testing search page when there are songs", () => {
-    let history: any;
     let store: Store;
     let randomSearch: string = "";
 
     beforeEach(() => {
       randomSearch = Random.getString();
       store = setStore({
-        searchResult: { ...dummySearchData, searchTerm: randomSearch, sortedBy: SortEnum.unsorted, sortedTracks: dummySearchData.results },
+        searchResult: {
+          ...dummySearchData,
+          searchTerm: randomSearch,
+          sortedBy: SortEnum.unsorted,
+          sortedTracks: dummySearchData.results,
+        },
         isLoading: false,
         mediaPlayerData: mediaPlayerInitialState,
       });
-      history = createMemoryHistory();
     });
 
     beforeEach(() => {

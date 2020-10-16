@@ -1,6 +1,11 @@
-import { put, call, takeLatest, fork, select} from "redux-saga/effects";
+import { put, call, takeLatest, fork, select } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
-import { searchSongsSuccess, GET_SONGS_START, updateSortedTracks, GET_SONGS_SUCCESS } from "./search-songs-actions";
+import {
+  searchSongsSuccess,
+  GET_SONGS_START,
+  updateSortedTracks,
+  GET_SONGS_SUCCESS,
+} from "./search-songs-actions";
 import { ITunesClient } from "services/externals/itunes-api";
 import { startLoading, stopLoading } from "features/loading";
 import { selectResults, selectSortedBy } from "./search-songs-selectors";
@@ -24,9 +29,11 @@ function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
   }
 }
 
-function* getSortedTracks(action:ActionPayloadRequired<SearchResult>): SagaIterator {
+function* getSortedTracks(
+  action: ActionPayloadRequired<SearchResult>
+): SagaIterator {
   const sortedBy = yield select(selectSortedBy);
-  const results = yield select(selectResults)
+  const results = yield select(selectResults);
 
   const sortedTracks = getSortRules(results)[sortedBy] || results;
   yield put(updateSortedTracks(sortedTracks));
