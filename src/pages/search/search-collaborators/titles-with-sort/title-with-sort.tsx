@@ -1,10 +1,7 @@
 import { queryStringSortOptions } from "application/routes-config";
 import { ScreenReaderOnly } from "components";
 import React, { FunctionComponent } from "react";
-import {
-  PlayListHeadElement,
-  PlayListHead,
-} from "../playlist/playlist-styled";
+import { PlayListHeadElement, PlayListHead } from "../playlist/playlist-styled";
 import { TitleWithSortWrapper } from "./title-with-sort-styled";
 
 const TitleWithSort: FunctionComponent<{ onOptionChange: Function }> = ({

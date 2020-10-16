@@ -1,6 +1,6 @@
 import { basePaddingX } from "components";
 import styled, { css } from "styled-components";
-import {declareCssForLargeView} from "styles/responsive";
+import { declareCssForLargeView } from "styles/responsive";
 
 export const SortOptionLabel = styled.label`
   ${basePaddingX}
