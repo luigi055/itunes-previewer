@@ -1,5 +1,6 @@
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import React, { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 import {
   PlayListWrapper,
   PlayListElement,
@@ -20,8 +21,9 @@ const renderSongs = (searchSongs: SearchSongsState) => {
     mediaPlayerLinksGenerator.generateURIFromZeroBasedPosition(arrayIndex);
   return searchSongs.sortedTracks.map((song, index) => (
     <PlayListLink
+    as={Link}
       key={`${song.collectionName}${song.trackName}${song.trackId}`}
-      href={getURLPath(index)}
+      to={getURLPath(index)}
     >
       <PlayListRow data-testid="playlist-row">
         <img src={song.artworkUrl60} alt={`${song.collectionName} thumbnail`} />

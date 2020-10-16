@@ -91,4 +91,20 @@ describe("testing MediaPlayerLinkGenerator class", () => {
       `/preview/${randomSearch}/track-10/${dummyTrackName}?${SortEnum.unsorted}`
     );
   });
+
+  it("should not add the query string when the sortedBy property is empty", () => {
+    const randomSearch = Random.getString();
+    const mediaPlayerLinks = new MediaPlayerLinksGenerator({
+      ...dummySearchData,
+      searchTerm: randomSearch,
+      sortedTracks: dummySearchData.results,
+      sortedBy: "",
+    });
+
+    const dummyTrackName = dummySearchData.results[9].trackName;
+
+    expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(11))).toBe(
+      `/preview/${randomSearch}/track-10/${dummyTrackName}`
+    );
+  })
 });

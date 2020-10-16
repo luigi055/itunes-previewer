@@ -29,9 +29,7 @@ function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
   }
 }
 
-function* getSortedTracks(
-  action: ActionPayloadRequired<SearchResult>
-): SagaIterator {
+function* getSortedTracks(): SagaIterator {
   const sortedBy = yield select(selectSortedBy);
   const results = yield select(selectResults);
 
