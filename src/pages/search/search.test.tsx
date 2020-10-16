@@ -1,7 +1,7 @@
 import React from "react";
 import { createMemoryHistory } from "history";
 import { render, screen } from "@testing-library/react";
-import Search from "./search";
+import Search, {SortEnum} from "./search";
 import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
@@ -48,7 +48,7 @@ describe("Testing the search page", () => {
     beforeEach(() => {
       randomSearch = Random.getString();
       store = setStore({
-        searchResult: { ...dummySearchData, searchTerm: randomSearch },
+        searchResult: { ...dummySearchData, searchTerm: randomSearch, sortedBy: SortEnum.unsorted, sortedTracks: dummySearchData.results },
         isLoading: false,
         mediaPlayerData: mediaPlayerInitialState,
       });
@@ -60,7 +60,7 @@ describe("Testing the search page", () => {
         <ConnectedMemoryRouter
           store={store}
           initialURLPath={routesConfig.SEARCH}
-          route={`${basePaths.SEARCH}/${Random.getString()}`}
+          route={`${basePaths.SEARCH}/${Random.getString()}?sort-by=unsorted`}
         >
           <Search />
         </ConnectedMemoryRouter>

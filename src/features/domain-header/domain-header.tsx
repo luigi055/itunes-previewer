@@ -1,21 +1,23 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { Header, SearchInput } from "components";
 import { DesignH1 } from "components/typography";
 import { basePaths } from "application/routes-config";
 import { useDispatch } from "react-redux";
-import { searchSongsStart } from "features/search-songs";
+import { searchSongsStart, updateSortedBy } from "features/search-songs";
 
 const DomainHeader: FunctionComponent = () => {
   const history = useHistory();
   const { artistName } = useParams() as DomainURIParams;
   const searchInfo = artistName || "";
+  const query = useLocation().search;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(updateSortedBy(query.slice(1)));
     dispatch(searchSongsStart(searchInfo));
-  }, [searchInfo, dispatch]);
+  }, [searchInfo, query,dispatch]);
 
   return (
     <Header>

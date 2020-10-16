@@ -14,11 +14,11 @@ const formatToMinutes = (milliseconds: number): string =>
 const formatPrice = (price: number, currency: string): string =>
   price === -1 ? "Free" : `${price} ${currency}`;
 
-const renderSongs = (searchSongs: SearchSongsState, searchTerm: string) => {
+const renderSongs = (searchSongs: SearchSongsState) => {
   const mediaPlayerLinksGenerator = new MediaPlayerLinksGenerator(searchSongs);
   const getURLPath = (arrayIndex: number) =>
     mediaPlayerLinksGenerator.generateURIFromZeroBasedPosition(arrayIndex);
-  return searchSongs.results.map((song, index) => (
+  return searchSongs.sortedTracks.map((song, index) => (
     <PlayListLink
       key={`${song.collectionName}${song.trackName}${song.trackId}`}
       href={getURLPath(index)}
@@ -44,8 +44,7 @@ const renderSongs = (searchSongs: SearchSongsState, searchTerm: string) => {
 
 const PlayList: FunctionComponent<{
   searchSong: SearchSongsState;
-  searchTerm: string;
-}> = ({ searchSong, searchTerm }) => {
+}> = ({ searchSong }) => {
   return (
     <PlayListWrapper>
       <PlayListHead>
@@ -63,7 +62,7 @@ const PlayList: FunctionComponent<{
           Price
         </PlayListElement>
       </PlayListHead>
-      {renderSongs(searchSong, searchTerm)}
+      {renderSongs(searchSong)}
     </PlayListWrapper>
   );
 };

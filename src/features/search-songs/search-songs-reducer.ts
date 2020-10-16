@@ -1,5 +1,5 @@
 import initialState from "./search-songs-initial-state";
-import { GET_SONGS_START, GET_SONGS_SUCCESS } from "./search-songs-actions";
+import { GET_SONGS_START, GET_SONGS_SUCCESS, UPDATE_SORTED_BY, UPDATE_SORTED_TRACKS } from "./search-songs-actions";
 
 const songsStateHandlers: Mapping<Function> = {
   [GET_SONGS_SUCCESS]: (
@@ -10,6 +10,14 @@ const songsStateHandlers: Mapping<Function> = {
     state: SearchSongsState,
     action: ActionPayloadRequired<string>
   ) => ({ ...state, searchTerm: decodeURIComponent(action.payload) }),
+  [UPDATE_SORTED_BY]: (
+    state: SearchSongsState,
+    action: ActionPayloadRequired<string>
+  ) => ({ ...state, sortedBy: decodeURIComponent(action.payload) }),
+  [UPDATE_SORTED_TRACKS]: (
+    state: SearchSongsState,
+    action: ActionPayloadRequired<ArtistSongs[]>
+  ) => ({ ...state, sortedTracks: action.payload }),
 };
 
 export const reduceSongs = (
