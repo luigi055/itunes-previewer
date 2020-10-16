@@ -43,7 +43,7 @@ export const TextRight = styled.div`
     justify-content: flex-end;
     padding-left: 25px;
 
-    > span,button {
+    > span, button {
       flex-basis: 100%;
     }
   `)}

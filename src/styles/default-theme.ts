@@ -12,7 +12,7 @@ const defaultTheme: Theme = {
   disabled: "#454749",
   disabledVariant: "#888",
   smallBreakPoint: 36,
-  mediumBreakPoint: 53,
+  mediumBreakPoint: 48,
   largeBreakPoint: 63.75,
   breakPointUnit: "rem",
 };
