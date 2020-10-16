@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { PlayListRow } from "../playlist/playlist-styled";
+import { PlayListRow } from "../../playlist-styled";
 import { declareCssForMediumView } from "styles/responsive";
 
 export const TitleWithSortWrapper = styled(PlayListRow)`

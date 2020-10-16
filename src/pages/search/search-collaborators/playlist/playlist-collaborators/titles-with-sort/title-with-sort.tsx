@@ -6,7 +6,7 @@ import {
   TextWrapper,
   TextLeft,
   TextRight,
-} from "../playlist/playlist-styled";
+} from "../../playlist-styled";
 import { TitleWithSortWrapper } from "./title-with-sort-styled";
 
 const TitleWithSort: FunctionComponent<{ onOptionChange: Function }> = ({

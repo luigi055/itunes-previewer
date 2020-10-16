@@ -2,8 +2,8 @@ import MediaPlayerLinksGenerator from "application/route-logic/media-player-link
 import { ScreenReaderOnly } from "components";
 import { Truncate } from "components/typography";
 import React, { FunctionComponent } from "react";
-import { SortOptions } from "../sort-options";
-import { TitleWithSort } from "../titles-with-sort";
+import { SortOptions } from "./playlist-collaborators/sort-options";
+import { TitleWithSort } from "./playlist-collaborators/titles-with-sort";
 import {
   PlayListWrapper,
   PlayListElement,
