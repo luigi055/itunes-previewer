@@ -2,6 +2,7 @@ import MediaPlayerLinksGenerator from "application/route-logic/media-player-link
 import { ScreenReaderOnly } from "components";
 import { Truncate } from "components/typography";
 import React, { FunctionComponent } from "react";
+import { TitleWithSort } from "../titles-with-sort";
 import {
   PlayListWrapper,
   PlayListElement,
@@ -82,8 +83,14 @@ const renderSongs = (searchSongs: SearchSongsState) => {
 
 const PlayList: FunctionComponent<{
   searchSong: SearchSongsState;
-}> = ({ searchSong }) => {
-  return <PlayListWrapper>{renderSongs(searchSong)}</PlayListWrapper>;
+  onOptionChange: Function;
+}> = ({ searchSong, onOptionChange }) => {
+  return (
+    <PlayListWrapper>
+      <TitleWithSort onOptionChange={onOptionChange} />
+      {renderSongs(searchSong)}
+    </PlayListWrapper>
+  );
 };
 
 export default PlayList;

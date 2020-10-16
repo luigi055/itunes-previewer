@@ -13,7 +13,7 @@ import { SortOptions } from "./search-collaborators/sort-options";
 import { basePaths } from "application/routes-config";
 import { updateSortedBy } from "features/search-songs";
 import { useHistory } from "react-router-dom";
-import { TitleWithSort } from "./search-collaborators/titles-with-sort";
+// import { TitleWithSort } from "./search-collaborators/titles-with-sort";
 
 const Search: FunctionComponent = () => {
   const searchSong = useSelector(selectSearchResult);
@@ -37,8 +37,10 @@ const Search: FunctionComponent = () => {
             Searching "{searchTerm}"
           </SearchTerm>
           <SortOptions value={sortedBy} onOptionChange={handleOptionChange} />
-          <TitleWithSort onOptionChange={handleOptionChange} />
-          <PlayList searchSong={searchSong} />
+          <PlayList
+            searchSong={searchSong}
+            onOptionChange={handleOptionChange}
+          />
         </>
       ) : (
         <EmptyList />

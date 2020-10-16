@@ -14,8 +14,7 @@ const playListCSS = css`
 
 const listElement = css<{ highlight?: boolean }>`
   align-items: center;
-  color: ${({ theme, highlight }) =>
-    highlight ? theme.primaryColor : "inherit"};
+
   display: flex;
   font-family: ${({ theme }) => theme.fontFamily};
 `;
@@ -44,7 +43,7 @@ export const TextRight = styled.div`
     justify-content: flex-end;
     padding-left: 25px;
 
-    > span {
+    > span,button {
       flex-basis: 100%;
     }
   `)}
@@ -60,7 +59,7 @@ export const TextLeft = styled.div`
     flex-direction: row;
     justify-content: flex-start;
 
-    > *:not(:first-child) {
+    > * {
       padding-left: 20px;
     }
 
@@ -88,19 +87,22 @@ export const TextLeft = styled.div`
   `)}
 `;
 
+export const PlayListThumbNail = styled.img`
+  align-self: center;
+  margin-right: 10px;
+
+  ${declareCssForMediumView(css`
+    margin-right: 0px;
+  `)}
+`;
 export const PlayListRow = styled.li`
   ${playListCSS}
 
   color: ${({ theme }) => theme.onBackgroundColor};
 `;
 
-export const PlayListThumbNail = styled.img`
-  align-self: center;
-  margin-right: 10px;
-
-  ${declareCssForMediumView(css`
-    margin-right: 20px;
-  `)}
+export const PlayListHead = styled.li`
+  color: #747b81;
 `;
 
 export const PlayListLink = styled(Link)`
@@ -114,16 +116,16 @@ export const PlayListLink = styled(Link)`
   }
 `;
 
-export const PlayListHead = styled.li`
-  ${playListCSS}
-  color: #747B81;
-`;
-
 export const PlayListElement = styled.span<{ highlight?: boolean }>`
   ${listElement}
+  color: ${({ theme, highlight }) =>
+    highlight ? theme.primaryColor : "inherit"};
 `;
 
 export const PlayListHeadElement = styled.span<{ highlight?: boolean }>`
   ${listElement}
   background: none;
+  color: ${({ theme, highlight }) =>
+    highlight ? theme.primaryColor : theme.disabledVariant};
+  font-size: var(--base-size);
 `;

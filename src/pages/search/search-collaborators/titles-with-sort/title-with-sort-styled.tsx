@@ -1,11 +1,13 @@
 import styled, { css } from "styled-components";
-import { PlayListWrapper } from "../playlist/playlist-styled";
+import { PlayListRow } from "../playlist/playlist-styled";
 import { declareCssForMediumView } from "styles/responsive";
 
-export const TitleWithSortWrapper = styled(PlayListWrapper)`
+export const TitleWithSortWrapper = styled(PlayListRow)`
   display: none;
 
   ${declareCssForMediumView(css`
-    display: block;
+    display: flex;
+    padding-top: 0;
+    padding-bottom: 0;
   `)}
 `;
