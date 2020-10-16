@@ -1,3 +1,4 @@
+import { basePaths } from "application/routes-config";
 export interface IMediaPlayerLinksGenerator {
   generateNextTrackURI(currentTrack: ITrack): string;
   generatePreviousTrackURI(currentTrack: ITrack): string;
@@ -13,7 +14,7 @@ class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
     const { results, searchTerm } = this._searchResult;
     const trackName = results[arrayIndex].trackName;
 
-    return `${this._baseURLPath}${trackNumber}/${trackName}?${searchTerm}`;
+    return `${basePaths.PREVIEW}/${searchTerm}/track-${trackNumber}/${trackName}`;
   }
 
   private _toZeroBased(oneBased: number) {

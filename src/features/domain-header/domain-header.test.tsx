@@ -3,7 +3,7 @@ import { createMemoryHistory } from "history";
 import { cleanup, render, screen } from "@testing-library/react";
 import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import DomainHeader from "./domain-header";
-import routesConfig, {basePaths, params} from "application/routes-config";
+import routesConfig, { basePaths } from "application/routes-config";
 import userEvent from "@testing-library/user-event";
 
 const searchInputTestId = "search-input";
@@ -36,7 +36,10 @@ describe("Testing DomainHeader Feature", () => {
 
   it("should fill the search input using the URI query string", () => {
     render(
-      <ConnectedMemoryRouter initialURLPath={routesConfig.SEARCH}>
+      <ConnectedMemoryRouter
+        initialURLPath={routesConfig.SEARCH}
+        route={`${basePaths.SEARCH}/${randomSearch}`}
+      >
         <DomainHeader />
       </ConnectedMemoryRouter>
     );
@@ -45,7 +48,7 @@ describe("Testing DomainHeader Feature", () => {
       searchInputTestId
     ).getElementsByTagName("input")[0];
 
-    expect(searchInputElement.value).toBe(`${params.artistName.slice(1,12)}`);
+    expect(searchInputElement.value).toBe(randomSearch);
   });
 
   it(`should update the artistName url param when the user submit the SearchInput component`, () => {
@@ -65,7 +68,8 @@ describe("Testing DomainHeader Feature", () => {
     userEvent.tab();
     document.activeElement.click();
 
-    expect(history.location.pathname).toBe(`${basePaths.SEARCH}/${randomSearch}`);
-
+    expect(history.location.pathname).toBe(
+      `${basePaths.SEARCH}/${randomSearch}`
+    );
   });
 });

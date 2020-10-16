@@ -40,7 +40,7 @@ const Preview = () => {
 
   return (
     <>
-    <DomainHeader />
+      <DomainHeader />
       <Cover currentTrack={currentTrack} />
       <Player>
         <AudioPlayer

@@ -21,7 +21,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generateURIFromZeroBasedPosition(0)).toBe(
-      `/preview/track-1/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}`
     );
   });
 
@@ -29,7 +29,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[1].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(new Track(1))).toBe(
-      `/preview/track-2/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-2/${dummyTrackName}`
     );
   });
 
@@ -37,7 +37,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(new Track(9))).toBe(
-      `/preview/track-10/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-10/${dummyTrackName}`
     );
   });
 
@@ -45,7 +45,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(new Track(0))).toBe(
-      `/preview/track-1/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}`
     );
   });
 
@@ -53,7 +53,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
     expect(mediaPlayerLinks.generateNextTrackURI(new Track(20))).toBe(
-      `/preview/track-10/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-10/${dummyTrackName}`
     );
   });
 
@@ -61,7 +61,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[3].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(5))).toBe(
-      `/preview/track-4/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-4/${dummyTrackName}`
     );
   });
 
@@ -69,15 +69,15 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[0].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(-2))).toBe(
-      `/preview/track-1/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}`
     );
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(0))).toBe(
-      `/preview/track-1/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}`
     );
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(1))).toBe(
-      `/preview/track-1/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-1/${dummyTrackName}`
     );
   });
 
@@ -85,7 +85,7 @@ describe("testing MediaPlayerLinkGenerator class", () => {
     const dummyTrackName = dummySearchData.results[9].trackName;
 
     expect(mediaPlayerLinks.generatePreviousTrackURI(new Track(11))).toBe(
-      `/preview/track-10/${dummyTrackName}?${randomSearch}`
+      `/preview/${randomSearch}/track-10/${dummyTrackName}`
     );
   });
 });

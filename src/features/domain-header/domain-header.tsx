@@ -8,7 +8,7 @@ import { searchSongsStart } from "features/search-songs";
 
 const DomainHeader: FunctionComponent = () => {
   const history = useHistory();
-  const {artistName} = useParams() as DomainURIParams;
+  const { artistName } = useParams() as DomainURIParams;
   const searchInfo = artistName || "";
 
   const dispatch = useDispatch();

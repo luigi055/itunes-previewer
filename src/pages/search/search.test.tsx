@@ -5,10 +5,7 @@ import Search from "./search";
 import { ConnectedComponent, Random } from "test-utils";
 import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
-import { triggeredActions } from "test-utils/triggered-actions";
 import { Store } from "redux";
-import userEvent from "@testing-library/user-event";
-import { GET_SONGS_SUCCESS, searchSongsStart } from "features/search-songs";
 import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
 
 const playlistRowTestId = "playlist-row";
@@ -52,7 +49,7 @@ describe("Testing the search page", () => {
       store = setStore({
         searchResult: { ...dummySearchData, searchTerm: randomSearch },
         isLoading: false,
-        mediaPlayerData: mediaPlayerInitialState
+        mediaPlayerData: mediaPlayerInitialState,
       });
       history = createMemoryHistory();
     });

@@ -1,4 +1,3 @@
-
 export const basePaths = {
   ROOT: "/",
   SEARCH: "/search",
@@ -12,10 +11,11 @@ export const params = {
   artistName: "/:artistName?",
 };
 
-const {trackNumber,trackName,sortBy, artistName} =params;
-const {ROOT,PREVIEW,SEARCH} = basePaths
-          export default {
-            ROOT,
-            PREVIEW: `${PREVIEW}${trackNumber}${trackName}${sortBy}`,
-            SEARCH: `${SEARCH}${artistName}${sortBy}`
-          }
+const { trackNumber, trackName, sortBy, artistName } = params;
+const { ROOT, PREVIEW, SEARCH } = basePaths;
+
+export default {
+  ROOT,
+  PREVIEW: `${PREVIEW}${artistName}${trackNumber}${trackName}${sortBy}`,
+  SEARCH: `${SEARCH}${artistName}${sortBy}`,
+};

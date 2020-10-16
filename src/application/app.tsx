@@ -14,7 +14,6 @@ function App() {
         <GlobalStyles />
         <Router>
           <MainLayout>
-            
             <ClientRouter />
           </MainLayout>
         </Router>

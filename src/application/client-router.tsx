@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Search from "pages/search";
-import routes, {basePaths} from "./routes-config";
+import routes, { basePaths } from "./routes-config";
 import Preview from "pages/preview";
 
 const ClientRouter: FunctionComponent = () => (
