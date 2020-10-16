@@ -1,12 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Search, { sortEnum } from "./search";
+import Search from "./search";
 import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
 import { Store } from "redux";
 import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
-import routesConfig, { basePaths } from "application/routes-config";
+import routesConfig, { basePaths, sortQueryStringOptions } from "application/routes-config";
 
 const playlistRowTestId = "playlist-row";
 const magnifyingGlassIconTestId = "magnifying-glass-icon";
@@ -49,7 +49,7 @@ describe("Testing the search page", () => {
         searchResult: {
           ...dummySearchData,
           searchTerm: randomSearch,
-          sortedBy: sortEnum.unsorted,
+          sortedBy: sortQueryStringOptions.unsorted,
           sortedTracks: dummySearchData.results,
         },
         isLoading: false,

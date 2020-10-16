@@ -11,6 +11,13 @@ export const params = {
   artistName: "/:artistName?",
 };
 
+export const sortQueryStringOptions = {
+  unsorted: "sort-by=unsorted",
+  sortByGenre: "sort-by=genre",
+  sortByPrice: "sort-by=price",
+  sortByDuration: "sort-by=duration",
+};
+
 const { trackNumber, trackName, sortBy, artistName } = params;
 const { ROOT, PREVIEW, SEARCH } = basePaths;
 

@@ -5,7 +5,7 @@ import { dummySearchData } from "services/externals/itunes-api/mock";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import userEvent from "@testing-library/user-event";
 import Track from "domain/track";
-import { sortEnum } from "pages/search/search";
+import { sortQueryStringOptions } from "application/routes-config";
 
 describe("Testing AudioPlayer component", () => {
   const playerReproduceTestId = "player-reproduce-button";
@@ -23,7 +23,7 @@ describe("Testing AudioPlayer component", () => {
     ...dummySearchData,
     searchTerm: "",
     sortedTracks: dummySearchData.results,
-    sortedBy: sortEnum.unsorted,
+    sortedBy: sortQueryStringOptions.unsorted,
   });
 
   beforeEach(() => {

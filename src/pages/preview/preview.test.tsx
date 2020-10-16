@@ -7,8 +7,7 @@ import { render, screen } from "@testing-library/react";
 import { Store } from "redux";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import Track from "domain/track";
-import routesConfig, { basePaths } from "application/routes-config";
-import { sortEnum } from "pages/search/search";
+import routesConfig, { basePaths, sortQueryStringOptions } from "application/routes-config";
 
 const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";
 const playerPreviousIconDisabledTestId = "player-previous-icon-disabled";
@@ -26,7 +25,7 @@ describe("Testing the Preview Page", () => {
     ...dummySearchData,
     searchTerm: "",
     sortedTracks: dummySearchData.results,
-    sortedBy: sortEnum.unsorted,
+    sortedBy: sortQueryStringOptions.unsorted,
   });
 
   const generateDummyURLBasedOnTracks = (track: ITrack) =>
