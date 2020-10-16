@@ -1,9 +1,9 @@
 import React from "react";
 import { createMemoryHistory } from "history";
 import { cleanup, render, screen } from "@testing-library/react";
-import { ConnectedComponent, Random } from "test-utils";
+import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import DomainHeader from "./domain-header";
-import routesConfig from "application/routes-config";
+import routesConfig, { basePaths } from "application/routes-config";
 import userEvent from "@testing-library/user-event";
 
 const searchInputTestId = "search-input";
@@ -35,22 +35,24 @@ describe("Testing DomainHeader Feature", () => {
   });
 
   it("should fill the search input using the URI query string", () => {
-    history.push(`${routesConfig.SEARCH}?${randomSearch}%20${randomSearch}`);
     render(
-      <ConnectedComponent history={history}>
+      <ConnectedMemoryRouter
+        initialURLPath={routesConfig.SEARCH}
+        route={`${basePaths.SEARCH}/${randomSearch}`}
+      >
         <DomainHeader />
-      </ConnectedComponent>
+      </ConnectedMemoryRouter>
     );
     const { getByTestId } = screen;
     const searchInputElement = getByTestId(
       searchInputTestId
     ).getElementsByTagName("input")[0];
 
-    expect(searchInputElement.value).toBe(`${randomSearch} ${randomSearch}`);
+    expect(searchInputElement.value).toBe(randomSearch);
   });
 
-  it(`should update the query string url when the user submit the SearchInput component`, () => {
-    history.push(routesConfig.ROOT);
+  it(`should update the artistName url param when the user submit the SearchInput component`, () => {
+    history.push(basePaths.ROOT);
     render(
       <ConnectedComponent history={history}>
         <DomainHeader />
@@ -66,7 +68,8 @@ describe("Testing DomainHeader Feature", () => {
     userEvent.tab();
     document.activeElement.click();
 
-    expect(history.location.pathname).toBe(routesConfig.SEARCH);
-    expect(history.location.search).toBe(`?${randomSearch}`);
+    expect(history.location.pathname).toBe(
+      `${basePaths.SEARCH}/${randomSearch}`
+    );
   });
 });

@@ -1,5 +1,6 @@
 import { AudioPlayer, Cover, SocialShare } from "components";
 import Track from "domain/track";
+import DomainHeader from "features/domain-header";
 import { fetchTrackData } from "features/media-player";
 import {
   selectCurrentTrack,
@@ -13,13 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Player } from "./preview.styled";
 
-interface PreviewURIParams {
-  trackNumber?: string;
-  trackName?: string;
-}
-
 const Preview = () => {
-  const { trackNumber } = useParams() as PreviewURIParams;
+  const { trackNumber } = useParams() as DomainURIParams;
   const { href } = window.location;
   const trackIndex = parseInt(
     trackNumber!.slice(trackNumber!.indexOf("-") + 1)
@@ -39,6 +35,7 @@ const Preview = () => {
 
   return (
     <>
+      <DomainHeader />
       <Cover currentTrack={currentTrack} />
       <Player>
         <AudioPlayer

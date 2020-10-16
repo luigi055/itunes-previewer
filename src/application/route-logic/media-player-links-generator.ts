@@ -1,3 +1,4 @@
+import { basePaths } from "application/routes-config";
 export interface IMediaPlayerLinksGenerator {
   generateNextTrackURI(currentTrack: ITrack): string;
   generatePreviousTrackURI(currentTrack: ITrack): string;
@@ -5,15 +6,14 @@ export interface IMediaPlayerLinksGenerator {
 }
 
 class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
-  private _baseURLPath = "/preview/track-";
-
   constructor(private _searchResult: SearchSongsState) {}
 
-  private _composeURI(trackNumber: number, arrayIndex: number = 0): string {
-    const { results, searchTerm } = this._searchResult;
-    const trackName = results[arrayIndex].trackName;
+  private _composeURI(trackNumber: number, arrayIndex: number): string {
+    const { sortedTracks, searchTerm, sortedBy } = this._searchResult;
+    const trackName = sortedTracks[arrayIndex].trackName;
+    const prettifiedSortedBy = sortedBy ? `?${sortedBy}` : "";
 
-    return `${this._baseURLPath}${trackNumber}/${trackName}?${searchTerm}`;
+    return `${basePaths.PREVIEW}/${searchTerm}/track-${trackNumber}/${trackName}${prettifiedSortedBy}`;
   }
 
   private _toZeroBased(oneBased: number) {

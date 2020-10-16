@@ -18,7 +18,8 @@ export const PlayListRow = styled.li`
   ${playListCSS}
   color: ${({ theme }) => theme.onBackgroundColor};
 
-  :hover, :focus {
+  :hover,
+  :focus {
     background: ${({ theme }) => theme.backgroundHoverColor};
   }
 `;
@@ -28,9 +29,21 @@ export const PlayListHead = styled.li`
   color: #747B81;
 `;
 
-export const PlayListElement = styled.span<{ highlight?: boolean }>`
+const listElement = css<{ highlight?: boolean }>`
   align-items: center;
   color: ${({ theme, highlight }) =>
     highlight ? theme.primaryColor : "inherit"};
   display: flex;
+  font-family: ${({ theme, highlight }) => theme.fontFamily};
+  font-size: 1rem;
+`;
+
+export const PlayListElement = styled.span<{ highlight?: boolean }>`
+  ${listElement}
+`;
+
+export const PlayListHeadElement = styled.span<{ highlight?: boolean }>`
+  ${listElement}
+  background: none;
+  font-weight: bold;
 `;

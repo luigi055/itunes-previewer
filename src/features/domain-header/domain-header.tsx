@@ -1,19 +1,23 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { Header, SearchInput } from "components";
 import { DesignH1 } from "components/typography";
-import routesConfig from "application/routes-config";
+import { basePaths } from "application/routes-config";
 import { useDispatch } from "react-redux";
-import { searchSongsStart } from "features/search-songs";
+import { searchSongsStart, updateSortedBy } from "features/search-songs";
 
 const DomainHeader: FunctionComponent = () => {
   const history = useHistory();
+  const { artistName } = useParams() as DomainURIParams;
+  const searchInfo = artistName || "";
   const query = useLocation().search;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(searchSongsStart(query.slice(1)));
-  }, [query, dispatch]);
+    dispatch(updateSortedBy(query.slice(1)));
+    dispatch(searchSongsStart(searchInfo));
+  }, [searchInfo, query, dispatch]);
 
   return (
     <Header>
@@ -22,11 +26,11 @@ const DomainHeader: FunctionComponent = () => {
       </DesignH1>
       <SearchInput
         data-testid="search-input"
-        initialValue={decodeURIComponent(query.substring(1))}
+        initialValue={decodeURIComponent(searchInfo)}
         maxWidth="380px"
         screenReaderTitle="search for your favorite music"
         handleSubmit={(value) => {
-          history.replace(`${routesConfig.SEARCH}?${value}`);
+          history.replace(`${basePaths.SEARCH}/${value}`);
         }}
       />
     </Header>

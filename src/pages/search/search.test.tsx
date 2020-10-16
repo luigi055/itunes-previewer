@@ -1,26 +1,20 @@
 import React from "react";
-import { createMemoryHistory } from "history";
 import { render, screen } from "@testing-library/react";
 import Search from "./search";
-import { ConnectedComponent, Random } from "test-utils";
+import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
-import { triggeredActions } from "test-utils/triggered-actions";
 import { Store } from "redux";
+import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
+import routesConfig, {
+  basePaths,
+  queryStringSortOptions,
+} from "application/routes-config";
 
 const playlistRowTestId = "playlist-row";
 const magnifyingGlassIconTestId = "magnifying-glass-icon";
 const emptyPlaylistHeadingTestId = "empty-playlist-heading";
 const emptyPlaylistMessage = "Use the search bar to find songs";
-
-const playListHeadings = {
-  SONG: "Song",
-  ARTIST: "Artist",
-  ALBUM: "Album",
-  DURATION: "Duration",
-  GENRE: "Genre",
-  PRICE: "Price",
-};
 
 describe("Testing the search page", () => {
   it("should show the empty songs message", () => {
@@ -40,57 +34,36 @@ describe("Testing the search page", () => {
   });
 
   describe("Testing search page when there are songs", () => {
-    let history: any;
     let store: Store;
     let randomSearch: string = "";
 
     beforeEach(() => {
       randomSearch = Random.getString();
       store = setStore({
-        searchResult: { ...dummySearchData, searchTerm: randomSearch },
+        searchResult: {
+          ...dummySearchData,
+          searchTerm: randomSearch,
+          sortedBy: queryStringSortOptions.unsorted,
+          sortedTracks: dummySearchData.results,
+        },
         isLoading: false,
+        mediaPlayerData: mediaPlayerInitialState,
       });
-      history = createMemoryHistory();
-      triggeredActions.clear();
     });
 
-    it("should show the search term correctly", () => {
+    beforeEach(() => {
       render(
-        <ConnectedComponent store={store} history={history}>
+        <ConnectedMemoryRouter
+          store={store}
+          initialURLPath={routesConfig.SEARCH}
+          route={`${basePaths.SEARCH}/${Random.getString()}?sort-by=unsorted`}
+        >
           <Search />
-        </ConnectedComponent>
+        </ConnectedMemoryRouter>
       );
-      const { getByTestId } = screen;
-
-      const searchTermComponent = getByTestId("search-term");
-
-      expect(searchTermComponent.textContent).toBe(
-        `Searching "${randomSearch}"`
-      );
-    });
-
-    it("should show all the head labels in the document", () => {
-      render(
-        <ConnectedComponent store={store} history={history}>
-          <Search />
-        </ConnectedComponent>
-      );
-      const { getByText } = screen;
-
-      expect(getByText(playListHeadings.SONG)).toBeInTheDocument();
-      expect(getByText(playListHeadings.ARTIST)).toBeInTheDocument();
-      expect(getByText(playListHeadings.ALBUM)).toBeInTheDocument();
-      expect(getByText(playListHeadings.DURATION)).toBeInTheDocument();
-      expect(getByText(playListHeadings.GENRE)).toBeInTheDocument();
-      expect(getByText(playListHeadings.PRICE)).toBeInTheDocument();
     });
 
     it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
-      render(
-        <ConnectedComponent store={store} history={history}>
-          <Search />
-        </ConnectedComponent>
-      );
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 
@@ -98,11 +71,6 @@ describe("Testing the search page", () => {
     });
 
     it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
-      render(
-        <ConnectedComponent store={store} history={history}>
-          <Search />
-        </ConnectedComponent>
-      );
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 

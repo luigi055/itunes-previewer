@@ -10,6 +10,7 @@ interface Theme {
   fontFamily: string;
   fontSize: string;
   disabled: string;
+  disabledVariant: string;
   largeBreakPoint: number;
   smallBreakPoint: number;
   breakPointUnit: string;

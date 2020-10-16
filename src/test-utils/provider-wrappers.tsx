@@ -1,11 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { createMemoryHistory } from "history";
 import { ThemeProvider } from "styled-components";
-import {
-  Router,
-  MemoryRouter,
-  Route,
-} from "react-router-dom";
+import { Router, MemoryRouter, Route } from "react-router-dom";
 import { defaultTheme } from "styles";
 import { setStore } from "services/application/redux";
 import { Provider } from "react-redux";
@@ -29,10 +25,11 @@ export const ConnectedComponent: FunctionComponent<{
 export const ConnectedMemoryRouter: FunctionComponent<{
   store?: Store;
   initialURLPath?: string;
-}> = ({ store = setStore(), initialURLPath = "", children }) => (
+  route?: string;
+}> = ({ store = setStore(), initialURLPath = "", route = "", children }) => (
   <Provider store={store}>
     <ComponentWithTheme>
-      <MemoryRouter initialEntries={[initialURLPath]}>
+      <MemoryRouter initialEntries={[route]}>
         <Route path={initialURLPath}>{children}</Route>
       </MemoryRouter>
     </ComponentWithTheme>

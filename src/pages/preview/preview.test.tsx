@@ -1,13 +1,16 @@
 import React from "react";
 import { setStore, storeInitialState } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
-import { ConnectedMemoryRouter } from "test-utils";
+import { ConnectedMemoryRouter, Random } from "test-utils";
 import Preview from "./preview";
 import { render, screen } from "@testing-library/react";
 import { Store } from "redux";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import Track from "domain/track";
-import routesConfig from "application/routes-config";
+import routesConfig, {
+  basePaths,
+  queryStringSortOptions,
+} from "application/routes-config";
 
 const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";
 const playerPreviousIconDisabledTestId = "player-previous-icon-disabled";
@@ -24,7 +27,14 @@ describe("Testing the Preview Page", () => {
   const mediaPlayerLinkGenerator = new MediaPlayerLinksGenerator({
     ...dummySearchData,
     searchTerm: "",
+    sortedTracks: dummySearchData.results,
+    sortedBy: queryStringSortOptions.unsorted,
   });
+
+  const generateDummyURLBasedOnTracks = (track: ITrack) =>
+    `${
+      basePaths.PREVIEW
+    }/${Random.getString()}/track-${track.getTrackNumber()}/${Random.getString()}`;
 
   const initializeStoreData = (currentTrack: ITrack) => {
     const track = dummySearchData.results[currentTrack.toZeroBaseIndex()];
@@ -60,6 +70,7 @@ describe("Testing the Preview Page", () => {
         <ConnectedMemoryRouter
           store={store}
           initialURLPath={routesConfig.PREVIEW}
+          route={`${generateDummyURLBasedOnTracks(currentTrack)}`}
         >
           <Preview />
         </ConnectedMemoryRouter>
@@ -116,6 +127,7 @@ describe("Testing the Preview Page", () => {
         <ConnectedMemoryRouter
           store={store}
           initialURLPath={routesConfig.PREVIEW}
+          route={`${generateDummyURLBasedOnTracks(currentTrack)}`}
         >
           <Preview />
         </ConnectedMemoryRouter>
@@ -143,6 +155,7 @@ describe("Testing the Preview Page", () => {
         <ConnectedMemoryRouter
           store={store}
           initialURLPath={routesConfig.PREVIEW}
+          route={`${generateDummyURLBasedOnTracks(currentTrack)}`}
         >
           <Preview />
         </ConnectedMemoryRouter>
