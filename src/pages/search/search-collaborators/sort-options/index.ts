@@ -1,1 +1,1 @@
-export {default as SortOptions} from './sort-options'
+export { default as SortOptions } from "./sort-options";

@@ -9,20 +9,20 @@ export const SortOptionLabel = styled.label`
     -moz-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     bottom: 0;
-    color: ${({theme}) => theme.disabledVariant};
-    content: '<>';
+    color: ${({ theme }) => theme.disabledVariant};
+    content: "<>";
     font: 14px "Consolas", monospace;
     padding: 20px auto;
     pointer-events: none;
     position: absolute;
     right: 50px;
-    text-align:center;
+    text-align: center;
     top: 0;
     transform: rotate(90deg);
   }
 
   :before {
-    content: '';
+    content: "";
     display: block;
     height: 20px;
     pointer-events: none;
@@ -36,15 +36,14 @@ export const SortOptionLabel = styled.label`
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    background: ${({theme}) => theme.backgroundVariantColor};
-    border: 1px solid ${({theme}) => theme.backgroundHoverColor};
+    background: ${({ theme }) => theme.backgroundVariantColor};
+    border: 1px solid ${({ theme }) => theme.backgroundHoverColor};
     border: none;
-    color: ${({theme}) => theme.primaryColor};
+    color: ${({ theme }) => theme.primaryColor};
     cursor: pointer;
     display: inline-block;
     font-size: 1rem;
     height: 40px;
-    outline: none;
     padding: 4px;
     text-align-last: center;
     text-align: center;

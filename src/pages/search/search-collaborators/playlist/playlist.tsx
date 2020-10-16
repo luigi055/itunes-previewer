@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import {
   PlayListWrapper,
   PlayListElement,
-  PlayListHead,
   PlayListLink,
   PlayListRow,
 } from "./playlist-styled";
@@ -47,26 +46,7 @@ const renderSongs = (searchSongs: SearchSongsState) => {
 const PlayList: FunctionComponent<{
   searchSong: SearchSongsState;
 }> = ({ searchSong }) => {
-  return (
-    <PlayListWrapper>
-      <PlayListHead>
-        <span></span>
-        <PlayListElement as="strong">Song</PlayListElement>
-        <PlayListElement as="strong">Artist</PlayListElement>
-        <PlayListElement as="strong">Album</PlayListElement>
-        <PlayListElement as="strong" highlight>
-          Duration
-        </PlayListElement>
-        <PlayListElement as="strong" highlight>
-          Genre
-        </PlayListElement>
-        <PlayListElement as="strong" highlight>
-          Price
-        </PlayListElement>
-      </PlayListHead>
-      {renderSongs(searchSong)}
-    </PlayListWrapper>
-  );
+  return <PlayListWrapper>{renderSongs(searchSong)}</PlayListWrapper>;
 };
 
 export default PlayList;

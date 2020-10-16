@@ -1,25 +1,35 @@
-import React, { FunctionComponent } from 'react';
-import { sortQueryStringOptions } from 'application/routes-config';
-import { SortOptionLabel } from './sort-options-styled';
+import React, { FunctionComponent } from "react";
+import { queryStringSortOptions } from "application/routes-config";
+import { SortOptionLabel } from "./sort-options-styled";
 
-const SortOptions: FunctionComponent<{handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void, defaultValue: string}> = 
-({handleChange, defaultValue}) => {
- 
+const SortOptions: FunctionComponent<{
+  onOptionChange: Function;
+  value: string;
+}> = ({ onOptionChange, value: defaultValue }) => {
+  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    onOptionChange(event.currentTarget.value);
+  };
+
   return (
     <SortOptionLabel htmlFor="sort-options">
-    <select
-      defaultValue={defaultValue}
-      id="sort-options"
-      data-testid="sort-options-select"
-      onChange={handleChange}
-    >
-      <option value={sortQueryStringOptions.unsorted}>Unsorted tracks</option>
-      <option value={sortQueryStringOptions.sortByGenre}>Sort tracks by genre</option>
-      <option value={sortQueryStringOptions.sortByPrice}>Sort tracks by price</option>
-      <option value={sortQueryStringOptions.sortByDuration}>Sort tracks by duration</option>
-    </select>
-  </SortOptionLabel>
-
+      <select
+        value={defaultValue}
+        id="sort-options"
+        data-testid="sort-options-select"
+        onChange={handleOptionChange}
+      >
+        <option value={queryStringSortOptions.unsorted}>Unsorted tracks</option>
+        <option value={queryStringSortOptions.sortByGenre}>
+          Sort tracks by genre
+        </option>
+        <option value={queryStringSortOptions.sortByPrice}>
+          Sort tracks by price
+        </option>
+        <option value={queryStringSortOptions.sortByDuration}>
+          Sort tracks by duration
+        </option>
+      </select>
+    </SortOptionLabel>
   );
 };
 

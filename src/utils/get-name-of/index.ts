@@ -1,1 +1,1 @@
-export {default} from './get-name-of'
+export { default } from "./get-name-of";

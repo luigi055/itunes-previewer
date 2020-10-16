@@ -6,7 +6,10 @@ import { setStore } from "services/application/redux";
 import { dummySearchData } from "services/externals/itunes-api/mock";
 import { Store } from "redux";
 import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
-import routesConfig, { basePaths, sortQueryStringOptions } from "application/routes-config";
+import routesConfig, {
+  basePaths,
+  queryStringSortOptions,
+} from "application/routes-config";
 
 const playlistRowTestId = "playlist-row";
 const magnifyingGlassIconTestId = "magnifying-glass-icon";
@@ -49,7 +52,7 @@ describe("Testing the search page", () => {
         searchResult: {
           ...dummySearchData,
           searchTerm: randomSearch,
-          sortedBy: sortQueryStringOptions.unsorted,
+          sortedBy: queryStringSortOptions.unsorted,
           sortedTracks: dummySearchData.results,
         },
         isLoading: false,

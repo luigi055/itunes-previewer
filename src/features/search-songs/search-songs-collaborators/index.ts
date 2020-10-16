@@ -1,1 +1,1 @@
-export * from './get-sort-rules';
+export * from "./get-sort-rules";

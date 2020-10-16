@@ -11,7 +11,7 @@ export const params = {
   artistName: "/:artistName?",
 };
 
-export const sortQueryStringOptions = {
+export const queryStringSortOptions = {
   unsorted: "sort-by=unsorted",
   sortByGenre: "sort-by=genre",
   sortByPrice: "sort-by=price",
