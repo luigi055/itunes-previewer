@@ -6,7 +6,7 @@ describe("test over get.name-of", () => {
     otherFakeProperty: FakeObject = new FakeObject();
   }
 
-  test("should get 'fakeProperty'", () => {
+  it("should get 'fakeProperty'", () => {
     expect(getNameOf<FakeObject>((fakeObj) => fakeObj.fakeProperty)).toBe(
       "fakeProperty"
     );

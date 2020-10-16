@@ -16,15 +16,6 @@ const magnifyingGlassIconTestId = "magnifying-glass-icon";
 const emptyPlaylistHeadingTestId = "empty-playlist-heading";
 const emptyPlaylistMessage = "Use the search bar to find songs";
 
-const playListHeadings = {
-  SONG: "Song",
-  ARTIST: "Artist",
-  ALBUM: "Album",
-  DURATION: "Duration",
-  GENRE: "Genre",
-  PRICE: "Price",
-};
-
 describe("Testing the search page", () => {
   it("should show the empty songs message", () => {
     render(
@@ -70,17 +61,6 @@ describe("Testing the search page", () => {
           <Search />
         </ConnectedMemoryRouter>
       );
-    });
-
-    it("should show all the head labels in the document", () => {
-      const { getByText } = screen;
-
-      expect(getByText(playListHeadings.SONG)).toBeInTheDocument();
-      expect(getByText(playListHeadings.ARTIST)).toBeInTheDocument();
-      expect(getByText(playListHeadings.ALBUM)).toBeInTheDocument();
-      expect(getByText(playListHeadings.DURATION)).toBeInTheDocument();
-      expect(getByText(playListHeadings.GENRE)).toBeInTheDocument();
-      expect(getByText(playListHeadings.PRICE)).toBeInTheDocument();
     });
 
     it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {

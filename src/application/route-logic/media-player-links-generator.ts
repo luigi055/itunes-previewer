@@ -6,8 +6,6 @@ export interface IMediaPlayerLinksGenerator {
 }
 
 class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
-  private _baseURLPath = "/preview/track-";
-
   constructor(private _searchResult: SearchSongsState) {}
 
   private _composeURI(trackNumber: number, arrayIndex: number): string {

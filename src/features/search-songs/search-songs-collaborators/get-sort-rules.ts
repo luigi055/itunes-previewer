@@ -1,4 +1,5 @@
 import { queryStringSortOptions } from "application/routes-config";
+import getNameOf from "utils/get-name-of";
 import { sortObjectsByPropertyAscending } from "utils/sort-utils";
 
 export const getSortRules = (
@@ -7,14 +8,14 @@ export const getSortRules = (
   [queryStringSortOptions.unsorted]: artistSongs,
   [queryStringSortOptions.sortByGenre]: sortObjectsByPropertyAscending(
     artistSongs,
-    "primaryGenreName" // TODO UNIFY property name
+    getNameOf<ArtistSongs>((object) => object.primaryGenreName)
   ),
   [queryStringSortOptions.sortByPrice]: sortObjectsByPropertyAscending(
     artistSongs,
-    "trackPrice"
+    getNameOf<ArtistSongs>((object) => object.trackPrice)
   ),
   [queryStringSortOptions.sortByDuration]: sortObjectsByPropertyAscending(
     artistSongs,
-    "trackTimeMillis"
+    getNameOf<ArtistSongs>((object) => object.trackTimeMillis)
   ),
 });
