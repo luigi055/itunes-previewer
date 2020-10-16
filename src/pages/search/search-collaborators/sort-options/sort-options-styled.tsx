@@ -5,6 +5,7 @@ import { declareCssForLargeView } from "styles/responsive";
 export const SortOptionLabel = styled.label`
   ${basePaddingX}
   position: relative;
+  margin-bottom: 20px;
 
   ${declareCssForLargeView(css`
     display: none;

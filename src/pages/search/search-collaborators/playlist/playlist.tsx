@@ -1,11 +1,16 @@
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
+import { ScreenReaderOnly } from "components";
+import { Truncate } from "components/typography";
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
 import {
   PlayListWrapper,
   PlayListElement,
   PlayListLink,
   PlayListRow,
+  PlayListThumbNail,
+  TextWrapper,
+  TextLeft,
+  TextRight,
 } from "./playlist-styled";
 
 const formatToMinutes = (milliseconds: number): string =>
@@ -20,24 +25,56 @@ const renderSongs = (searchSongs: SearchSongsState) => {
     mediaPlayerLinksGenerator.generateURIFromZeroBasedPosition(arrayIndex);
   return searchSongs.sortedTracks.map((song, index) => (
     <PlayListLink
-      as={Link}
       key={`${song.collectionName}${song.trackName}${song.trackId}`}
       to={getURLPath(index)}
     >
       <PlayListRow data-testid="playlist-row">
-        <img src={song.artworkUrl60} alt={`${song.collectionName} thumbnail`} />
+        <PlayListThumbNail
+          src={song.artworkUrl60}
+          alt={`thumbnail ${song.artistName} ${song.collectionName}`}
+        />
 
-        <PlayListElement highlight>{song.trackName}</PlayListElement>
-        <PlayListElement>{song.artistName}</PlayListElement>
+        <TextWrapper>
+          <TextLeft>
+            <PlayListElement highlight title={song.trackName}>
+              <Truncate>
+                <ScreenReaderOnly>song name:</ScreenReaderOnly>
+                {song.trackName}
+              </Truncate>
+            </PlayListElement>
 
-        <PlayListElement>{song.collectionName}</PlayListElement>
-        <PlayListElement>
-          {formatToMinutes(song.trackTimeMillis)}
-        </PlayListElement>
-        <PlayListElement>{song.primaryGenreName}</PlayListElement>
-        <PlayListElement>
-          {formatPrice(song.trackPrice, song.currency)}
-        </PlayListElement>
+            <PlayListElement title={song.artistName}>
+              <Truncate>
+                <ScreenReaderOnly>artist name:</ScreenReaderOnly>
+                {song.artistName}
+              </Truncate>
+            </PlayListElement>
+
+            <PlayListElement title={song.collectionName}>
+              <Truncate>
+                <ScreenReaderOnly>album name:</ScreenReaderOnly>
+                {song.collectionName}
+              </Truncate>
+            </PlayListElement>
+          </TextLeft>
+          <TextRight>
+            <PlayListElement title={formatToMinutes(song.trackTimeMillis)}>
+              <ScreenReaderOnly>time duration:</ScreenReaderOnly>
+              {formatToMinutes(song.trackTimeMillis)}
+              <ScreenReaderOnly>minutes</ScreenReaderOnly>
+            </PlayListElement>
+            <PlayListElement title={song.primaryGenreName}>
+              <ScreenReaderOnly>genre:</ScreenReaderOnly>
+              {song.primaryGenreName}
+            </PlayListElement>
+            <PlayListElement
+              title={formatPrice(song.trackPrice, song.currency)}
+            >
+              <ScreenReaderOnly>song price:</ScreenReaderOnly>
+              {formatPrice(song.trackPrice, song.currency)}
+            </PlayListElement>
+          </TextRight>
+        </TextWrapper>
       </PlayListRow>
     </PlayListLink>
   ));
