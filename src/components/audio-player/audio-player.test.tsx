@@ -50,15 +50,6 @@ describe("Testing AudioPlayer component", () => {
 
   describe("testing play/pause button", () => {
     it("should reproduce the correct URL", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-          />
-        </ConnectedComponent>
-      );
       const { getByTestId } = screen;
 
       expect(getByTestId(playerAudioTestId).src).toContain(
@@ -66,7 +57,7 @@ describe("Testing AudioPlayer component", () => {
       );
     });
 
-    it("should show the Play icon by default since the player is paused by default", () => {
+    beforeEach(() => {
       render(
         <ConnectedComponent>
           <AudioPlayer
@@ -76,6 +67,9 @@ describe("Testing AudioPlayer component", () => {
           />
         </ConnectedComponent>
       );
+    });
+
+    it("should show the Play icon by default since the player is paused by default", () => {
       const { getByTestId, queryByTestId } = screen;
 
       expect(getByTestId(playerPlayIconTestId)).toBeInTheDocument();
@@ -83,15 +77,6 @@ describe("Testing AudioPlayer component", () => {
     });
 
     it("should show the play icon when the onPlaying event is invoked", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-          />
-        </ConnectedComponent>
-      );
       const { getByTestId, queryByTestId } = screen;
 
       fireEvent(
@@ -104,15 +89,6 @@ describe("Testing AudioPlayer component", () => {
     });
 
     it("should show the pause icon again when the player is reproducing the song and onPause event is invoked", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-          />
-        </ConnectedComponent>
-      );
       const { getByTestId, queryByTestId } = screen;
 
       fireEvent(
@@ -133,15 +109,6 @@ describe("Testing AudioPlayer component", () => {
     });
 
     it("should invoke the play method", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-          />
-        </ConnectedComponent>
-      );
       const { getByTestId } = screen;
 
       /**
@@ -167,104 +134,128 @@ describe("Testing AudioPlayer component", () => {
   });
 
   describe("testing previous and next buttons", () => {
-    it("should redirect to the next track URI", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-          />
-        </ConnectedComponent>
-      );
-      const { getByTestId } = screen;
+    describe("Buttons redirections", () => {
+      let handlePreviousButtonSpy: Function;
+      let handleNextButtonSpy: Function;
+      beforeEach(() => {
+        handlePreviousButtonSpy = jest.fn();
+        handleNextButtonSpy = jest.fn();
+        render(
+          <ConnectedComponent>
+            <AudioPlayer
+              currentTrackURL={dummyPreviewURL}
+              nextTrackPath={nextTrackPath}
+              previousTrackPath={previousTrackPath}
+              onPreviousButtonClick={handlePreviousButtonSpy}
+              onNextButtonClick={handleNextButtonSpy}
+            />
+          </ConnectedComponent>
+        );
+      });
 
-      const playerGoNextButton = getByTestId(playerGoNextButtonTestId);
+      it("should redirect to the next track URI", () => {
+        const { getByTestId } = screen;
 
-      expect(playerGoNextButton.href).toContain(nextTrackPath);
-    });
-    it("should redirect to the previous track URI", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-          />
-        </ConnectedComponent>
-      );
-      const { getByTestId } = screen;
+        const playerGoNextButton = getByTestId(playerGoNextButtonTestId);
 
-      const playerGoPreviousButton = getByTestId(playerGoPreviousButtonTestId);
+        expect(playerGoNextButton.href).toContain(nextTrackPath);
+      });
 
-      expect(playerGoPreviousButton.href).toContain(previousTrackPath);
-    });
+      it("should redirect to the previous track URI", () => {
+        const { getByTestId } = screen;
 
-    it("should both buttons be enabled by default ", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-          />
-        </ConnectedComponent>
-      );
-      const { getByTestId } = screen;
+        const playerGoPreviousButton = getByTestId(
+          playerGoPreviousButtonTestId
+        );
 
-      const playerGoPreviousIconEnabled = getByTestId(
-        playerPreviousIconEnabledTestId
-      );
-      const playerGoNextIconEnabled = getByTestId(playerNextIconEnabledTestId);
+        expect(playerGoPreviousButton.href).toContain(previousTrackPath);
+      });
 
-      expect(playerGoPreviousIconEnabled).toBeInTheDocument();
-      expect(playerGoNextIconEnabled).toBeInTheDocument();
-    });
+      it("should both buttons be enabled by default ", () => {
+        const { getByTestId } = screen;
 
-    it("should disable the previous button when isPreviousButtonDisabled is true ", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-            isPreviousButtonDisabled={true}
-          />
-        </ConnectedComponent>
-      );
-      const { getByTestId } = screen;
+        const playerGoPreviousIconEnabled = getByTestId(
+          playerPreviousIconEnabledTestId
+        );
+        const playerGoNextIconEnabled = getByTestId(
+          playerNextIconEnabledTestId
+        );
 
-      const playerGoPreviousIconDisabled = getByTestId(
-        playerPreviousIconDisabledTestId
-      );
-      const playerGoNextIconEnabled = getByTestId(playerNextIconEnabledTestId);
+        expect(playerGoPreviousIconEnabled).toBeInTheDocument();
+        expect(playerGoNextIconEnabled).toBeInTheDocument();
+      });
 
-      expect(playerGoPreviousIconDisabled).toBeInTheDocument();
-      expect(playerGoNextIconEnabled).toBeInTheDocument();
+      it("should invoke the onPreviousButtonClick event when user clicks on previous button", () => {
+        const { getByTestId } = screen;
+
+        const playerGoPreviousButton = getByTestId(
+          playerGoPreviousButtonTestId
+        );
+
+        userEvent.click(playerGoPreviousButton);
+
+        expect(handlePreviousButtonSpy).toHaveBeenCalled();
+      });
+
+      it("should invoke the onNextButtonClick event when user clicks on previous button", () => {
+        const { getByTestId } = screen;
+
+        const playerGoNextButton = getByTestId(playerGoNextButtonTestId);
+
+        userEvent.click(playerGoNextButton);
+
+        expect(handleNextButtonSpy).toHaveBeenCalled();
+      });
     });
 
-    it("should disable the next button when isNextButtonDisabled is true ", () => {
-      render(
-        <ConnectedComponent>
-          <AudioPlayer
-            currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
-            isNextButtonDisabled={true}
-          />
-        </ConnectedComponent>
-      );
-      const { getByTestId } = screen;
+    describe("testing button disable", () => {
+      it("should disable the previous button when isPreviousButtonDisabled is true ", () => {
+        render(
+          <ConnectedComponent>
+            <AudioPlayer
+              currentTrackURL={dummyPreviewURL}
+              nextTrackPath={nextTrackPath}
+              previousTrackPath={previousTrackPath}
+              isPreviousButtonDisabled={true}
+            />
+          </ConnectedComponent>
+        );
+        const { getByTestId } = screen;
 
-      const playerGoNextIconDisabled = getByTestId(
-        playerNextIconDisabledTestId
-      );
-      const playerGoPreviousIconEnabled = getByTestId(
-        playerPreviousIconEnabledTestId
-      );
+        const playerGoPreviousIconDisabled = getByTestId(
+          playerPreviousIconDisabledTestId
+        );
+        const playerGoNextIconEnabled = getByTestId(
+          playerNextIconEnabledTestId
+        );
 
-      expect(playerGoNextIconDisabled).toBeInTheDocument();
-      expect(playerGoPreviousIconEnabled).toBeInTheDocument();
+        expect(playerGoPreviousIconDisabled).toBeInTheDocument();
+        expect(playerGoNextIconEnabled).toBeInTheDocument();
+      });
+
+      it("should disable the next button when isNextButtonDisabled is true ", () => {
+        render(
+          <ConnectedComponent>
+            <AudioPlayer
+              currentTrackURL={dummyPreviewURL}
+              nextTrackPath={nextTrackPath}
+              previousTrackPath={previousTrackPath}
+              isNextButtonDisabled={true}
+            />
+          </ConnectedComponent>
+        );
+        const { getByTestId } = screen;
+
+        const playerGoNextIconDisabled = getByTestId(
+          playerNextIconDisabledTestId
+        );
+        const playerGoPreviousIconEnabled = getByTestId(
+          playerPreviousIconEnabledTestId
+        );
+
+        expect(playerGoNextIconDisabled).toBeInTheDocument();
+        expect(playerGoPreviousIconEnabled).toBeInTheDocument();
+      });
     });
   });
 });
