@@ -14,5 +14,5 @@ interface ArtistTrack {
 
 interface IArtistTracks {
   resultCount: number;
-  results: ArtistTrack[]
+  results: ArtistTrack[];
 }

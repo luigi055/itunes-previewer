@@ -13,7 +13,9 @@ import { selectResults, selectSortedBy } from "./search-songs-selectors";
 import { getSortRules } from "./search-songs-collaborators";
 import ItunesAdapter from "domain/artist-track/itunes-adapter";
 
-export function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
+export function* getSongs(
+  searchTerm: ActionPayloadRequired<string>
+): SagaIterator {
   const { payload } = searchTerm;
 
   try {
@@ -26,7 +28,7 @@ export function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterat
       yield put(searchSongsSuccess(adaptedTracks));
     }
   } catch (error) {
-    yield put(searchSongsFail())
+    yield put(searchSongsFail());
   } finally {
     yield put(stopLoading());
   }

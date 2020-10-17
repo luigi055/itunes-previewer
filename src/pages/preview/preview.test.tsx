@@ -71,7 +71,8 @@ describe("Testing the Preview Page", () => {
     const currentTrack = new Track(1).defineMaxLimit(
       dummyArtistTracks.resultCount
     );
-    const firstTrack = dummyArtistTracks.results[currentTrack.toZeroBaseIndex()];
+    const firstTrack =
+      dummyArtistTracks.results[currentTrack.toZeroBaseIndex()];
 
     beforeEach(() => {
       store = setStore(initializeStoreData(currentTrack));

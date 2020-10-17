@@ -6,14 +6,16 @@ export const GET_SONGS_FAIL: string = `${SONGS_FEATURE}/GET_SONGS_FAIL`;
 export const UPDATE_SORTED_BY: string = `${SONGS_FEATURE}/UPDATE_SORTED_BY`;
 export const UPDATE_SORTED_TRACKS: string = `${SONGS_FEATURE}/UPDATE_SORTED_TRACKS`;
 
-export const searchSongsStart = (payload: string): ActionPayloadRequired<string> => ({
+export const searchSongsStart = (
+  payload: string
+): ActionPayloadRequired<string> => ({
   type: GET_SONGS_START,
   payload,
 });
 
 export const searchSongsFail = (): ActionStandardBase => ({
   type: GET_SONGS_FAIL,
-  error: true
+  error: true,
 });
 
 export const searchSongsSuccess = (

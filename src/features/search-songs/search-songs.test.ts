@@ -9,9 +9,7 @@ import {
 } from "./search-songs-actions";
 import { setStore, storeInitialState } from "services/application/redux";
 import searchSongsInitialState from "./search-songs-initial-state";
-import {
-  fetchSearchAPIMocked,
-} from "services/externals/itunes-api/mock";
+import { fetchSearchAPIMocked } from "services/externals/itunes-api/mock";
 import { triggeredActions } from "utils/test/triggered-actions";
 import { STOP_LOADING } from "features/loading";
 import {
@@ -20,7 +18,7 @@ import {
   selectSearchResult,
 } from "./search-songs-selectors";
 import { dummyArtistTracks } from "utils/test/domain-dummies";
-import {getSongs} from './search-songs-sagas'
+import { getSongs } from "./search-songs-sagas";
 
 describe("Testing search songs feature", () => {
   let store: Store;
@@ -65,10 +63,9 @@ describe("Testing search songs feature", () => {
       STOP_LOADING
     );
   });
-
 });
 
-describe("Test Error handling (behavior not implemented)",  () => {
+describe("Test Error handling (behavior not implemented)", () => {
   let store: Store;
   let randomTerm: string = "";
 
@@ -79,14 +76,14 @@ describe("Test Error handling (behavior not implemented)",  () => {
 
   it(`should dispatch ${GET_SONGS_FAIL}`, () => {
     store.dispatch(searchSongsStart(randomTerm));
-    
-    const generator = getSongs(searchSongsStart(randomTerm))
+
+    const generator = getSongs(searchSongsStart(randomTerm));
     generator.next();
     generator.next();
 
     expect(generator.next().value.payload.action).toEqual({
-      type:GET_SONGS_FAIL,
-      error: true
-    })
+      type: GET_SONGS_FAIL,
+      error: true,
+    });
   });
-})
+});
