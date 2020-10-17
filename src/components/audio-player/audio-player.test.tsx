@@ -1,6 +1,7 @@
 import React from "react";
 import { createEvent, fireEvent, render, screen } from "@testing-library/react";
 import AudioPlayer from "./audio-player";
+import { createMemoryHistory } from "history";
 import { dummySearchData } from "services/externals/itunes-api/mock";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import userEvent from "@testing-library/user-event";
@@ -134,26 +135,50 @@ describe("Testing AudioPlayer component", () => {
   });
 
   describe("testing previous and next buttons", () => {
-    describe("Buttons redirections", () => {
-      let handlePreviousButtonSpy: Function;
-      let handleNextButtonSpy: Function;
+    let handlePreviousButtonSpy: Function;
+    let handleNextButtonSpy: Function;
+    let history: any;
+
+    describe("Testing the base buttons redirection and required properties", () => {
       beforeEach(() => {
         handlePreviousButtonSpy = jest.fn();
         handleNextButtonSpy = jest.fn();
+        history = createMemoryHistory();
         render(
-          <ConnectedComponent>
+          <ConnectedComponent history={history}>
             <AudioPlayer
               currentTrackURL={dummyPreviewURL}
               nextTrackPath={nextTrackPath}
               previousTrackPath={previousTrackPath}
-              onPreviousButtonClick={handlePreviousButtonSpy}
-              onNextButtonClick={handleNextButtonSpy}
             />
           </ConnectedComponent>
         );
       });
-
       it("should redirect to the next track URI", () => {
+        const { getByTestId } = screen;
+
+        const playerGoNextButton = getByTestId(playerGoNextButtonTestId);
+
+        userEvent.click(playerGoNextButton);
+        const { pathname, search } = history.location;
+
+        expect(`${pathname}${search}`).toContain(nextTrackPath);
+      });
+      it("should redirect to the previous track URI", () => {
+        const { getByTestId } = screen;
+
+        const playerGoPreviousButton = getByTestId(
+          playerGoPreviousButtonTestId
+        );
+
+        userEvent.click(playerGoPreviousButton);
+        const { pathname, search } = history.location;
+
+        expect(`${pathname}${search}`).toContain(previousTrackPath);
+      });
+
+      
+      it("should link has the correct next track URI", () => {
         const { getByTestId } = screen;
 
         const playerGoNextButton = getByTestId(playerGoNextButtonTestId);
@@ -161,7 +186,7 @@ describe("Testing AudioPlayer component", () => {
         expect(playerGoNextButton.href).toContain(nextTrackPath);
       });
 
-      it("should redirect to the previous track URI", () => {
+      it("should link has the correct previous track URI", () => {
         const { getByTestId } = screen;
 
         const playerGoPreviousButton = getByTestId(
@@ -183,6 +208,24 @@ describe("Testing AudioPlayer component", () => {
 
         expect(playerGoPreviousIconEnabled).toBeInTheDocument();
         expect(playerGoNextIconEnabled).toBeInTheDocument();
+      });
+
+    });
+    describe("Testing events", () => {
+      beforeEach(() => {
+        handlePreviousButtonSpy = jest.fn();
+        handleNextButtonSpy = jest.fn();
+        render(
+          <ConnectedComponent>
+            <AudioPlayer
+              currentTrackURL={dummyPreviewURL}
+              nextTrackPath={nextTrackPath}
+              previousTrackPath={previousTrackPath}
+              onPreviousButtonClick={handlePreviousButtonSpy}
+              onNextButtonClick={handleNextButtonSpy}
+            />
+          </ConnectedComponent>
+        );
       });
 
       it("should invoke the onPreviousButtonClick event when user clicks on previous button", () => {
@@ -208,7 +251,7 @@ describe("Testing AudioPlayer component", () => {
       });
     });
 
-    describe("testing button disable", () => {
+    describe("Testing button disable", () => {
       it("should disable the previous button when isPreviousButtonDisabled is true ", () => {
         render(
           <ConnectedComponent>
