@@ -67,9 +67,9 @@ const TrackElement: FunctionComponent<{
             {formatToMinutes(trackData.trackTimeMillis)}
             <ScreenReaderOnly>minutes</ScreenReaderOnly>
           </PlayListElement>
-          <PlayListElement title={trackData.primaryGenreName}>
+          <PlayListElement title={trackData.genre}>
             <ScreenReaderOnly>genre:</ScreenReaderOnly>
-            {trackData.primaryGenreName}
+            {trackData.genre}
           </PlayListElement>
           <PlayListElement
             title={formatPrice(trackData.trackPrice, trackData.currency)}

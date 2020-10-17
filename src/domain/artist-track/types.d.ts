@@ -4,13 +4,10 @@ interface ArtistTrack {
   artistName: string;
   collectionName: string;
   trackTimeMillis: number;
-  primaryGenreName: string;
+  genre: string;
   trackPrice: number;
   currency: string;
-  collectionViewUrl: string;
-  kind: string;
   previewUrl: string;
-  artworkUrl30: string;
   artworkUrl60: string;
   artworkUrl100: string;
 }

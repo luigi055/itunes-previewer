@@ -67,7 +67,7 @@ describe("Testing the TrackElement component", () => {
     expect(getByText(dummyTrackData.trackName)).toBeInTheDocument();
     expect(getByText(dummyTrackData.collectionName)).toBeInTheDocument();
     expect(getByText(dummyTrackData.artistName)).toBeInTheDocument();
-    expect(getByText(dummyTrackData.primaryGenreName)).toBeInTheDocument();
+    expect(getByText(dummyTrackData.genre)).toBeInTheDocument();
     expect(
       getByText(formatPrice(dummyTrackData.trackPrice, dummyTrackData.currency))
     ).toBeInTheDocument();

@@ -7,10 +7,7 @@ interface ITunesTrack {
   primaryGenreName: string;
   trackPrice: number;
   currency: string;
-  collectionViewUrl: string;
-  kind: string;
   previewUrl: string;
-  artworkUrl30: string;
   artworkUrl60: string;
   artworkUrl100: string;
 }

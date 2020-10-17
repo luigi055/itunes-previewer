@@ -8,7 +8,7 @@ export const getSortRules = (
   [queryStringSortOptions.unsorted]: artistSongs,
   [queryStringSortOptions.sortByGenre]: sortObjectsByPropertyAscending(
     artistSongs,
-    getNameOf<ArtistTrack>((object) => object.primaryGenreName)
+    getNameOf<ArtistTrack>((object) => object.genre)
   ),
   [queryStringSortOptions.sortByPrice]: sortObjectsByPropertyAscending(
     artistSongs,
