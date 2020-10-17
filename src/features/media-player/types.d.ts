@@ -4,4 +4,5 @@ interface MediaPlayerData {
   previousTrackPath: string;
   isNextButtonDisabled: boolean;
   isPreviousButtonDisabled: boolean;
+  trackNumber: number;
 }

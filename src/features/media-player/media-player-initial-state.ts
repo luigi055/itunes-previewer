@@ -19,4 +19,5 @@ export default {
   previousTrackPath: "",
   isNextButtonDisabled: false,
   isPreviousButtonDisabled: false,
+  trackNumber: 1,
 };

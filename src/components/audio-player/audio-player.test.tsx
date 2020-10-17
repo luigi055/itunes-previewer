@@ -6,6 +6,7 @@ import MediaPlayerLinksGenerator from "application/route-logic/media-player-link
 import userEvent from "@testing-library/user-event";
 import Track from "domain/track";
 import { queryStringSortOptions } from "application/routes-config";
+import { ConnectedComponent } from "test-utils";
 
 describe("Testing AudioPlayer component", () => {
   const playerReproduceTestId = "player-reproduce-button";
@@ -50,11 +51,13 @@ describe("Testing AudioPlayer component", () => {
   describe("testing play/pause button", () => {
     it("should reproduce the correct URL", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId } = screen;
 
@@ -65,11 +68,13 @@ describe("Testing AudioPlayer component", () => {
 
     it("should show the Play icon by default since the player is paused by default", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId, queryByTestId } = screen;
 
@@ -79,11 +84,13 @@ describe("Testing AudioPlayer component", () => {
 
     it("should show the play icon when the onPlaying event is invoked", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId, queryByTestId } = screen;
 
@@ -98,11 +105,13 @@ describe("Testing AudioPlayer component", () => {
 
     it("should show the pause icon again when the player is reproducing the song and onPause event is invoked", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId, queryByTestId } = screen;
 
@@ -125,11 +134,13 @@ describe("Testing AudioPlayer component", () => {
 
     it("should invoke the play method", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId } = screen;
 
@@ -158,11 +169,13 @@ describe("Testing AudioPlayer component", () => {
   describe("testing previous and next buttons", () => {
     it("should redirect to the next track URI", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId } = screen;
 
@@ -172,11 +185,13 @@ describe("Testing AudioPlayer component", () => {
     });
     it("should redirect to the previous track URI", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId } = screen;
 
@@ -187,11 +202,13 @@ describe("Testing AudioPlayer component", () => {
 
     it("should both buttons be enabled by default ", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId } = screen;
 
@@ -206,12 +223,14 @@ describe("Testing AudioPlayer component", () => {
 
     it("should disable the previous button when isPreviousButtonDisabled is true ", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-          isPreviousButtonDisabled={true}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+            isPreviousButtonDisabled={true}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId } = screen;
 
@@ -226,12 +245,14 @@ describe("Testing AudioPlayer component", () => {
 
     it("should disable the next button when isNextButtonDisabled is true ", () => {
       render(
-        <AudioPlayer
-          currentTrackURL={dummyPreviewURL}
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
-          isNextButtonDisabled={true}
-        />
+        <ConnectedComponent>
+          <AudioPlayer
+            currentTrackURL={dummyPreviewURL}
+            nextTrackPath={nextTrackPath}
+            previousTrackPath={previousTrackPath}
+            isNextButtonDisabled={true}
+          />
+        </ConnectedComponent>
       );
       const { getByTestId } = screen;
 

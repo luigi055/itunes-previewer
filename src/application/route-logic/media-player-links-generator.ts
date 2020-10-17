@@ -13,7 +13,11 @@ class MediaPlayerLinksGenerator implements IMediaPlayerLinksGenerator {
     const trackName = sortedTracks[arrayIndex].trackName;
     const prettifiedSortedBy = sortedBy ? `?${sortedBy}` : "";
 
-    return `${basePaths.PREVIEW}/${searchTerm}/track-${trackNumber}/${trackName}${prettifiedSortedBy}`;
+    return `${basePaths.PREVIEW}/${encodeURIComponent(
+      searchTerm
+    )}/track-${trackNumber}/${encodeURIComponent(
+      trackName
+    )}${prettifiedSortedBy}`;
   }
 
   private _toZeroBased(oneBased: number) {

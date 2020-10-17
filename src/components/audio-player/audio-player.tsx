@@ -12,6 +12,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Link } from "react-router-dom";
 import { ControlButtons, PlayerButton } from "./audio-player-styled";
 
 const ToggleReproduceButton: FunctionComponent<{ isPlaying: boolean }> = ({
@@ -33,10 +34,12 @@ const AudioPlayer: FunctionComponent<
   AudioPlayerProps & HTMLAttributes<HTMLDivElement>
 > = ({
   currentTrackURL,
-  nextTrackPath,
   previousTrackPath,
+  nextTrackPath,
   isNextButtonDisabled = false,
   isPreviousButtonDisabled = false,
+  onPreviousButtonClick = () => {},
+  onNextButtonClick = () => {},
   ...props
 }) => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
@@ -57,9 +60,14 @@ const AudioPlayer: FunctionComponent<
     <>
       <ControlButtons {...props}>
         <PlayerButton
-          href={previousTrackPath}
+          as={Link}
+          to={previousTrackPath}
           data-testid="player-go-previous-button"
           isDisabled={isPreviousButtonDisabled}
+          aria-disabled={isPreviousButtonDisabled}
+          onClick={() => {
+            onPreviousButtonClick();
+          }}
         >
           <PlayerPrevious isDisabled={isPreviousButtonDisabled} />
           <ScreenReaderOnly>go Previous</ScreenReaderOnly>
@@ -74,9 +82,14 @@ const AudioPlayer: FunctionComponent<
         </PlayerButton>
 
         <PlayerButton
-          href={nextTrackPath}
+          as={Link}
+          to={nextTrackPath}
           data-testid="player-go-next-button"
           isDisabled={isNextButtonDisabled}
+          aria-disabled={isNextButtonDisabled}
+          onClick={() => {
+            onNextButtonClick();
+          }}
         >
           <PlayerNext isDisabled={isNextButtonDisabled} />
           <ScreenReaderOnly>go next</ScreenReaderOnly>
