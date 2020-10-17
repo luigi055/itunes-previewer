@@ -11,9 +11,15 @@ import routesConfig, {
   basePaths,
   queryStringSortOptions,
 } from "application/routes-config";
+import userEvent from "@testing-library/user-event";
+import { triggeredActions } from "test-utils/triggered-actions";
+import { GO_TO_TRACK } from "features/media-player";
+import searchSongsInitialState from "features/search-songs/search-songs-initial-state";
 
+const playerPreviousButtonTestId = "player-go-previous-button";
 const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";
 const playerPreviousIconDisabledTestId = "player-previous-icon-disabled";
+const playerNextButtonTestId = "player-go-next-button";
 const playerNextIconEnabledTestId = "player-next-icon-enabled";
 const playerNextIconDisabledTestId = "player-next-icon-disabled";
 const coverImageTestId = "cover-image";
@@ -41,6 +47,11 @@ describe("Testing the Preview Page", () => {
 
     return {
       ...storeInitialState,
+      searchResult: {
+        ...searchSongsInitialState,
+        sortedTracks: dummySearchData.results,
+        resultCount: dummySearchData.resultCount,
+      },
       mediaPlayerData: {
         currentTrack: track,
         nextTrackPath: mediaPlayerLinkGenerator.generateNextTrackURI(
@@ -51,6 +62,7 @@ describe("Testing the Preview Page", () => {
         ),
         isNextButtonDisabled: currentTrack.isLastTrack(),
         isPreviousButtonDisabled: currentTrack.isFirstTrack(),
+        trackNumber: currentTrack.getTrackNumber(),
       },
     };
   };
@@ -131,6 +143,28 @@ describe("Testing the Preview Page", () => {
         >
           <Preview />
         </ConnectedMemoryRouter>
+      );
+    });
+
+    beforeEach(() => triggeredActions.clear());
+
+    it("should invoke goToTrack action creator when the user clicks on previous button", () => {
+      const { getByTestId } = screen;
+
+      userEvent.click(getByTestId(playerPreviousButtonTestId));
+
+      expect(triggeredActions.getAction(GO_TO_TRACK)?.payload).toBe(
+        currentTrack.getTrackNumber() - 1
+      );
+    });
+
+    it("should invoke goToTrack action creator when the user clicks on next button", () => {
+      const { getByTestId } = screen;
+
+      userEvent.click(getByTestId(playerNextButtonTestId));
+
+      expect(triggeredActions.getAction(GO_TO_TRACK)?.payload).toBe(
+        currentTrack.getTrackNumber() + 1
       );
     });
 

@@ -177,7 +177,6 @@ describe("Testing AudioPlayer component", () => {
         expect(`${pathname}${search}`).toContain(previousTrackPath);
       });
 
-      
       it("should link has the correct next track URI", () => {
         const { getByTestId } = screen;
 
@@ -209,7 +208,6 @@ describe("Testing AudioPlayer component", () => {
         expect(playerGoPreviousIconEnabled).toBeInTheDocument();
         expect(playerGoNextIconEnabled).toBeInTheDocument();
       });
-
     });
     describe("Testing events", () => {
       beforeEach(() => {
