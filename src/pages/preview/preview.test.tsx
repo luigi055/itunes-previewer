@@ -19,7 +19,7 @@ const playerNextIconDisabledTestId = "player-next-icon-disabled";
 const coverImageTestId = "cover-image";
 const coverTrackNameTestId = "cover-track-name";
 const coverArtistNameTestId = "cover-artist-name";
-const playerSourceTestId = "player-source";
+const playerAudioTestId = "player-audio-element";
 const socialShareTestId = "social-share-component";
 
 describe("Testing the Preview Page", () => {
@@ -94,7 +94,7 @@ describe("Testing the Preview Page", () => {
     it("should reproduce the correct song", () => {
       const { getByTestId } = screen;
 
-      expect(getByTestId(playerSourceTestId).src).toContain(
+      expect(getByTestId(playerAudioTestId).src).toContain(
         firstTrack.previewUrl
       );
     });

@@ -12,7 +12,7 @@ describe("Testing AudioPlayer component", () => {
   const playerReproduceTestId = "player-reproduce-button";
   const playerPlayIconTestId = "player-play-icon";
   const playerPauseIconTestId = "player-pause-icon";
-  const playerSourceTestId = "player-source";
+  const playerAudioTestId = "player-audio-element";
   const playerGoPreviousButtonTestId = "player-go-previous-button";
   const playerGoNextButtonTestId = "player-go-next-button";
   const playerAudioElementTestId = "player-audio-element";
@@ -61,7 +61,7 @@ describe("Testing AudioPlayer component", () => {
       );
       const { getByTestId } = screen;
 
-      expect(getByTestId(playerSourceTestId).src).toContain(
+      expect(getByTestId(playerAudioTestId).src).toContain(
         `/${dummyPreviewURL}`
       );
     });

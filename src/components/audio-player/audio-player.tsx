@@ -66,6 +66,7 @@ const AudioPlayer: FunctionComponent<
           isDisabled={isPreviousButtonDisabled}
           aria-disabled={isPreviousButtonDisabled}
           onClick={() => {
+            setIsPlaying(false);
             onPreviousButtonClick();
           }}
         >
@@ -88,6 +89,7 @@ const AudioPlayer: FunctionComponent<
           isDisabled={isNextButtonDisabled}
           aria-disabled={isNextButtonDisabled}
           onClick={() => {
+            setIsPlaying(false);
             onNextButtonClick();
           }}
         >
@@ -103,13 +105,8 @@ const AudioPlayer: FunctionComponent<
           ref={audioPlayerRef}
           onPause={toggleIsPlaying}
           onPlaying={toggleIsPlaying}
-        >
-          <source
-            data-testid="player-source"
-            src={currentTrackURL}
-            type="audio/x-m4a"
-          />
-        </audio>
+          src={currentTrackURL}
+        ></audio>
       )}
     </>
   );
