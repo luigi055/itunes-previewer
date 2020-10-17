@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled, { useTheme } from "styled-components";
-import { CenteredMainElement } from "components";
+import { basePaddingX, CenteredMainElement } from "components";
 import { MagnifyingGlass } from "components/icons";
 import { DesignH1 } from "components/typography";
 
@@ -11,6 +11,7 @@ const EmptyPlaylistHeading = styled(DesignH1)`
 `;
 
 const EmptyTextWrapper = styled.div`
+  ${basePaddingX}
   text-align: center;
 `;
 
