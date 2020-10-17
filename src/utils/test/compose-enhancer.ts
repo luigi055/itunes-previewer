@@ -6,7 +6,9 @@ declare global {
   }
 }
 
-export const composeEnhancer: Function =
+const composeEnhancer: Function =
   (process.env.NODE_ENV === "development" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose;
+
+export default composeEnhancer;

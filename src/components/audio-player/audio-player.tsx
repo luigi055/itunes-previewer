@@ -12,6 +12,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Link } from "react-router-dom";
 import { ControlButtons, PlayerButton } from "./audio-player-styled";
 
 const ToggleReproduceButton: FunctionComponent<{ isPlaying: boolean }> = ({
@@ -33,16 +34,18 @@ const AudioPlayer: FunctionComponent<
   AudioPlayerProps & HTMLAttributes<HTMLDivElement>
 > = ({
   currentTrackURL,
-  nextTrackPath,
   previousTrackPath,
+  nextTrackPath,
   isNextButtonDisabled = false,
   isPreviousButtonDisabled = false,
+  onPreviousButtonClick = () => {},
+  onNextButtonClick = () => {},
   ...props
 }) => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const handleClickReproduceButton = async (
+  const handleClickReproduceTrack = async (
     event: MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
@@ -52,14 +55,25 @@ const AudioPlayer: FunctionComponent<
   };
 
   const toggleIsPlaying = () => setIsPlaying(!isPlaying);
+  const handlePreviousTrack = () => {
+    setIsPlaying(false);
+    onPreviousButtonClick();
+  };
+  const handleNextTrack = () => {
+    setIsPlaying(false);
+    onNextButtonClick();
+  };
 
   return (
     <>
       <ControlButtons {...props}>
         <PlayerButton
-          href={previousTrackPath}
+          as={Link}
+          to={previousTrackPath}
           data-testid="player-go-previous-button"
-          isDisabled={isPreviousButtonDisabled}
+          $isDisabled={isPreviousButtonDisabled}
+          aria-disabled={isPreviousButtonDisabled}
+          onClick={handlePreviousTrack}
         >
           <PlayerPrevious isDisabled={isPreviousButtonDisabled} />
           <ScreenReaderOnly>go Previous</ScreenReaderOnly>
@@ -68,20 +82,24 @@ const AudioPlayer: FunctionComponent<
         <PlayerButton
           as="button"
           data-testid="player-reproduce-button"
-          onClick={handleClickReproduceButton}
+          onClick={handleClickReproduceTrack}
         >
           <ToggleReproduceButton isPlaying={isPlaying} />
         </PlayerButton>
 
         <PlayerButton
-          href={nextTrackPath}
+          as={Link}
+          to={nextTrackPath}
           data-testid="player-go-next-button"
-          isDisabled={isNextButtonDisabled}
+          $isDisabled={isNextButtonDisabled}
+          aria-disabled={isNextButtonDisabled}
+          onClick={handleNextTrack}
         >
           <PlayerNext isDisabled={isNextButtonDisabled} />
           <ScreenReaderOnly>go next</ScreenReaderOnly>
         </PlayerButton>
       </ControlButtons>
+
       {currentTrackURL && (
         <audio
           data-testid="player-audio-element"
@@ -90,13 +108,8 @@ const AudioPlayer: FunctionComponent<
           ref={audioPlayerRef}
           onPause={toggleIsPlaying}
           onPlaying={toggleIsPlaying}
-        >
-          <source
-            data-testid="player-source"
-            src={currentTrackURL}
-            type="audio/x-m4a"
-          />
-        </audio>
+          src={currentTrackURL}
+        ></audio>
       )}
     </>
   );

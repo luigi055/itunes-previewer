@@ -16,15 +16,15 @@ import { useHistory } from "react-router-dom";
 
 const Search: FunctionComponent = () => {
   const searchSong = useSelector(selectSearchResult);
-  const artistSongs: ArtistSongs[] = useSelector(selectResults);
+  const artistSongs: ArtistTrack[] = useSelector(selectResults);
   const searchTerm = useSelector(selectSearchTerm);
   const sortedBy = useSelector(selectSortedBy);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleOptionChange = (optionValue: string) => {
-    history.replace(`${basePaths.SEARCH}/${searchTerm}?${optionValue}`);
-    dispatch(updateSortedBy(optionValue));
+  const handleSortChange = (sortOptionValue: string) => {
+    history.replace(`${basePaths.SEARCH}/${searchTerm}?${sortOptionValue}`);
+    dispatch(updateSortedBy(sortOptionValue));
   };
 
   return (
@@ -38,7 +38,7 @@ const Search: FunctionComponent = () => {
           <PlayList
             searchSong={searchSong}
             sortedBy={sortedBy}
-            onOptionChange={handleOptionChange}
+            onSortChange={handleSortChange}
           />
         </>
       ) : (

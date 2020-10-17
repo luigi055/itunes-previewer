@@ -4,4 +4,6 @@ interface AudioPlayerProps {
   previousTrackPath: string;
   isNextButtonDisabled?: boolean;
   isPreviousButtonDisabled?: boolean;
+  onPreviousButtonClick?: Function;
+  onNextButtonClick?: Function;
 }

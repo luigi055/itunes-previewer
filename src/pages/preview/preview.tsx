@@ -1,7 +1,7 @@
 import { AudioPlayer, Cover, SocialShare } from "components";
 import Track from "domain/track";
 import DomainHeader from "features/domain-header";
-import { fetchTrackData } from "features/media-player";
+import { fetchTrackData, goToTrack } from "features/media-player";
 import {
   selectCurrentTrack,
   selectIsNextButtonDisabled,
@@ -33,6 +33,14 @@ const Preview = () => {
     dispatch(fetchTrackData(track.getTrackNumber()));
   }, [dispatch, track]);
 
+  const handlePreviousButtonClick = () => {
+    dispatch(goToTrack(track.getTrackNumber() - 1));
+  };
+
+  const handleNextButtonClick = () => {
+    dispatch(goToTrack(track.getTrackNumber() + 1));
+  };
+
   return (
     <>
       <DomainHeader />
@@ -40,11 +48,13 @@ const Preview = () => {
       <Player>
         <AudioPlayer
           className="audio-player"
-          currentTrackURL={currentTrack.previewUrl}
           nextTrackPath={nextTrackPath}
           previousTrackPath={previousTrackPath}
+          currentTrackURL={currentTrack.previewUrl}
           isNextButtonDisabled={isNextButtonDisabled}
           isPreviousButtonDisabled={isPreviousButtonDisabled}
+          onPreviousButtonClick={handlePreviousButtonClick}
+          onNextButtonClick={handleNextButtonClick}
         />
         <SocialShare
           className="social-share"

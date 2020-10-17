@@ -4,7 +4,7 @@ import React, { FunctionComponent } from "react";
 import { CoverElement } from "./cover.styled";
 
 interface CoverInformationProps {
-  currentTrack: ArtistSongs;
+  currentTrack: ArtistTrack;
 }
 
 const Cover: FunctionComponent<CoverInformationProps> = ({ currentTrack }) => {

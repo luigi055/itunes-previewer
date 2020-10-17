@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { dummySearchData } from "services/externals/itunes-api/mock";
-import { ConnectedComponent, Random } from "test-utils";
+import { ConnectedComponent, Random } from "utils/test";
 import TrackElement, { formatPrice, formatToMinutes } from "./track-element";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 const playlistLinkTestId = "playlist-link";
 
@@ -45,7 +45,7 @@ describe("testing small helper functions for TrackElement Component", () => {
 
 describe("Testing the TrackElement component", () => {
   let randomPath: string;
-  const dummyTrackData = dummySearchData.results[0];
+  const dummyTrackData = dummyArtistTracks.results[0];
   beforeEach(() => {
     randomPath = Random.getString();
     render(
@@ -67,7 +67,7 @@ describe("Testing the TrackElement component", () => {
     expect(getByText(dummyTrackData.trackName)).toBeInTheDocument();
     expect(getByText(dummyTrackData.collectionName)).toBeInTheDocument();
     expect(getByText(dummyTrackData.artistName)).toBeInTheDocument();
-    expect(getByText(dummyTrackData.primaryGenreName)).toBeInTheDocument();
+    expect(getByText(dummyTrackData.genre)).toBeInTheDocument();
     expect(
       getByText(formatPrice(dummyTrackData.trackPrice, dummyTrackData.currency))
     ).toBeInTheDocument();

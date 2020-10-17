@@ -1,4 +1,4 @@
-import { Random } from "test-utils";
+import { Random } from "utils/test";
 import ITunesClient, { mediaQueryString } from "./itunes-client";
 import { dummySearchData, fetchSearchAPIMocked } from "./mock";
 

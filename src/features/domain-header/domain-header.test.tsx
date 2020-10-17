@@ -1,7 +1,7 @@
 import React from "react";
 import { createMemoryHistory } from "history";
 import { cleanup, render, screen } from "@testing-library/react";
-import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
+import { ConnectedComponent, ConnectedMemoryRouter, Random } from "utils/test";
 import DomainHeader from "./domain-header";
 import routesConfig, { basePaths } from "application/routes-config";
 import userEvent from "@testing-library/user-event";

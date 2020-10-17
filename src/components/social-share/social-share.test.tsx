@@ -1,6 +1,6 @@
 import React from "react";
 import { screen, render } from "@testing-library/react";
-import { Random } from "test-utils";
+import { Random } from "utils/test";
 import SocialShare from "./social-share";
 import { hiddenMessages, shareURLs } from "./social-share-constants";
 

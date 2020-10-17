@@ -9,7 +9,7 @@ import {
 const songsStateHandlers: Mapping<Function> = {
   [GET_SONGS_SUCCESS]: (
     state: SearchSongsState,
-    action: ActionPayloadRequired<SearchResult>
+    action: ActionPayloadRequired<IArtistTracks>
   ) => ({ ...state, ...action.payload }),
   [GET_SONGS_START]: (
     state: SearchSongsState,
@@ -21,13 +21,13 @@ const songsStateHandlers: Mapping<Function> = {
   ) => ({ ...state, sortedBy: decodeURIComponent(action.payload) }),
   [UPDATE_SORTED_TRACKS]: (
     state: SearchSongsState,
-    action: ActionPayloadRequired<ArtistSongs[]>
+    action: ActionPayloadRequired<ArtistTrack[]>
   ) => ({ ...state, sortedTracks: action.payload }),
 };
 
 export const reduceSongs = (
   state: SearchSongsState = initialState,
-  action: ActionStandard<SearchResult | string>
+  action: ActionStandard<IArtistTracks | string>
 ) => {
   const handler = songsStateHandlers[action.type];
   const hasHandler = !!handler;

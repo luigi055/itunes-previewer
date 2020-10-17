@@ -1,4 +1,4 @@
-import { Random } from "test-utils";
+import { Random } from "utils/test";
 const arrayLength = 10;
 
 export const dummySearchData = {
@@ -12,10 +12,7 @@ export const dummySearchData = {
     primaryGenreName: Random.getString(),
     trackPrice: Random.getNumber(),
     currency: Random.getString(),
-    collectionViewUrl: Random.getString(),
-    kind: Random.getString(),
     previewUrl: Random.getString(),
-    artworkUrl30: Random.getString(),
     artworkUrl60: Random.getString(),
     artworkUrl100: Random.getString(),
   })),
