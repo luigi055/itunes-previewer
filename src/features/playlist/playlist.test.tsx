@@ -2,9 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ConnectedComponent, Random } from "test-utils";
 import { dummySearchData } from "services/externals/itunes-api/mock";
-import {
-  queryStringSortOptions,
-} from "application/routes-config";
+import { queryStringSortOptions } from "application/routes-config";
 import PlayList from "./playlist";
 
 const playlistRowTestId = "playlist-row";

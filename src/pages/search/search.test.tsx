@@ -19,9 +19,9 @@ const magnifyingGlassIconTestId = "magnifying-glass-icon";
 const emptyPlaylistHeadingTestId = "empty-playlist-heading";
 const emptyPlaylistMessage = "Use the search bar to find songs";
 
-const headingGenreButtonTestId = "heading-genre-button"
-const headingDurationButtonTestId = "heading-duration-button"
-const headingPriceButtonTestId = "heading-price-button"
+const headingGenreButtonTestId = "heading-genre-button";
+const headingDurationButtonTestId = "heading-duration-button";
+const headingPriceButtonTestId = "heading-price-button";
 
 describe("Testing the search page", () => {
   it("should show the empty songs message", () => {
@@ -71,8 +71,8 @@ describe("Testing the search page", () => {
     });
 
     beforeEach(() => {
-      triggeredActions.clear() ;
-    })
+      triggeredActions.clear();
+    });
 
     it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
       const { getAllByTestId } = screen;
@@ -90,28 +90,28 @@ describe("Testing the search page", () => {
 
     it(`should dispatch the ${UPDATE_SORTED_BY} when the user clicks on sort by genre`, () => {
       const { getByTestId } = screen;
-      
+
       userEvent.click(getByTestId(headingGenreButtonTestId));
-      const action = triggeredActions.getAction(UPDATE_SORTED_BY) 
-      
+      const action = triggeredActions.getAction(UPDATE_SORTED_BY);
+
       expect(action?.payload).toBe(queryStringSortOptions.sortByGenre);
     });
 
     it(`should dispatch the ${UPDATE_SORTED_BY} when the user clicks on sort by price`, () => {
       const { getByTestId } = screen;
-      
+
       userEvent.click(getByTestId(headingPriceButtonTestId));
       const action = triggeredActions.getAction(UPDATE_SORTED_BY);
-      
+
       expect(action?.payload).toBe(queryStringSortOptions.sortByPrice);
     });
 
     it(`should dispatch the ${UPDATE_SORTED_BY} when the user clicks on sort by duration`, () => {
       const { getByTestId } = screen;
-      
+
       userEvent.click(getByTestId(headingDurationButtonTestId));
       const action = triggeredActions.getAction(UPDATE_SORTED_BY);
-      
+
       expect(action?.payload).toBe(queryStringSortOptions.sortByDuration);
     });
   });
