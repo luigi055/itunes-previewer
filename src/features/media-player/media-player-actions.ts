@@ -12,8 +12,8 @@ export const fetchTrackData = (
 });
 
 export const generateCurrentTrackData = (
-  payload: any
-): ActionPayloadRequired<any> => ({
+  payload: ITrackData
+): ActionPayloadRequired<ITrackData> => ({
   type: GENERATE_CURRENT_TRACK_DATA,
   payload,
 });
