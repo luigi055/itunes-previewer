@@ -1,13 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Search from "./search";
-import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
-import { setStore } from "services/application/redux";
+import { ConnectedComponent, Random } from "test-utils";
 import { dummySearchData } from "services/externals/itunes-api/mock";
-import { Store } from "redux";
-import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
-import routesConfig, {
-  basePaths,
+import {
   queryStringSortOptions,
 } from "application/routes-config";
 import PlayList from "./playlist";
@@ -16,7 +11,6 @@ const playlistRowTestId = "playlist-row";
 
 describe("Testing the Playlist", () => {
   describe("Testing search page when there are tracks", () => {
-    let store: Store;
     let randomSearch: string = "";
 
     beforeEach(() => {
