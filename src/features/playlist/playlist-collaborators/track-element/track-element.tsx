@@ -12,22 +12,29 @@ import {
 } from "../../playlist-styled";
 
 const currencyDictionary: Mapping<string> = {
-  "EUR": "€",
-  "USD": "$"
+  EUR: "€",
+  USD: "$",
 };
 
-const formatToMinutes = (milliseconds: number): string =>
-  (milliseconds / 1000 / 60).toFixed(2).replace(/\./, ":");
+export const formatToMinutes = (milliseconds: number) => {
+  const seconds = Math.floor((milliseconds / 1000) % 60);
+  const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
+  const secondsFormatted = seconds < 10 ? "0" + seconds : seconds;
 
-const formatPrice = (price: number, currency: string): string =>
-  price === -1 ? "Free" : `${price} ${currencyDictionary[currency]}`;
+  return minutes + ":" + secondsFormatted;
+};
 
-const TrackElement: FunctionComponent<{trackData: ArtistSongs, trackPath:string}> = ({trackData, trackPath}) => (
-  <PlayListLink
-    to={trackPath}
-  >
+export const formatPrice = (price: number, currency: string): string =>
+  price <= 0 ? "Free" : `${price}${currencyDictionary[currency]}`;
+
+const TrackElement: FunctionComponent<{
+  trackData: ArtistSongs;
+  trackPath: string;
+}> = ({ trackData, trackPath }) => (
+  <PlayListLink data-testid="playlist-link" to={trackPath}>
     <PlayListRow data-testid="playlist-row">
       <PlayListThumbNail
+        data-testid="playlist-thumbnail"
         src={trackData.artworkUrl60}
         alt={`thumbnail ${trackData.artistName} ${trackData.collectionName}`}
       />

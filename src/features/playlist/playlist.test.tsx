@@ -15,8 +15,7 @@ import PlayList from "./playlist";
 const playlistRowTestId = "playlist-row";
 
 describe("Testing the Playlist", () => {
-
-  describe("Testing search page when there are songs", () => {
+  describe("Testing search page when there are tracks", () => {
     let store: Store;
     let randomSearch: string = "";
 
@@ -25,7 +24,7 @@ describe("Testing the Playlist", () => {
     });
 
     beforeEach(() => {
-      const searchResult ={
+      const searchResult = {
         ...dummySearchData,
         searchTerm: randomSearch,
         sortedBy: queryStringSortOptions.unsorted,
@@ -33,20 +32,23 @@ describe("Testing the Playlist", () => {
       };
       render(
         <ConnectedComponent>
-        <PlayList sortedBy={queryStringSortOptions.unsorted.slice(1)} onOptionChange={jest.fn()} searchSong={searchResult} />
+          <PlayList
+            sortedBy={queryStringSortOptions.unsorted.slice(1)}
+            onOptionChange={jest.fn()}
+            searchSong={searchResult}
+          />
         </ConnectedComponent>
-        );
+      );
     });
-    
-    it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
-    
+
+    it(`should have ${dummySearchData.results.length} tracks in the playlist`, () => {
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 
       expect(playlistRowCount).toBe(dummySearchData.results.length);
     });
 
-    it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
+    it(`should have ${dummySearchData.results.length} tracks in the playlist`, () => {
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 
