@@ -71,7 +71,7 @@ const AudioPlayer: FunctionComponent<
           as={Link}
           to={previousTrackPath}
           data-testid="player-go-previous-button"
-          isDisabled={isPreviousButtonDisabled}
+          $isDisabled={isPreviousButtonDisabled}
           aria-disabled={isPreviousButtonDisabled}
           onClick={handlePreviousTrack}
         >
@@ -91,7 +91,7 @@ const AudioPlayer: FunctionComponent<
           as={Link}
           to={nextTrackPath}
           data-testid="player-go-next-button"
-          isDisabled={isNextButtonDisabled}
+          $isDisabled={isNextButtonDisabled}
           aria-disabled={isNextButtonDisabled}
           onClick={handleNextTrack}
         >
