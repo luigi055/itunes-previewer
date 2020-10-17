@@ -38,6 +38,7 @@ function* processTrackData(
 function* updateTrackData(
   currentTrack: ActionPayloadRequired<number>
 ): SagaIterator {
+  // TODO remove duplication
   const searchResult = (yield select(selectSearchResult)) as SearchSongsState;
   const mediaPlayerLinksGenerator = new MediaPlayerLinksGenerator(searchResult);
   const track = new Track(currentTrack.payload).defineMaxLimit(

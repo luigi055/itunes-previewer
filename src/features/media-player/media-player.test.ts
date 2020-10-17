@@ -9,7 +9,7 @@ import {
   selectNextTrackPath,
   selectPreviousTrackPath,
 } from "./media-player-selectors";
-import { fetchTrackData } from "./media-player-actions";
+import { fetchTrackData, goToTrack } from "./media-player-actions";
 import { Store } from "redux";
 import { selectSearchResult } from "features/search-songs";
 import { setStore } from "services/application/redux";
@@ -118,6 +118,29 @@ describe("Testing search songs feature", () => {
     );
     expect(selectPreviousTrackPath(store.getState())).toEqual(
       mediaPlayerLinkGenerator.generatePreviousTrackURI(track)
+    );
+  });
+
+  it("should update the currentTrack data when goToTrack function is invoked", () => {
+    const track = new Track(5);
+    const newTrack = new Track(3);
+    store.dispatch(fetchTrackData(track.toZeroBaseIndex()));
+    store.dispatch(searchSongsSuccess(dummySearchData));
+    store.dispatch(goToTrack(newTrack.getTrackNumber()));
+
+    const mediaPlayerLinkGenerator = new MediaPlayerLinksGenerator(
+      selectSearchResult(store.getState())
+    );
+
+    expect(selectCurrentTrack(store.getState())).toEqual(
+      dummySearchData.results[newTrack.toZeroBaseIndex()]
+    );
+
+    expect(selectNextTrackPath(store.getState())).toEqual(
+      mediaPlayerLinkGenerator.generateNextTrackURI(newTrack)
+    );
+    expect(selectPreviousTrackPath(store.getState())).toEqual(
+      mediaPlayerLinkGenerator.generatePreviousTrackURI(newTrack)
     );
   });
 });
