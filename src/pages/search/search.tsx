@@ -6,14 +6,13 @@ import {
   selectSortedBy,
 } from "features/search-songs/search-songs-selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { EmptyList, PlayList } from "./search-collaborators";
+import { EmptyList } from "./search-collaborators";
+import PlayList from "../../features/playlist";
 import { SearchTerm } from "./search-styled";
 import DomainHeader from "features/domain-header";
-import { SortOptions } from "./search-collaborators/sort-options";
 import { basePaths } from "application/routes-config";
 import { updateSortedBy } from "features/search-songs";
 import { useHistory } from "react-router-dom";
-import { TitleWithSort } from "./search-collaborators/titles-with-sort";
 
 const Search: FunctionComponent = () => {
   const searchSong = useSelector(selectSearchResult);
@@ -36,9 +35,11 @@ const Search: FunctionComponent = () => {
           <SearchTerm isFontWeightNormal as="h2" data-testid="search-term">
             Searching "{searchTerm}"
           </SearchTerm>
-          <SortOptions value={sortedBy} onOptionChange={handleOptionChange} />
-          <TitleWithSort onOptionChange={handleOptionChange} />
-          <PlayList searchSong={searchSong} />
+          <PlayList
+            searchSong={searchSong}
+            sortedBy={sortedBy}
+            onOptionChange={handleOptionChange}
+          />
         </>
       ) : (
         <EmptyList />

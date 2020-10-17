@@ -1,8 +1,14 @@
 import styled, { css } from "styled-components";
+import { declareCssForSmallView } from "styles/responsive";
 
 export const basePaddingX = css`
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  ${declareCssForSmallView(css`
+    padding-left: 25px;
+    padding-right: 25px;
+  `)}
 `;
 
 export const basePaddingY = css`

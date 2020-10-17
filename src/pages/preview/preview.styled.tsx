@@ -1,6 +1,6 @@
 import { basePaddingX } from "components";
 import styled, { css } from "styled-components";
-import { declareCssForLargeView } from "styles/responsive";
+import { declareCssForMediumView } from "styles/responsive";
 
 export const Player = styled.section`
   background: ${({ theme }) => theme.backgroundVariantColor};
@@ -24,7 +24,7 @@ export const Player = styled.section`
     width: 100%;
   }
 
-  ${declareCssForLargeView(css`
+  ${declareCssForMediumView(css`
     padding: 28px 0;
     ${basePaddingX}
 

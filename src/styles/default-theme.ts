@@ -11,9 +11,10 @@ const defaultTheme: Theme = {
   fontSize: "16px",
   disabled: "#454749",
   disabledVariant: "#888",
-  largeBreakPoint: 48,
+  smallBreakPoint: 36,
+  mediumBreakPoint: 48,
+  largeBreakPoint: 63.75,
   breakPointUnit: "rem",
-  smallBreakPoint: 25,
 };
 
 export default defaultTheme;

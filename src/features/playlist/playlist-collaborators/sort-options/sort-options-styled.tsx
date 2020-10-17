@@ -1,12 +1,13 @@
 import { basePaddingX } from "components";
 import styled, { css } from "styled-components";
-import { declareCssForLargeView } from "styles/responsive";
+import { declareCssForMediumView } from "styles/responsive";
 
 export const SortOptionLabel = styled.label`
   ${basePaddingX}
   position: relative;
+  margin-bottom: 20px;
 
-  ${declareCssForLargeView(css`
+  ${declareCssForMediumView(css`
     display: none;
   `)}
 

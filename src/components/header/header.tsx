@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { fluidContainer } from "components/layout";
-import { declareCssForLargeView } from "styles/responsive";
+import { declareCssForMediumView } from "styles/responsive";
 
 export const Header = styled.header`
   ${fluidContainer}
@@ -16,7 +16,7 @@ export const Header = styled.header`
   padding-bottom: 10px;
   padding-top: 10px;
 
-  ${declareCssForLargeView(css`
+  ${declareCssForMediumView(css`
     flex-direction: row;
     max-height: 70px;
     min-height: 70px;
