@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 
 const Search: FunctionComponent = () => {
   const searchSong = useSelector(selectSearchResult);
-  const artistSongs: ArtistSongs[] = useSelector(selectResults);
+  const artistSongs: ArtistTrack[] = useSelector(selectResults);
   const searchTerm = useSelector(selectSearchTerm);
   const sortedBy = useSelector(selectSortedBy);
   const history = useHistory();

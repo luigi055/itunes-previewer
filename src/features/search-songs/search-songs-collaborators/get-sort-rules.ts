@@ -3,19 +3,19 @@ import getNameOf from "utils/get-name-of";
 import { sortObjectsByPropertyAscending } from "utils/sort-utils";
 
 export const getSortRules = (
-  artistSongs: ArtistSongs[]
-): Mapping<ArtistSongs[]> => ({
+  artistSongs: ArtistTrack[]
+): Mapping<ArtistTrack[]> => ({
   [queryStringSortOptions.unsorted]: artistSongs,
   [queryStringSortOptions.sortByGenre]: sortObjectsByPropertyAscending(
     artistSongs,
-    getNameOf<ArtistSongs>((object) => object.primaryGenreName)
+    getNameOf<ArtistTrack>((object) => object.primaryGenreName)
   ),
   [queryStringSortOptions.sortByPrice]: sortObjectsByPropertyAscending(
     artistSongs,
-    getNameOf<ArtistSongs>((object) => object.trackPrice)
+    getNameOf<ArtistTrack>((object) => object.trackPrice)
   ),
   [queryStringSortOptions.sortByDuration]: sortObjectsByPropertyAscending(
     artistSongs,
-    getNameOf<ArtistSongs>((object) => object.trackTimeMillis)
+    getNameOf<ArtistTrack>((object) => object.trackTimeMillis)
   ),
 });

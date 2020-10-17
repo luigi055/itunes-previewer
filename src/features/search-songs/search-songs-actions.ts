@@ -12,8 +12,8 @@ export const searchSongsStart = (payload: string): ActionStandard<string> => ({
 });
 
 export const searchSongsSuccess = (
-  payload: SearchResult
-): ActionStandard<SearchResult> => ({
+  payload: IArtistTracks
+): ActionStandard<IArtistTracks> => ({
   type: GET_SONGS_SUCCESS,
   payload,
 });
@@ -24,8 +24,8 @@ export const updateSortedBy = (payload: string): ActionStandard<string> => ({
 });
 
 export const updateSortedTracks = (
-  payload: ArtistSongs[]
-): ActionStandard<ArtistSongs[]> => ({
+  payload: ArtistTrack[]
+): ActionStandard<ArtistTrack[]> => ({
   type: UPDATE_SORTED_TRACKS,
   payload,
 });

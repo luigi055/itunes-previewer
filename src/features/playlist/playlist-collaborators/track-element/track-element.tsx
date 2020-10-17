@@ -28,7 +28,7 @@ export const formatPrice = (price: number, currency: string): string =>
   price <= 0 ? "Free" : `${price}${currencyDictionary[currency]}`;
 
 const TrackElement: FunctionComponent<{
-  trackData: ArtistSongs;
+  trackData: ArtistTrack;
   trackPath: string;
 }> = ({ trackData, trackPath }) => (
   <PlayListLink data-testid="playlist-link" to={trackPath}>

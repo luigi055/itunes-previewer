@@ -1,4 +1,4 @@
-interface ITunesTrack {
+interface ArtistTrack {
   trackId: number;
   trackName: string;
   artistName: string;
@@ -15,7 +15,7 @@ interface ITunesTrack {
   artworkUrl100: string;
 }
 
-interface ITunesSearchResult {
+interface IArtistTracks {
   resultCount: number;
-  results: ITunesTrack[];
+  results: ArtistTrack[]
 }

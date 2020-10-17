@@ -1,5 +1,5 @@
-interface SearchSongsState extends SearchResult {
+interface SearchSongsState extends IArtistTracks {
   searchTerm: string;
   sortedBy: string;
-  sortedTracks: ArtistSongs[];
+  sortedTracks: ArtistTrack[];
 }

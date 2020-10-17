@@ -1,5 +1,5 @@
 interface ITrackData {
-  currentTrack: ArtistSongs;
+  currentTrack: ArtistTrack;
   nextTrackPath: string;
   previousTrackPath: string;
   isNextButtonDisabled: boolean;
