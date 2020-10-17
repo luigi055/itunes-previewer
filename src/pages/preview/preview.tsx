@@ -11,7 +11,7 @@ import {
 } from "features/media-player/media-player-selectors";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Player } from "./preview.styled";
 
 const Preview = () => {
@@ -21,7 +21,7 @@ const Preview = () => {
     trackNumber!.slice(trackNumber!.indexOf("-") + 1)
   );
   const track = new Track(trackIndex);
-
+  const history = useHistory();
   const dispatch = useDispatch();
   const currentTrack = useSelector(selectCurrentTrack);
   const nextTrackPath = useSelector(selectNextTrackPath);
@@ -35,10 +35,12 @@ const Preview = () => {
 
   const handlePreviousButtonClick = () => {
     dispatch(goToTrack(track.getTrackNumber() - 1));
+    history.replace(previousTrackPath);
   };
 
   const handleNextButtonClick = () => {
     dispatch(goToTrack(track.getTrackNumber() + 1));
+    history.replace(nextTrackPath);
   };
 
   return (
@@ -48,8 +50,6 @@ const Preview = () => {
       <Player>
         <AudioPlayer
           className="audio-player"
-          nextTrackPath={nextTrackPath}
-          previousTrackPath={previousTrackPath}
           currentTrackURL={currentTrack.previewUrl}
           isNextButtonDisabled={isNextButtonDisabled}
           isPreviousButtonDisabled={isPreviousButtonDisabled}
