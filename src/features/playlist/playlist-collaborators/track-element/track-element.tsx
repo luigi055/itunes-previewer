@@ -1,0 +1,79 @@
+import { ScreenReaderOnly } from "components";
+import { Truncate } from "components/typography";
+import React, { FunctionComponent } from "react";
+import {
+  PlayListElement,
+  PlayListLink,
+  PlayListRow,
+  PlayListThumbNail,
+  TextWrapper,
+  TextLeft,
+  TextRight,
+} from "../../playlist-styled";
+
+const currencyDictionary: Mapping<string> = {
+  "EUR": "€",
+  "USD": "$"
+};
+
+const formatToMinutes = (milliseconds: number): string =>
+  (milliseconds / 1000 / 60).toFixed(2).replace(/\./, ":");
+
+const formatPrice = (price: number, currency: string): string =>
+  price === -1 ? "Free" : `${price} ${currencyDictionary[currency]}`;
+
+const TrackElement: FunctionComponent<{trackData: ArtistSongs, trackPath:string}> = ({trackData, trackPath}) => (
+  <PlayListLink
+    to={trackPath}
+  >
+    <PlayListRow data-testid="playlist-row">
+      <PlayListThumbNail
+        src={trackData.artworkUrl60}
+        alt={`thumbnail ${trackData.artistName} ${trackData.collectionName}`}
+      />
+      <TextWrapper>
+        <TextLeft>
+          <PlayListElement highlight title={trackData.trackName}>
+            <Truncate>
+              <ScreenReaderOnly>track name:</ScreenReaderOnly>
+              {trackData.trackName}
+            </Truncate>
+          </PlayListElement>
+
+          <PlayListElement title={trackData.artistName}>
+            <Truncate>
+              <ScreenReaderOnly>artist name:</ScreenReaderOnly>
+              {trackData.artistName}
+            </Truncate>
+          </PlayListElement>
+
+          <PlayListElement title={trackData.collectionName}>
+            <Truncate>
+              <ScreenReaderOnly>album name:</ScreenReaderOnly>
+              {trackData.collectionName}
+            </Truncate>
+          </PlayListElement>
+        </TextLeft>
+        <TextRight>
+          <PlayListElement title={formatToMinutes(trackData.trackTimeMillis)}>
+            <ScreenReaderOnly>time duration:</ScreenReaderOnly>
+            {formatToMinutes(trackData.trackTimeMillis)}
+            <ScreenReaderOnly>minutes</ScreenReaderOnly>
+          </PlayListElement>
+          <PlayListElement title={trackData.primaryGenreName}>
+            <ScreenReaderOnly>genre:</ScreenReaderOnly>
+            {trackData.primaryGenreName}
+          </PlayListElement>
+          <PlayListElement
+            title={formatPrice(trackData.trackPrice, trackData.currency)}
+          >
+            <ScreenReaderOnly>track price:</ScreenReaderOnly>
+            {formatPrice(trackData.trackPrice, trackData.currency)}
+          </PlayListElement>
+        </TextRight>
+      </TextWrapper>
+    </PlayListRow>
+  </PlayListLink>
+);
+
+export default TrackElement;

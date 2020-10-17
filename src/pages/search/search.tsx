@@ -6,7 +6,8 @@ import {
   selectSortedBy,
 } from "features/search-songs/search-songs-selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { EmptyList, PlayList } from "./search-collaborators";
+import { EmptyList } from "./search-collaborators";
+import PlayList from "../../features/playlist";
 import { SearchTerm } from "./search-styled";
 import DomainHeader from "features/domain-header";
 import { basePaths } from "application/routes-config";

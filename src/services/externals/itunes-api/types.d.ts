@@ -8,7 +8,7 @@ interface ArtistSongs {
   trackPrice: number;
   currency: string;
   collectionViewUrl: string;
-  kind: string; // song
+  kind: string;
   previewUrl: string;
   artworkUrl30: string;
   artworkUrl60: string;

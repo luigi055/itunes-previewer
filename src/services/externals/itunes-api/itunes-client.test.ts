@@ -1,5 +1,5 @@
 import { Random } from "test-utils";
-import ITunesClient from "./itunes-client";
+import ITunesClient, { mediaQueryString } from "./itunes-client";
 import { dummySearchData, fetchSearchAPIMocked } from "./mock";
 
 describe("Testing the itunes client class", () => {
@@ -12,7 +12,7 @@ describe("Testing the itunes client class", () => {
     const result = await ITunesClient.search(term);
 
     expect(global.fetch).toHaveBeenCalledWith(
-      `${process.env.REACT_APP_ITUNES_SEARCH_URI}${term}`
+      `${process.env.REACT_APP_ITUNES_SEARCH_URI}${term}${mediaQueryString}`
     );
     expect(result).toEqual(dummySearchData);
   });
