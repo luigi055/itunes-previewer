@@ -5,6 +5,7 @@ import {
   GET_SONGS_START,
   updateSortedTracks,
   GET_SONGS_SUCCESS,
+  searchSongsFail,
 } from "./search-songs-actions";
 import { ITunesClient } from "services/externals/itunes-api";
 import { startLoading, stopLoading } from "features/loading";
@@ -12,7 +13,7 @@ import { selectResults, selectSortedBy } from "./search-songs-selectors";
 import { getSortRules } from "./search-songs-collaborators";
 import ItunesAdapter from "domain/artist-track/itunes-adapter";
 
-function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
+export function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
   const { payload } = searchTerm;
 
   try {
@@ -22,11 +23,10 @@ function* getSongs(searchTerm: ActionPayloadRequired<string>): SagaIterator {
     } else {
       const response = yield call(ITunesClient.search, payload);
       const adaptedTracks = new ItunesAdapter(response).adaptModel();
-
       yield put(searchSongsSuccess(adaptedTracks));
     }
   } catch (error) {
-    console.error("implement error case");
+    yield put(searchSongsFail())
   } finally {
     yield put(stopLoading());
   }

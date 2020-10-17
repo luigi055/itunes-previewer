@@ -18,6 +18,7 @@ export const Header = styled.header`
 
   ${declareCssForMediumView(css`
     flex-direction: row;
+    justify-content: space-between;
     max-height: 70px;
     min-height: 70px;
   `)}
