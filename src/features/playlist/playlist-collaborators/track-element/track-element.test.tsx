@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { ConnectedComponent, Random } from "test-utils";
+import { ConnectedComponent, Random } from "utils/test";
 import TrackElement, { formatPrice, formatToMinutes } from "./track-element";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 const playlistLinkTestId = "playlist-link";
 

@@ -1,4 +1,4 @@
-import { Random } from "test-utils";
+import { Random } from "utils/test";
 const arrayLength = 10;
 
 export const dummySearchData = {

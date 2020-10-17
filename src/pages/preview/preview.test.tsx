@@ -1,6 +1,6 @@
 import React from "react";
 import { setStore, storeInitialState } from "services/application/redux";
-import { ConnectedMemoryRouter, Random } from "test-utils";
+import { ConnectedMemoryRouter, Random } from "utils/test";
 import Preview from "./preview";
 import { render, screen } from "@testing-library/react";
 import { Store } from "redux";
@@ -11,10 +11,10 @@ import routesConfig, {
   queryStringSortOptions,
 } from "application/routes-config";
 import userEvent from "@testing-library/user-event";
-import { triggeredActions } from "test-utils/triggered-actions";
+import { triggeredActions } from "utils/test/triggered-actions";
 import { GO_TO_TRACK } from "features/media-player";
 import searchSongsInitialState from "features/search-songs/search-songs-initial-state";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 const playerPreviousButtonTestId = "player-go-previous-button";
 const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";

@@ -6,8 +6,8 @@ import MediaPlayerLinksGenerator from "application/route-logic/media-player-link
 import userEvent from "@testing-library/user-event";
 import Track from "domain/track";
 import { queryStringSortOptions } from "application/routes-config";
-import { ConnectedComponent } from "test-utils";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { ConnectedComponent } from "utils/test";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 describe("Testing AudioPlayer component", () => {
   const playerReproduceTestId = "player-reproduce-button";

@@ -3,7 +3,7 @@ import { createMemoryHistory } from "history";
 import { cleanup, render } from "@testing-library/react";
 import ClientRouter from "./client-router";
 import { basePaths } from "./routes-config";
-import { ConnectedComponent } from "test-utils";
+import { ConnectedComponent } from "utils/test";
 
 describe("Testing ClientRouter component", () => {
   let history: any;

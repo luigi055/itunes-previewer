@@ -1,10 +1,10 @@
-import { Random } from "test-utils";
+import { Random } from "utils/test";
 import MediaPlayerLinksGenerator, {
   IMediaPlayerLinksGenerator,
 } from "./media-player-links-generator";
 import Track from "domain/track";
 import { queryStringSortOptions, basePaths } from "application/routes-config";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 describe("testing MediaPlayerLinkGenerator class", () => {
   let randomSearch: string;

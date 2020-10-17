@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Cover from "./cover";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 describe("Testing the Cover component", () => {
   const coverImageTestId = "cover-image";

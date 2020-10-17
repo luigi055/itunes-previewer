@@ -16,7 +16,7 @@ import { setStore } from "services/application/redux";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import Track from "domain/track";
 import { queryStringSortOptions } from "application/routes-config";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 describe("Testing search songs feature", () => {
   let store: Store;

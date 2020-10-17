@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Search from "./search";
-import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
+import { ConnectedComponent, ConnectedMemoryRouter, Random } from "utils/test";
 import { setStore } from "services/application/redux";
 import { Store } from "redux";
 import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
@@ -10,9 +10,9 @@ import routesConfig, {
   queryStringSortOptions,
 } from "application/routes-config";
 import userEvent from "@testing-library/user-event";
-import { triggeredActions } from "test-utils/triggered-actions";
+import { triggeredActions } from "utils/test/triggered-actions";
 import { UPDATE_SORTED_BY } from "features/search-songs";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 const playlistRowTestId = "playlist-row";
 const magnifyingGlassIconTestId = "magnifying-glass-icon";

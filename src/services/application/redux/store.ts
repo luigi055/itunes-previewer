@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import { composeEnhancer } from "./collaborators";
 import rootReducers from "./root-reducers";
 import rootSagas from "./root-sagas";
-import { actionWatcherMiddleware } from "test-utils/triggered-actions";
+import { actionWatcherMiddleware } from "utils/test/triggered-actions";
 import storeInitialState from "./store-initial-state";
 
 const sagaMiddleware = createSagaMiddleware();

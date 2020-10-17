@@ -1,6 +1,6 @@
 import { Store } from "redux";
 import { START_LOADING } from "./../loading/loading-actions";
-import { Random } from "test-utils";
+import { Random } from "utils/test";
 import {
   GET_SONGS_START,
   GET_SONGS_SUCCESS,
@@ -11,14 +11,14 @@ import searchSongsInitialState from "./search-songs-initial-state";
 import {
   fetchSearchAPIMocked,
 } from "services/externals/itunes-api/mock";
-import { triggeredActions } from "test-utils/triggered-actions";
+import { triggeredActions } from "utils/test/triggered-actions";
 import { STOP_LOADING } from "features/loading";
 import {
   selectResults,
   selectResultCount,
   selectSearchResult,
 } from "./search-songs-selectors";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 describe("Testing search songs feature", () => {
   let store: Store;

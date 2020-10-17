@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
-import { ComponentWithTheme, Random } from "test-utils";
+import { ComponentWithTheme, Random } from "utils/test";
 import SearchInput from "./search-input";
 import userEvent from "@testing-library/user-event";
 

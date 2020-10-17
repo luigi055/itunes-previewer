@@ -1,9 +1,9 @@
 import searchSongsInitialState from "features/search-songs/search-songs-initial-state";
-import { Random } from "test-utils/random/random";
+import { Random } from "utils/test/random/random";
 import Track from "domain/track";
 import TrackDataGenerator from "./track-data";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
-import { dummyArtistTracks } from "test-utils/domain-dummies";
+import { dummyArtistTracks } from "utils/test/domain-dummies";
 
 describe("Testing TrackDataGenerator class", () => {
   it("should generate the correct trackData", () => {
