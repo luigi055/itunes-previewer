@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ConnectedComponent, Random } from "test-utils";
-import { dummySearchData } from "services/externals/itunes-api/mock";
 import { queryStringSortOptions } from "application/routes-config";
 import PlayList from "./playlist";
+import { dummyArtistTracks } from "test-utils/domain-dummies";
 
 const playlistRowTestId = "playlist-row";
 
@@ -17,10 +17,10 @@ describe("Testing the Playlist", () => {
 
     beforeEach(() => {
       const searchResult = {
-        ...dummySearchData,
+        ...dummyArtistTracks,
         searchTerm: randomSearch,
         sortedBy: queryStringSortOptions.unsorted,
-        sortedTracks: dummySearchData.results,
+        sortedTracks: dummyArtistTracks.results,
       };
       render(
         <ConnectedComponent>
@@ -33,18 +33,18 @@ describe("Testing the Playlist", () => {
       );
     });
 
-    it(`should have ${dummySearchData.results.length} tracks in the playlist`, () => {
+    it(`should have ${dummyArtistTracks.results.length} tracks in the playlist`, () => {
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 
-      expect(playlistRowCount).toBe(dummySearchData.results.length);
+      expect(playlistRowCount).toBe(dummyArtistTracks.results.length);
     });
 
-    it(`should have ${dummySearchData.results.length} tracks in the playlist`, () => {
+    it(`should have ${dummyArtistTracks.results.length} tracks in the playlist`, () => {
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 
-      expect(playlistRowCount).toBe(dummySearchData.results.length);
+      expect(playlistRowCount).toBe(dummyArtistTracks.results.length);
     });
   });
 });

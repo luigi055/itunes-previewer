@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import Search from "./search";
 import { ConnectedComponent, ConnectedMemoryRouter, Random } from "test-utils";
 import { setStore } from "services/application/redux";
-import { dummySearchData } from "services/externals/itunes-api/mock";
 import { Store } from "redux";
 import mediaPlayerInitialState from "features/media-player/media-player-initial-state";
 import routesConfig, {
@@ -13,6 +12,7 @@ import routesConfig, {
 import userEvent from "@testing-library/user-event";
 import { triggeredActions } from "test-utils/triggered-actions";
 import { UPDATE_SORTED_BY } from "features/search-songs";
+import { dummyArtistTracks } from "test-utils/domain-dummies";
 
 const playlistRowTestId = "playlist-row";
 const magnifyingGlassIconTestId = "magnifying-glass-icon";
@@ -48,10 +48,10 @@ describe("Testing the search page", () => {
       randomSearch = Random.getString();
       store = setStore({
         searchResult: {
-          ...dummySearchData,
+          ...dummyArtistTracks,
           searchTerm: randomSearch,
           sortedBy: queryStringSortOptions.unsorted,
-          sortedTracks: dummySearchData.results,
+          sortedTracks: dummyArtistTracks.results,
         },
         isLoading: false,
         mediaPlayerData: mediaPlayerInitialState,
@@ -74,18 +74,18 @@ describe("Testing the search page", () => {
       triggeredActions.clear();
     });
 
-    it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
+    it(`should have ${dummyArtistTracks.results.length} songs in the playlist`, () => {
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 
-      expect(playlistRowCount).toBe(dummySearchData.results.length);
+      expect(playlistRowCount).toBe(dummyArtistTracks.results.length);
     });
 
-    it(`should have ${dummySearchData.results.length} songs in the playlist`, () => {
+    it(`should have ${dummyArtistTracks.results.length} songs in the playlist`, () => {
       const { getAllByTestId } = screen;
       const playlistRowCount = getAllByTestId(playlistRowTestId).length;
 
-      expect(playlistRowCount).toBe(dummySearchData.results.length);
+      expect(playlistRowCount).toBe(dummyArtistTracks.results.length);
     });
 
     it(`should dispatch the ${UPDATE_SORTED_BY} when the user clicks on sort by genre`, () => {

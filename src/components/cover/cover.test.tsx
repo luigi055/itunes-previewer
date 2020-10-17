@@ -1,13 +1,13 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { dummySearchData } from "services/externals/itunes-api/mock";
 import Cover from "./cover";
+import { dummyArtistTracks } from "test-utils/domain-dummies";
 
 describe("Testing the Cover component", () => {
   const coverImageTestId = "cover-image";
   const coverTrackNameTestId = "cover-track-name";
   const coverArtistNameTestId = "cover-artist-name";
-  const dummyCurrentTrack = dummySearchData.results[0];
+  const dummyCurrentTrack = dummyArtistTracks.results[0];
 
   beforeEach(() => {
     render(<Cover currentTrack={dummyCurrentTrack} />);

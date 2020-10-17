@@ -1,17 +1,17 @@
 import searchSongsInitialState from "features/search-songs/search-songs-initial-state";
 import { Random } from "test-utils/random/random";
-import { dummySearchData } from "services/externals/itunes-api/mock";
 import Track from "domain/track";
 import TrackDataGenerator from "./track-data";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
+import { dummyArtistTracks } from "test-utils/domain-dummies";
 
 describe("Testing TrackDataGenerator class", () => {
   it("should generate the correct trackData", () => {
     const searchTerm = Random.getString();
     const searchSongs = {
       ...searchSongsInitialState,
-      sortedTracks: dummySearchData.results,
-      resultCount: dummySearchData.resultCount,
+      sortedTracks: dummyArtistTracks.results,
+      resultCount: dummyArtistTracks.resultCount,
       searchTerm: searchTerm,
     };
     const currentTrack = new Track(2);

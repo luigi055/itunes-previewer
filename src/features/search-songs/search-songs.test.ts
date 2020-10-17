@@ -9,7 +9,6 @@ import {
 import { setStore, storeInitialState } from "services/application/redux";
 import searchSongsInitialState from "./search-songs-initial-state";
 import {
-  dummySearchData,
   fetchSearchAPIMocked,
 } from "services/externals/itunes-api/mock";
 import { triggeredActions } from "test-utils/triggered-actions";
@@ -19,6 +18,7 @@ import {
   selectResultCount,
   selectSearchResult,
 } from "./search-songs-selectors";
+import { dummyArtistTracks } from "test-utils/domain-dummies";
 
 describe("Testing search songs feature", () => {
   let store: Store;
@@ -43,23 +43,23 @@ describe("Testing search songs feature", () => {
     store.dispatch(searchSongsStart(randomTerm));
     await triggeredActions.waitForAction(GET_SONGS_SUCCESS);
 
-    expect(triggeredActions.getAction(GET_SONGS_START).payload).toBe(
+    expect(triggeredActions.getAction(GET_SONGS_START)?.payload).toBe(
       randomTerm
     );
     expect(selectResultCount(store.getState())).toEqual(
-      dummySearchData.resultCount
+      dummyArtistTracks.resultCount
     );
-    expect(selectResults(store.getState())).toEqual(dummySearchData.results);
+    expect(selectResults(store.getState())).toEqual(dummyArtistTracks.results);
   });
 
   it("should start the loading action and stop it once the saga finish", async () => {
     store.dispatch(searchSongsStart(randomTerm));
     await triggeredActions.waitForAction(STOP_LOADING);
 
-    expect(triggeredActions.getLastActionCalled(START_LOADING).type).toEqual(
+    expect(triggeredActions.getLastActionCalled(START_LOADING)?.type).toEqual(
       START_LOADING
     );
-    expect(triggeredActions.getLastActionCalled(STOP_LOADING).type).toEqual(
+    expect(triggeredActions.getLastActionCalled(STOP_LOADING)?.type).toEqual(
       STOP_LOADING
     );
   });

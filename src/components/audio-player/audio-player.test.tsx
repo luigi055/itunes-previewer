@@ -2,12 +2,12 @@ import React from "react";
 import { createEvent, fireEvent, render, screen } from "@testing-library/react";
 import AudioPlayer from "./audio-player";
 import { createMemoryHistory } from "history";
-import { dummySearchData } from "services/externals/itunes-api/mock";
 import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import userEvent from "@testing-library/user-event";
 import Track from "domain/track";
 import { queryStringSortOptions } from "application/routes-config";
 import { ConnectedComponent } from "test-utils";
+import { dummyArtistTracks } from "test-utils/domain-dummies";
 
 describe("Testing AudioPlayer component", () => {
   const playerReproduceTestId = "player-reproduce-button";
@@ -22,9 +22,9 @@ describe("Testing AudioPlayer component", () => {
   const playerNextIconEnabledTestId = "player-next-icon-enabled";
   const playerNextIconDisabledTestId = "player-next-icon-disabled";
   const mediaPlayerLinks = new MediaPlayerLinksGenerator({
-    ...dummySearchData,
+    ...dummyArtistTracks,
     searchTerm: "",
-    sortedTracks: dummySearchData.results,
+    sortedTracks: dummyArtistTracks.results,
     sortedBy: queryStringSortOptions.unsorted,
   });
 
@@ -44,7 +44,7 @@ describe("Testing AudioPlayer component", () => {
   beforeEach(() => {
     const track = new Track(1);
     dummyPreviewURL =
-      dummySearchData.results[track.toZeroBaseIndex()].previewUrl;
+      dummyArtistTracks.results[track.toZeroBaseIndex()].previewUrl;
     nextTrackPath = mediaPlayerLinks.generateNextTrackURI(track);
     previousTrackPath = mediaPlayerLinks.generatePreviousTrackURI(track);
   });

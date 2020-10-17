@@ -1,6 +1,5 @@
 import React from "react";
 import { setStore, storeInitialState } from "services/application/redux";
-import { dummySearchData } from "services/externals/itunes-api/mock";
 import { ConnectedMemoryRouter, Random } from "test-utils";
 import Preview from "./preview";
 import { render, screen } from "@testing-library/react";
@@ -15,6 +14,7 @@ import userEvent from "@testing-library/user-event";
 import { triggeredActions } from "test-utils/triggered-actions";
 import { GO_TO_TRACK } from "features/media-player";
 import searchSongsInitialState from "features/search-songs/search-songs-initial-state";
+import { dummyArtistTracks } from "test-utils/domain-dummies";
 
 const playerPreviousButtonTestId = "player-go-previous-button";
 const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";
@@ -31,9 +31,9 @@ const socialShareTestId = "social-share-component";
 describe("Testing the Preview Page", () => {
   let store: Store;
   const mediaPlayerLinkGenerator = new MediaPlayerLinksGenerator({
-    ...dummySearchData,
+    ...dummyArtistTracks,
     searchTerm: "",
-    sortedTracks: dummySearchData.results,
+    sortedTracks: dummyArtistTracks.results,
     sortedBy: queryStringSortOptions.unsorted,
   });
 
@@ -43,14 +43,14 @@ describe("Testing the Preview Page", () => {
     }/${Random.getString()}/track-${track.getTrackNumber()}/${Random.getString()}`;
 
   const initializeStoreData = (currentTrack: ITrack) => {
-    const track = dummySearchData.results[currentTrack.toZeroBaseIndex()];
+    const track = dummyArtistTracks.results[currentTrack.toZeroBaseIndex()];
 
     return {
       ...storeInitialState,
       searchResult: {
         ...searchSongsInitialState,
-        sortedTracks: dummySearchData.results,
-        resultCount: dummySearchData.resultCount,
+        sortedTracks: dummyArtistTracks.results,
+        resultCount: dummyArtistTracks.resultCount,
       },
       mediaPlayerData: {
         currentTrack: track,
@@ -69,9 +69,9 @@ describe("Testing the Preview Page", () => {
 
   describe("Testing first track preview", () => {
     const currentTrack = new Track(1).defineMaxLimit(
-      dummySearchData.resultCount
+      dummyArtistTracks.resultCount
     );
-    const firstTrack = dummySearchData.results[currentTrack.toZeroBaseIndex()];
+    const firstTrack = dummyArtistTracks.results[currentTrack.toZeroBaseIndex()];
 
     beforeEach(() => {
       store = setStore(initializeStoreData(currentTrack));
@@ -127,7 +127,7 @@ describe("Testing the Preview Page", () => {
 
   describe("testing a middle track preview", () => {
     const currentTrack = new Track(5).defineMaxLimit(
-      dummySearchData.resultCount
+      dummyArtistTracks.resultCount
     );
 
     beforeEach(() => {
@@ -177,7 +177,7 @@ describe("Testing the Preview Page", () => {
   });
   describe("testing last track preview", () => {
     const currentTrack = new Track(10).defineMaxLimit(
-      dummySearchData.resultCount
+      dummyArtistTracks.resultCount
     );
 
     beforeEach(() => {
