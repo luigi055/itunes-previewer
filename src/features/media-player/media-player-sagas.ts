@@ -1,4 +1,3 @@
-import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import { UPDATE_SORTED_TRACKS } from "./../search-songs/search-songs-actions";
 import {
   FETCH_TRACK_DATA,
@@ -9,6 +8,7 @@ import { put, takeLatest, fork, take, select } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
 import { selectSearchResult } from "features/search-songs";
 import Track from "domain/track";
+import TrackDataGenerator from "domain/track-data";
 
 function* processTrackData(
   currentTrack: ActionPayloadRequired<number>
@@ -16,47 +16,24 @@ function* processTrackData(
   yield take(UPDATE_SORTED_TRACKS);
 
   const searchResult = (yield select(selectSearchResult)) as SearchSongsState;
-  const mediaPlayerLinksGenerator = new MediaPlayerLinksGenerator(searchResult);
-  const track = new Track(currentTrack.payload).defineMaxLimit(
-    searchResult.resultCount
+  const trackData = new TrackDataGenerator(
+    new Track(currentTrack.payload),
+    searchResult
   );
 
-  yield put(
-    generateCurrentTrackData({
-      currentTrack: searchResult.sortedTracks[track.toZeroBaseIndex()],
-      nextTrackPath: mediaPlayerLinksGenerator.generateNextTrackURI(track),
-      previousTrackPath: mediaPlayerLinksGenerator.generatePreviousTrackURI(
-        track
-      ),
-      isNextButtonDisabled: track.isLastTrack(),
-      isPreviousButtonDisabled: track.isFirstTrack(),
-      trackNumber: track.getTrackNumber(),
-    })
-  );
+  yield put(generateCurrentTrackData(trackData.getTrackData()));
 }
 
 function* updateTrackData(
   currentTrack: ActionPayloadRequired<number>
 ): SagaIterator {
-  // TODO remove duplication
   const searchResult = (yield select(selectSearchResult)) as SearchSongsState;
-  const mediaPlayerLinksGenerator = new MediaPlayerLinksGenerator(searchResult);
-  const track = new Track(currentTrack.payload).defineMaxLimit(
-    searchResult.resultCount
+  const trackData = new TrackDataGenerator(
+    new Track(currentTrack.payload),
+    searchResult
   );
 
-  yield put(
-    generateCurrentTrackData({
-      currentTrack: searchResult.sortedTracks[track.toZeroBaseIndex()],
-      nextTrackPath: mediaPlayerLinksGenerator.generateNextTrackURI(track),
-      previousTrackPath: mediaPlayerLinksGenerator.generatePreviousTrackURI(
-        track
-      ),
-      isNextButtonDisabled: track.isLastTrack(),
-      isPreviousButtonDisabled: track.isFirstTrack(),
-      trackNumber: track.getTrackNumber(),
-    })
-  );
+  yield put(generateCurrentTrackData(trackData.getTrackData()));
 }
 
 function* getTrackData() {

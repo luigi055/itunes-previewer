@@ -92,7 +92,7 @@ describe("Testing the Preview Page", () => {
     it("should be displayed the album cover correctly", () => {
       const { getByTestId } = screen;
 
-      expect(getByTestId(coverImageTestId).src).toContain(
+      expect((getByTestId(coverImageTestId) as HTMLImageElement).src).toContain(
         firstTrack.artworkUrl100
       );
       expect(getByTestId(coverTrackNameTestId).textContent).toBe(
@@ -106,9 +106,9 @@ describe("Testing the Preview Page", () => {
     it("should reproduce the correct song", () => {
       const { getByTestId } = screen;
 
-      expect(getByTestId(playerAudioTestId).src).toContain(
-        firstTrack.previewUrl
-      );
+      expect(
+        (getByTestId(playerAudioTestId) as HTMLAudioElement).src
+      ).toContain(firstTrack.previewUrl);
     });
 
     it("should previous button be disabled and the next button enabled since it is the first track", () => {
