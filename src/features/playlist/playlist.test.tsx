@@ -26,7 +26,7 @@ describe("Testing the Playlist", () => {
         <ConnectedComponent>
           <PlayList
             sortedBy={queryStringSortOptions.unsorted.slice(1)}
-            onOptionChange={jest.fn()}
+            onSortChange={jest.fn()}
             searchSong={searchResult}
           />
         </ConnectedComponent>
