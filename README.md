@@ -87,6 +87,12 @@ You can download the app and play around, enhance or even learn from it, and her
 $ npm test
 ```
 
+## Run Tests Coverage
+
+```sh
+$ npm run test:ci
+```
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
