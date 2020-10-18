@@ -24,8 +24,16 @@ Simple Application where you can search for song tracks from Itunes API and repr
 </p>
 
 <h2 align="center"><a  href="http://cornerjob-music-player.surge.sh/search">Live Demo</a></h2>
-
+ 
 ## UX / UI Improvements
+
+Basic improvements for Responsive Design. since the design provided was desktop only, I extended the Base design to be friendly with mobiles phones since most of the case the screen size are smaller than desktop screens.
+
+- Playlist. for small screen the application shows the tracks like a list. displaying only the most relevant information, and in order to keep the sorting behavior. I added an additional HTML selector (only visible for small screen sizes) where the user can sort the list based on Track duration, price or Genre. The rest of the UI for wide screen sizes is displayed as the resources provided.
+
+- Header. in order to make this component responsive in small screen sizes, The title will be on top of search input.
+
+- Social Share Button. In small screen size the buttons are displayed above the player controls.
 
 ## Technology Stack
 
