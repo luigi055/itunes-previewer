@@ -1,44 +1,88 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Corner Job Media Player
 
-## Available Scripts
+<h2 align="center">
+<img src="https://s3-eu-west-1.amazonaws.com/static-seo-page-inspection.cornerjob.com/icons/152x152.png" 
+     alt="Corner job logo"  >
+</h2>
 
-In the project directory, you can run:
+Simple Application where you can search for song tracks from Itunes API and reproduce the previews.
 
-### `npm start`
+## Previews Mobile
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<p align="center">
+<img src="https://i.imgur.com/kBYs4YP.gif"
+  alt="Corner job search preview mobile"
+  >
+</p>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Previews Desktop
 
-### `npm test`
+<p align="center">
+<img src="https://i.imgur.com/voi395r.gif"
+  alt="Corner job search preview desktop"
+  >
+</p>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<h2 align="center"><a  href="http://cornerjob-music-player.surge.sh/search">Live Demo</a></h2>
 
-### `npm run build`
+## UX / UI Improvements
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technology Stack
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+- [TypeScript](https://www.typescriptlang.org/)
+- [HTML,CSS](<https://en.wikipedia.org/wiki/HTML#:~:text=Hypertext%20Markup%20Language%20(HTML)%20is,scripting%20languages%20such%20as%20JavaScript>)
+- [surge.sh](https://surge.sh/)
+- [Node.js](https://nodejs.org/en/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Dependencies and Libraries
 
-### `npm run eject`
+| Library                                                                               |                 Usage                  |
+| ------------------------------------------------------------------------------------- | :------------------------------------: |
+| [React](https://reactjs.org)                                                          |  library for building user interfaces  |
+| [Redux](https://redux.js.org/)                                                        |      State Container for JS Appst      |
+| [Jest](https://jestjs.io/)                                                            |           Testing Framework.           |
+| [React Testing-Library](https://testing-library.com/docs/react-testing-library/intro) |      For testing React components      |
+| [Styled Components](https://styled-components.com/)                                   |      for Styling React component       |
+| [Redux Saga](https://redux-saga.js.org/)                                              | for Handling application side effects. |
+| [react-router-dom](https://www.npmjs.com/package/react-router-dom)                    |     DOM bindings for React Router.     |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Usage
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can download the app and play around, enhance or even learn from it, and here is how to do it:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<details><summary><b>Show instructions</b></summary>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1.  Clone the repo:
 
-## Learn More
+    ```sh
+    $ git clone https://gitlab.com/pedroLaRosa/cornerjob-media-player.git
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2.  Install package.json dependencies:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```sh
+    $ npm install
+    ```
+
+3.  start the app 😃:
+
+    ```sh
+    $ npm start
+    ```
+
+    </details>
+
+## Run Tests
+
+```sh
+$ npm test
+```
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Icons and Assets
+
+Icons and assets taken provided by Corner job's development team
