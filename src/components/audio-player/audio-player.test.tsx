@@ -2,10 +2,8 @@ import React from "react";
 import { createEvent, fireEvent, render, screen } from "@testing-library/react";
 import AudioPlayer from "./audio-player";
 import { createMemoryHistory } from "history";
-import MediaPlayerLinksGenerator from "application/route-logic/media-player-links-generator";
 import userEvent from "@testing-library/user-event";
 import Track from "domain/track";
-import { queryStringSortOptions } from "application/routes-config";
 import { ConnectedComponent } from "utils/test";
 import { dummyArtistTracks } from "utils/test/domain-dummies";
 
@@ -21,12 +19,6 @@ describe("Testing AudioPlayer component", () => {
   const playerPreviousIconEnabledTestId = "player-previous-icon-enabled";
   const playerNextIconEnabledTestId = "player-next-icon-enabled";
   const playerNextIconDisabledTestId = "player-next-icon-disabled";
-  const mediaPlayerLinks = new MediaPlayerLinksGenerator({
-    ...dummyArtistTracks,
-    searchTerm: "",
-    sortedTracks: dummyArtistTracks.results,
-    sortedBy: queryStringSortOptions.unsorted,
-  });
 
   beforeEach(() => {
     /**
@@ -39,14 +31,10 @@ describe("Testing AudioPlayer component", () => {
     window.HTMLMediaElement.prototype.pause = jest.fn();
   });
   let dummyPreviewURL: string;
-  let nextTrackPath: string;
-  let previousTrackPath: string;
   beforeEach(() => {
     const track = new Track(1);
     dummyPreviewURL =
       dummyArtistTracks.results[track.toZeroBaseIndex()].previewUrl;
-    nextTrackPath = mediaPlayerLinks.generateNextTrackURI(track);
-    previousTrackPath = mediaPlayerLinks.generatePreviousTrackURI(track);
   });
 
   describe("testing play/pause button", () => {
@@ -63,8 +51,8 @@ describe("Testing AudioPlayer component", () => {
         <ConnectedComponent>
           <AudioPlayer
             currentTrackURL={dummyPreviewURL}
-            nextTrackPath={nextTrackPath}
-            previousTrackPath={previousTrackPath}
+            onPreviousButtonClick={jest.fn()}
+            onNextButtonClick={jest.fn()}
           />
         </ConnectedComponent>
       );
@@ -148,51 +136,11 @@ describe("Testing AudioPlayer component", () => {
           <ConnectedComponent history={history}>
             <AudioPlayer
               currentTrackURL={dummyPreviewURL}
-              nextTrackPath={nextTrackPath}
-              previousTrackPath={previousTrackPath}
+              onPreviousButtonClick={jest.fn()}
+              onNextButtonClick={jest.fn()}
             />
           </ConnectedComponent>
         );
-      });
-      it("should redirect to the next track URI", () => {
-        const { getByTestId } = screen;
-
-        const playerGoNextButton = getByTestId(playerGoNextButtonTestId);
-
-        userEvent.click(playerGoNextButton);
-        const { pathname, search } = history.location;
-
-        expect(`${pathname}${search}`).toContain(nextTrackPath);
-      });
-      it("should redirect to the previous track URI", () => {
-        const { getByTestId } = screen;
-
-        const playerGoPreviousButton = getByTestId(
-          playerGoPreviousButtonTestId
-        );
-
-        userEvent.click(playerGoPreviousButton);
-        const { pathname, search } = history.location;
-
-        expect(`${pathname}${search}`).toContain(previousTrackPath);
-      });
-
-      it("should link has the correct next track URI", () => {
-        const { getByTestId } = screen;
-
-        const playerGoNextButton = getByTestId(playerGoNextButtonTestId);
-
-        expect(playerGoNextButton.href).toContain(nextTrackPath);
-      });
-
-      it("should link has the correct previous track URI", () => {
-        const { getByTestId } = screen;
-
-        const playerGoPreviousButton = getByTestId(
-          playerGoPreviousButtonTestId
-        );
-
-        expect(playerGoPreviousButton.href).toContain(previousTrackPath);
       });
 
       it("should both buttons be enabled by default ", () => {
@@ -217,8 +165,6 @@ describe("Testing AudioPlayer component", () => {
           <ConnectedComponent>
             <AudioPlayer
               currentTrackURL={dummyPreviewURL}
-              nextTrackPath={nextTrackPath}
-              previousTrackPath={previousTrackPath}
               onPreviousButtonClick={handlePreviousButtonSpy}
               onNextButtonClick={handleNextButtonSpy}
             />
@@ -255,9 +201,9 @@ describe("Testing AudioPlayer component", () => {
           <ConnectedComponent>
             <AudioPlayer
               currentTrackURL={dummyPreviewURL}
-              nextTrackPath={nextTrackPath}
-              previousTrackPath={previousTrackPath}
               isPreviousButtonDisabled={true}
+              onPreviousButtonClick={jest.fn()}
+              onNextButtonClick={jest.fn()}
             />
           </ConnectedComponent>
         );
@@ -279,9 +225,9 @@ describe("Testing AudioPlayer component", () => {
           <ConnectedComponent>
             <AudioPlayer
               currentTrackURL={dummyPreviewURL}
-              nextTrackPath={nextTrackPath}
-              previousTrackPath={previousTrackPath}
               isNextButtonDisabled={true}
+              onPreviousButtonClick={jest.fn()}
+              onNextButtonClick={jest.fn()}
             />
           </ConnectedComponent>
         );

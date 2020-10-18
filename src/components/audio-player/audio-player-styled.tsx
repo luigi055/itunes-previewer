@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const PlayerButton = styled("a")<{ $isDisabled?: boolean }>`
-  pointer-events: ${({ $isDisabled }) => ($isDisabled ? "none" : "auto")};
+export const PlayerButton = styled.button`
   background: none;
   padding: 10px 12px;
 `;
