@@ -8,15 +8,7 @@ Simple Application where you can search for song tracks from Itunes API and repr
 
 <p align="center">
 <img src="https://i.imgur.com/kBYs4YP.gif"
-  alt="Corner job search preview mobile"
-  >
-</p>
-
-## Previews Desktop
-
-<p align="center">
-<img src="https://i.imgur.com/voi395r.gif"
-  alt="Corner job search preview desktop"
+  alt="preview mobile"
   >
 </p>
 
@@ -93,7 +85,3 @@ $ npm run test:ci
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-## Icons and Assets
-
-Icons and assets taken provided by Corner job's development team
