@@ -1,8 +1,5 @@
-# Corner Job Media Player
-
 <h2 align="center">
-<img src="https://s3-eu-west-1.amazonaws.com/static-seo-page-inspection.cornerjob.com/icons/152x152.png" 
-     alt="Corner job logo"  >
+<h1>Itunes Previewer Media Player</h1>
 </h2>
 
 Simple Application where you can search for song tracks from Itunes API and reproduce the previews.
@@ -23,7 +20,7 @@ Simple Application where you can search for song tracks from Itunes API and repr
   >
 </p>
 
-<h2 align="center"><a  href="http://cornerjob-music-player.surge.sh/search">Live Demo</a></h2>
+<h2 align="center"><a  href="https://itunes-previewer.surge.sh/">Live Demo</a></h2>
  
 ## UX / UI Improvements
 
@@ -64,7 +61,7 @@ You can download the app and play around, enhance or even learn from it, and her
 1.  Clone the repo:
 
     ```sh
-    $ git clone https://gitlab.com/pedroLaRosa/cornerjob-media-player.git
+    $ git clone https://github.com/luigi055/itunes-previewer.git
     ```
 
 2.  Install package.json dependencies:
