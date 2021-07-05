@@ -21,9 +21,7 @@ const DomainHeader: FunctionComponent = () => {
 
   return (
     <Header>
-      <DesignH1 data-testid="application-heading">
-        CornerJob Music Player
-      </DesignH1>
+      <DesignH1 data-testid="application-heading">Itunes Previewer</DesignH1>
       <SearchInput
         data-testid="search-input"
         initialValue={decodeURIComponent(searchInfo)}

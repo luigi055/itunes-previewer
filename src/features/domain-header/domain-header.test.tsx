@@ -8,7 +8,7 @@ import userEvent from "@testing-library/user-event";
 
 const searchInputTestId = "search-input";
 const applicationHeadingTestid = "application-heading";
-const headingText = "CornerJob Music Player";
+const headingText = "Itunes Previewer";
 
 describe("Testing DomainHeader Feature", () => {
   let history: any;
