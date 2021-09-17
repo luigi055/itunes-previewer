@@ -41,7 +41,7 @@ export const triggeredActions = {
           0;
         const check = (): any =>
           originalTimeout(
-            (): Promise<any> => (isAction() ? resolve() : check()),
+            (): Promise<void> => (isAction() ? resolve(undefined) : check()),
             1
           );
         check();

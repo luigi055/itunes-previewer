@@ -65,8 +65,7 @@ describe("Testing the SearchInput Component", () => {
       const searchInput = getByTestId(searchInputTestId);
 
       userEvent.type(searchInput, randomTextToChange);
-
-      expect(searchInput).toHaveValue(randomTextToChange);
+      expect(searchInput).toHaveValue(`${randomText}${randomTextToChange}`);
     });
 
     it("should get the value when the user enter a value and press enter", () => {
