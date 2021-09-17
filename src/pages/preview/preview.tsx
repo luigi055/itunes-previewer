@@ -1,3 +1,4 @@
+import React, { useEffect, useMemo } from "react";
 import { AudioPlayer, Cover, SocialShare } from "components";
 import Track from "domain/track";
 import DomainHeader from "features/domain-header";
@@ -9,7 +10,6 @@ import {
   selectNextTrackPath,
   selectPreviousTrackPath,
 } from "features/media-player/media-player-selectors";
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { Player } from "./preview.styled";
@@ -20,7 +20,7 @@ const Preview = () => {
   const trackIndex = parseInt(
     trackNumber!.slice(trackNumber!.indexOf("-") + 1)
   );
-  const track = new Track(trackIndex);
+  const track = useMemo(() => new Track(trackIndex), [trackIndex]);
   const history = useHistory();
   const dispatch = useDispatch();
   const currentTrack = useSelector(selectCurrentTrack);

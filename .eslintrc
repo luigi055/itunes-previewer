@@ -19,7 +19,7 @@
     "new-cap": [
       2,
       {
-        "capIsNewExceptions": ["Map", "List", "IMaskMixin"]
+        "capIsNewExceptions": ["Map", "List"]
       }
     ],
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],

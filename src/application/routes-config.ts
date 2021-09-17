@@ -21,8 +21,10 @@ export const queryStringSortOptions = {
 const { trackNumber, trackName, sortBy, artistName } = params;
 const { ROOT, PREVIEW, SEARCH } = basePaths;
 
-export default {
+const routesConfig = {
   ROOT,
   PREVIEW: `${PREVIEW}${artistName}${trackNumber}${trackName}${sortBy}`,
   SEARCH: `${SEARCH}${artistName}${sortBy}`,
 };
+
+export default routesConfig;

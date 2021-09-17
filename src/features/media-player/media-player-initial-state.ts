@@ -1,4 +1,4 @@
-export default {
+const mediaPlayerInitialState = {
   currentTrack: {
     trackId: 0,
     trackName: "",
@@ -18,3 +18,5 @@ export default {
   isPreviousButtonDisabled: false,
   trackNumber: 1,
 };
+
+export default mediaPlayerInitialState;
