@@ -27,7 +27,7 @@
     "test:ci": "cross-env CI=true react-scripts test --detectOpenHandles --coverage",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css,html}\"",
     "lint": "eslint --ext .ts,.tsx src/** --quiet",
-    "deploy": "npm run build && mv build/index.html build/200.html && surge build"
+    "deploy": "npm run build && mv build/index.html build/200.html && npx surge build"
   },
   "browserslist": {
     "production": [
